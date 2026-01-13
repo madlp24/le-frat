@@ -8,10 +8,12 @@
 {% if products %}
   <ul>
     {% for product in products %}
-      <li>
-        <a href="#">{{ product.name }}</a> - ${{ product.price }}
-      </li>
+    <li>
+        <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
+        – ${{ product.price }}
+    </li>
     {% endfor %}
+
   </ul>
 {% else %}
   <p>No products available yet.</p>
