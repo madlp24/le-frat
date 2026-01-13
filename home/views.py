@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
-def home(request):
-    return HttpResponse("Home page works!")
+def index(request):
+    return render(request, "home/index.html")
