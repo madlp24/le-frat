@@ -7,4 +7,8 @@ def product_list(request):
 
 def product_detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
+
+    if request.method == "POST":
+        quantity = int(request.POST.get("quantity", 1))
+
     return render(request, "products/product_detail.html", {"product": product})

@@ -12,8 +12,12 @@
 <p><strong>Price:</strong> ${{ product.price }}</p>
 <p>{{ product.description }}</p>
 
-<!-- Add to bag will come in Issue #4 -->
-<p><em>Add to bag coming next.</em></p>
+<form method="POST" action="#">
+  {% csrf_token %}
+  <label for="quantity">Quantity</label>
+  <input type="number" id="quantity" name="quantity" value="1" min="1" max="{{ product.stock }}">
+  <button type="submit">Add to bag</button>
+</form>
 
 <a href="{% url 'products' %}">Back to shop</a>
 {% endblock %}
