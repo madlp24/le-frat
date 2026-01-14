@@ -12,12 +12,13 @@
 <p><strong>Price:</strong> ${{ product.price }}</p>
 <p>{{ product.description }}</p>
 
-<form method="POST" action="#">
+<form method="POST" action="{% url 'add_to_bag' product.id %}">
   {% csrf_token %}
   <label for="quantity">Quantity</label>
   <input type="number" id="quantity" name="quantity" value="1" min="1" max="{{ product.stock }}">
   <button type="submit">Add to bag</button>
 </form>
+
 
 <a href="{% url 'products' %}">Back to shop</a>
 {% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Your Bag | Le Frat{% endblock %}
+
+{% block content %}
+<h1>Your Bag</h1>
+
+{% if bag %}
+  <ul>
+    {% for item_id, quantity in bag.items %}
+      <li>
+        Product ID: {{ item_id }} — Qty: {{ quantity }}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Your bag is empty.</p>
+{% endif %}
+
+<a href="{% url 'products' %}">Continue shopping</a>
+{% endblock %}
