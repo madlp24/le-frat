@@ -5,9 +5,20 @@ from products.models import Product
 
 def view_bag(request):
     bag = request.session.get("bag", {})
-    products = Product.objects.all()
-    return render(request, "bag/bag.html", {"bag": bag, "products": products})
+    bag_items = []
 
+    for item_id, quantity in bag.items():
+        product = Product.objects.get(pk=item_id)
+        bag_items.append({
+            "product": product,
+            "quantity": quantity,
+        })
+
+    return render(
+        request,
+        "bag/bag.html",
+        {"bag_items": bag_items}
+    )
 
 def add_to_bag(request, product_id):
     """Add a quantity of the specified product to the shopping bag."""

@@ -6,30 +6,29 @@
 {% block content %}
 <h1>Your Bag</h1>
 
-{% if bag %}
+{% if bag_items %}
   <ul>
-    {% for item_id, quantity in bag.items %}
-      {% with product=products|get_item:item_id %}
+    {% for item in bag_items %}
       <li>
-        <strong>{{ product.name }}</strong> – ${{ product.price }}
+        <strong>{{ item.product.name }}</strong> – ${{ item.product.price }}
 
-        <form method="POST" action="{% url 'update_bag' product.id %}">
+        <form method="POST" action="{% url 'update_bag' item.product.id %}">
           {% csrf_token %}
-          <input type="number" name="quantity" value="{{ quantity }}" min="1" max="{{ product.stock }}">
+          <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
           <button type="submit">Update</button>
         </form>
 
-        <form method="POST" action="{% url 'remove_from_bag' product.id %}">
+        <form method="POST" action="{% url 'remove_from_bag' item.product.id %}">
           {% csrf_token %}
           <button type="submit">Remove</button>
         </form>
       </li>
-      {% endwith %}
     {% endfor %}
   </ul>
 {% else %}
   <p>Your bag is empty.</p>
 {% endif %}
+
 
 <a href="{% url 'products' %}">Continue shopping</a>
 {% endblock %}
