@@ -4,9 +4,9 @@ from products.models import Product
 
 
 def view_bag(request):
-    """Display the shopping bag contents."""
     bag = request.session.get("bag", {})
-    return render(request, "bag/bag.html", {"bag": bag})
+    products = Product.objects.all()
+    return render(request, "bag/bag.html", {"bag": bag, "products": products})
 
 
 def add_to_bag(request, product_id):
@@ -31,6 +31,39 @@ def add_to_bag(request, product_id):
     else:
         bag[product_id_str] = quantity
         messages.success(request, f"Added {product.name} to your bag.")
+
+    request.session["bag"] = bag
+    return redirect("view_bag")
+
+def update_bag(request, product_id):
+    """Update quantity of a product in the bag."""
+    try:
+        quantity = int(request.POST.get("quantity"))
+    except (TypeError, ValueError):
+        quantity = 0
+
+    bag = request.session.get("bag", {})
+    product_id_str = str(product_id)
+
+    if quantity > 0:
+        bag[product_id_str] = quantity
+        messages.success(request, "Bag updated successfully.")
+    else:
+        bag.pop(product_id_str, None)
+        messages.success(request, "Item removed from your bag.")
+
+    request.session["bag"] = bag
+    return redirect("view_bag")
+
+
+def remove_from_bag(request, product_id):
+    """Remove an item from the bag."""
+    bag = request.session.get("bag", {})
+    product_id_str = str(product_id)
+
+    if product_id_str in bag:
+        bag.pop(product_id_str)
+        messages.success(request, "Item removed from your bag.")
 
     request.session["bag"] = bag
     return redirect("view_bag")
