@@ -1,22 +1,23 @@
 from decimal import Decimal
 from products.models import Product
 
+
 def bag_contents(request):
     bag = request.session.get("bag", {})
     bag_items = []
     total = Decimal("0.00")
     product_count = 0
 
-    products = Product.objects.filter(id__in=bag.keys())
+    for item_id, quantity in bag.items():
+        product = Product.objects.get(pk=item_id)
+        line_total = product.price * quantity
 
-    for product in products:
-        qty = bag.get(str(product.id), 0)
-        line_total = product.price * qty
         total += line_total
-        product_count += qty
+        product_count += quantity
+
         bag_items.append({
             "product": product,
-            "quantity": qty,
+            "quantity": quantity,
             "line_total": line_total,
         })
 

@@ -5,6 +5,24 @@
 {% block content %}
 <h1>Checkout</h1>
 
+<h2>Order Summary</h2>
+
+{% if bag_items %}
+  <ul>
+    {% for item in bag_items %}
+      <li>
+        {{ item.product.name }} x {{ item.quantity }}
+        — ${{ item.line_total }}
+      </li>
+    {% endfor %}
+  </ul>
+  <p><strong>Total:</strong> ${{ total }}</p>
+{% else %}
+  <p>Your bag is empty.</p>
+{% endif %}
+
+<hr>
+
 <form method="POST">
   {% csrf_token %}
   {{ order_form.as_p }}
