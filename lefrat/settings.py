@@ -139,6 +139,10 @@ AUTHENTICATION_BACKENDS = [
 LOGIN_REDIRECT_URL = "/profile/"
 ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 
+STRIPE_PUBLIC_KEY = os.getenv("STRIPE_PUBLIC_KEY")
+STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
+STRIPE_WH_SECRET = os.getenv("STRIPE_WH_SECRET")
+
 # New Allauth settings (no deprecation warnings)
 ACCOUNT_LOGIN_METHODS = {"username", "email"}
 ACCOUNT_SIGNUP_FIELDS = ["email*", "username*", "password1*", "password2*"]

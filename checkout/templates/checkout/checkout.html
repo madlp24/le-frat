@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout | Le Frat{% endblock %}
+
+{% block content %}
+<h1>Checkout</h1>
+
+<form method="POST">
+  {% csrf_token %}
+  {{ order_form.as_p }}
+  <button type="submit">Pay</button>
+</form>
+
+<script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
