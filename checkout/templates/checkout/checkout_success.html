@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Success | Le Frat{% endblock %}
+
+{% block content %}
+<h1>Payment Successful</h1>
+<p><strong>Order:</strong> {{ order.order_number }}</p>
+<p><strong>Total:</strong> ${{ order.order_total }}</p>
+
+<ul>
+  {% for item in order.lineitems.all %}
+    <li>{{ item.product.name }} x {{ item.quantity }} — ${{ item.lineitem_total }}</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'products' %}">Continue shopping</a>
+{% endblock %}
