@@ -48,7 +48,6 @@ def checkout(request):
             messages.error(request, "Payment was not successful. Please try again.")
             return redirect("checkout")
 
-        # Optional: ensure amount matches what we calculated
         if int(pi.amount) != stripe_amount:
             messages.error(request, "Payment amount mismatch. Please try again.")
             return redirect("checkout")
@@ -56,6 +55,10 @@ def checkout(request):
         if form.is_valid():
             order = form.save(commit=False)
             order.order_total = total
+
+            if request.user.is_authenticated:
+                order.user = request.user
+
             order.save()
 
             for item_id, quantity in bag.items():
