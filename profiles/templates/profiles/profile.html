@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile | Le Frat{% endblock %}
+
+{% block content %}
+<h1>My Profile</h1>
+
+<h2>Order History</h2>
+
+{% if orders %}
+  <ul>
+    {% for order in orders %}
+      <li>
+        <strong>{{ order.order_number }}</strong> — ${{ order.order_total }} — {{ order.date|date:"Y-m-d" }}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>You don’t have any orders yet.</p>
+{% endif %}
+{% endblock %}
