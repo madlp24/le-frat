@@ -1,0 +1,66 @@
+:root{
+  --lf-blue: #1D00FB;
+  --lf-black: #000000;
+  --lf-offwhite: #ECECEC;
+}
+
+/* Global */
+body{
+  background: var(--lf-offwhite);
+  color: var(--lf-black);
+}
+
+/* Links */
+a{
+  color: var(--lf-blue);
+}
+a:hover{
+  color: var(--lf-black);
+}
+
+/* Buttons (Bootstrap override) */
+.btn-primary{
+  background-color: var(--lf-blue);
+  border-color: var(--lf-blue);
+}
+.btn-primary:hover{
+  background-color: var(--lf-black);
+  border-color: var(--lf-black);
+}
+
+.btn-outline-primary{
+  color: var(--lf-blue);
+  border-color: var(--lf-blue);
+}
+.btn-outline-primary:hover{
+  background-color: var(--lf-blue);
+  border-color: var(--lf-blue);
+}
+
+/* Cards */
+.card{
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 1rem;
+}
+.card-img-top{
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+/* Navbar */
+.navbar{
+  background: var(--lf-black) !important;
+}
+.navbar .nav-link,
+.navbar .navbar-brand{
+  color: var(--lf-offwhite) !important;
+}
+.navbar .nav-link:hover{
+  color: var(--lf-blue) !important;
+}
+
+/* Form focus glow */
+.form-control:focus{
+  border-color: var(--lf-blue);
+  box-shadow: 0 0 0 0.2rem rgba(29,0,251,0.25);
+}

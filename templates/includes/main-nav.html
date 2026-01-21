@@ -1,0 +1,93 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+      LE FRAT
+    </a>
+
+    <!-- Mobile toggle -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+
+      <!-- Left -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'products' %}">Shop</a>
+        </li>
+      </ul>
+
+      <!-- Right -->
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+
+        <!-- Bag -->
+        <li class="nav-item">
+          <a class="nav-link position-relative" href="{% url 'view_bag' %}">
+            Bag
+            {% if product_count %}
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                {{ product_count }}
+              </span>
+            {% endif %}
+          </a>
+        </li>
+
+        <!-- Account -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="accountDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Account
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-end">
+
+            {% if request.user.is_authenticated %}
+              <li>
+                <a class="dropdown-item" href="{% url 'profile' %}">
+                  Profile
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'account_logout' %}">
+                  Logout
+                </a>
+              </li>
+            {% else %}
+              <li>
+                <a class="dropdown-item" href="{% url 'account_login' %}">
+                  Login
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'account_signup' %}">
+                  Sign Up
+                </a>
+              </li>
+            {% endif %}
+
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>

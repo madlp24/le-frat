@@ -3,19 +3,48 @@
 {% block title %}Shop | Le Frat{% endblock %}
 
 {% block content %}
-<h1>Shop</h1>
+<div class="container py-4">
 
-{% if products %}
-  <ul>
-    {% for product in products %}
-    <li>
-        <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
-        – ${{ product.price }}
-    </li>
-    {% endfor %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="m-0">Shop</h1>
+  </div>
 
-  </ul>
-{% else %}
-  <p>No products available yet.</p>
-{% endif %}
+  {% if products %}
+    <div class="row g-4">
+      {% for product in products %}
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card h-100">
+
+            {% if product.image %}
+              <img
+                src="{{ product.image.url }}"
+                class="card-img-top"
+                alt="{{ product.name }}"
+              >
+            {% endif %}
+
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ product.name }}</h5>
+
+              <p class="card-text fw-bold mb-3">
+                ${{ product.price }}
+              </p>
+
+              <a
+                href="{% url 'product_detail' product.id %}"
+                class="btn btn-primary mt-auto"
+              >
+                View
+              </a>
+            </div>
+
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No products available yet.</p>
+  {% endif %}
+
+</div>
 {% endblock %}
