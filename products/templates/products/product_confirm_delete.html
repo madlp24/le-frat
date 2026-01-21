@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Product | Le Frat{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="m-0">Delete product</h1>
+    <a class="btn btn-outline-primary" href="{% url 'products' %}">Back to shop</a>
+  </div>
+
+  <div class="alert alert-warning border">
+    <p class="mb-1 fw-bold">This action cannot be undone.</p>
+    <p class="mb-0">
+      You are about to delete: <strong>{{ product.name }}</strong>
+    </p>
+  </div>
+
+  <form method="POST" class="d-flex gap-2">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">Yes, delete</button>
+    <a class="btn btn-outline-secondary" href="{% url 'products' %}">Cancel</a>
+  </form>
+</div>
+{% endblock %}
