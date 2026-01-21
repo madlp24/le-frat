@@ -1,0 +1,6 @@
+<form method="POST" action="{% url 'newsletter_signup' %}">
+  {% csrf_token %}
+  <label for="id_email">Newsletter</label>
+  <input type="email" name="email" id="id_email" placeholder="you@example.com" required>
+  <button type="submit">Join</button>
+</form>
