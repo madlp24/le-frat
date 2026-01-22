@@ -167,3 +167,17 @@ form[method="GET"] {
 .lf-toast-icon{
   color: var(--lf-blue);
 }
+
+/* ================================
+   Cards / muted text (Le Frat)
+================================ */
+
+.lf-card{
+  border-radius: 1.25rem;
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+.lf-muted{
+  color: rgba(0,0,0,0.65);
+}
