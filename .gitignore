@@ -9,7 +9,7 @@ db.sqlite3
 *.log
 media/
 */migrations/__pycache__/
-
+env.py
 .vscode/
 
 .DS_Store

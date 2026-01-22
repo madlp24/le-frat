@@ -4,10 +4,26 @@
   --lf-offwhite: #ECECEC;
 }
 
-/* Global */
+/* ================================
+   Global
+================================ */
+
 body{
   background: var(--lf-offwhite);
   color: var(--lf-black);
+}
+
+/* Typography: bold, tight, "Full Send" energy */
+h1, h2, h3, .navbar-brand{
+  letter-spacing: -0.02em;
+}
+
+h1{
+  font-weight: 800;
+}
+
+h2, h3{
+  font-weight: 700;
 }
 
 /* Links */
@@ -18,7 +34,15 @@ a:hover{
   color: var(--lf-black);
 }
 
-/* Buttons (Bootstrap override) */
+/* ================================
+   Buttons (Bootstrap override)
+================================ */
+
+.btn{
+  border-radius: 0.85rem;
+  font-weight: 700;
+}
+
 .btn-primary{
   background-color: var(--lf-blue);
   border-color: var(--lf-blue);
@@ -31,33 +55,74 @@ a:hover{
 .btn-outline-primary{
   color: var(--lf-blue);
   border-color: var(--lf-blue);
+  background: transparent;
 }
 .btn-outline-primary:hover{
   background-color: var(--lf-blue);
   border-color: var(--lf-blue);
 }
 
-/* Cards */
+/* Clear filters button (and general secondary outline) */
+.btn-outline-secondary{
+  border-color: var(--lf-black);
+  color: var(--lf-black);
+  border-width: 2px;
+}
+.btn-outline-secondary:hover{
+  background-color: var(--lf-black);
+  color: var(--lf-offwhite);
+}
+
+/* ================================
+   Cards
+================================ */
+
 .card{
+  background: #fff;
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+.card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
 .card-img-top{
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
+  object-fit: cover;
+  height: 250px;
+  aspect-ratio: 4 / 5;
 }
 
-/* Navbar */
+/* ================================
+   Navbar
+================================ */
+
 .navbar{
   background: var(--lf-black) !important;
+  border-bottom: 1px solid rgba(236,236,236,0.12);
 }
+
 .navbar .nav-link,
 .navbar .navbar-brand{
   color: var(--lf-offwhite) !important;
 }
+
+.navbar .navbar-brand{
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
 .navbar .nav-link:hover{
   color: var(--lf-blue) !important;
 }
+
+/* ================================
+   Forms
+================================ */
 
 /* Form focus glow */
 .form-control:focus{
@@ -65,82 +130,75 @@ a:hover{
   box-shadow: 0 0 0 0.2rem rgba(29,0,251,0.25);
 }
 
+/* Inputs: consistent focus glow everywhere */
+.form-select:focus,
+.form-check-input:focus{
+  border-color: var(--lf-blue);
+  box-shadow: 0 0 0 0.2rem rgba(29,0,251,0.25);
+}
+
+.form-check-input:checked{
+  background-color: var(--lf-blue);
+  border-color: var(--lf-blue);
+}
+
+/* ================================
+   Alerts
+================================ */
+
+.alert{
+  border-radius: 0.9rem;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+/* Empty state (kept clean/white) */
+.alert-light{
+  background-color: #fff;
+  border-radius: 0.75rem;
+}
+
 /* ================================
    Shop / Products Page
 ================================ */
 
 /* Page heading spacing */
-.container h1 {
-  font-weight: 700;
+.container h1{
   letter-spacing: -0.02em;
 }
 
-/* Product cards */
-.card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-}
-
-/* Product images */
-.card-img-top {
-  object-fit: cover;
-  height: 250px;
-}
-
 /* Product title */
-.card-title {
+.card-title{
   font-size: 1.1rem;
   font-weight: 600;
 }
 
 /* Product price */
-.card-text {
+.card-text{
   font-size: 1rem;
 }
 
 /* Admin buttons (Edit / Delete) */
-.card .btn-sm {
+.card .btn-sm{
   font-size: 0.8rem;
   padding: 0.35rem 0.6rem;
 }
 
 /* Search / filter toolbar */
-form[method="GET"] {
+form[method="GET"]{
   background: #fff;
   padding: 1rem;
   border-radius: 0.75rem;
   border: 1px solid rgba(0,0,0,0.08);
 }
 
-/* Clear filters button */
-.btn-outline-secondary {
-  border-color: var(--lf-black);
-  color: var(--lf-black);
-}
-
-.btn-outline-secondary:hover {
-  background-color: var(--lf-black);
-  color: var(--lf-offwhite);
-}
-
 /* Active filters text */
-.text-muted strong {
+.text-muted strong{
   color: var(--lf-black);
-}
-
-/* Empty state */
-.alert-light {
-  background-color: #fff;
-  border-radius: 0.75rem;
 }
 
 /* Responsive tweaks */
-@media (max-width: 576px) {
-  .card-img-top {
+@media (max-width: 576px){
+  .card-img-top{
     height: 200px;
   }
 }
