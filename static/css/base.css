@@ -144,3 +144,26 @@ form[method="GET"] {
     height: 200px;
   }
 }
+
+/* ================================
+   Toasts (Django Messages)
+================================ */
+
+.lf-toast-container{
+  z-index: 1100;
+}
+
+.lf-toast{
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 1rem;
+  background: #fff;
+}
+
+.lf-toast .toast-header{
+  background: #fff;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.lf-toast-icon{
+  color: var(--lf-blue);
+}

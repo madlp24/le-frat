@@ -20,6 +20,7 @@ def view_bag(request):
         {"bag_items": bag_items}
     )
 
+
 def add_to_bag(request, product_id):
     """Add a quantity of the specified product to the shopping bag."""
     product = get_object_or_404(Product, pk=product_id)
@@ -44,7 +45,11 @@ def add_to_bag(request, product_id):
         messages.success(request, f"Added {product.name} to your bag.")
 
     request.session["bag"] = bag
-    return redirect("view_bag")
+
+    # ✅ NEW: redirect to wherever the form asked (checkout / bag / back)
+    next_url = request.POST.get("next") or request.META.get("HTTP_REFERER")
+    return redirect(next_url or "view_bag")
+
 
 def update_bag(request, product_id):
     """Update quantity of a product in the bag."""

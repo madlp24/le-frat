@@ -1,17 +1,46 @@
 {% extends "base.html" %}
 
-{% block title %}Success | Le Frat{% endblock %}
+{% block title %}Order Confirmation | Le Frat{% endblock %}
 
 {% block content %}
-<h1>Payment Successful</h1>
-<p><strong>Order:</strong> {{ order.order_number }}</p>
-<p><strong>Total:</strong> ${{ order.order_total }}</p>
+<div class="container py-4">
 
-<ul>
-  {% for item in order.lineitems.all %}
-    <li>{{ item.product.name }} x {{ item.quantity }} — ${{ item.lineitem_total }}</li>
-  {% endfor %}
-</ul>
+  <h1 class="mb-3">Order Confirmed</h1>
+  <p class="mb-4">Thanks for your purchase. Here are your order details:</p>
 
-<a href="{% url 'products' %}">Continue shopping</a>
+  <div class="card mb-4">
+    <div class="card-body">
+      <p class="mb-1"><strong>Order:</strong> {{ order.order_number }}</p>
+      <p class="mb-1"><strong>Date:</strong> {{ order.date|date:"Y-m-d H:i" }}</p>
+      <p class="mb-0"><strong>Total:</strong> ${{ order.order_total }}</p>
+    </div>
+  </div>
+
+  <h2 class="h4">Items</h2>
+  <ul class="list-group mb-4">
+    {% for item in order.lineitems.all %}
+      <li class="list-group-item d-flex justify-content-between">
+        <span>{{ item.product.name }} × {{ item.quantity }}</span>
+        <span>${{ item.lineitem_total }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h2 class="h4">Delivery & Contact</h2>
+  <div class="card mb-4">
+    <div class="card-body">
+      <p class="mb-1"><strong>Name:</strong> {{ order.full_name }}</p>
+      <p class="mb-1"><strong>Email:</strong> {{ order.email }}</p>
+      <p class="mb-1"><strong>Phone:</strong> {{ order.phone_number }}</p>
+      <hr>
+      <p class="mb-1">{{ order.street_address1 }}</p>
+      {% if order.street_address2 %}<p class="mb-1">{{ order.street_address2 }}</p>{% endif %}
+      <p class="mb-1">{{ order.town_or_city }}{% if order.postcode %}, {{ order.postcode }}{% endif %}</p>
+      <p class="mb-0">{{ order.country }}</p>
+    </div>
+  </div>
+
+  <a class="btn btn-primary" href="{% url 'products' %}">Continue shopping</a>
+
+</div>
 {% endblock %}

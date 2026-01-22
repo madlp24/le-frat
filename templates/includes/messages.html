@@ -1,7 +1,32 @@
 {% if messages %}
-  <ul>
+  <div class="lf-toast-container toast-container position-fixed top-0 end-0 p-3" aria-live="polite" aria-atomic="true">
     {% for message in messages %}
-      <li>{{ message }}</li>
+      <div
+        class="toast lf-toast"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        data-bs-delay="3000"
+      >
+        <div class="toast-header">
+          <i class="fa-solid fa-circle-info lf-toast-icon me-2"></i>
+
+          <strong class="me-auto">
+            {% if message.tags == "success" %}Success
+            {% elif message.tags == "danger" %}Error
+            {% elif message.tags == "warning" %}Warning
+            {% elif message.tags == "info" %}Info
+            {% else %}Notice
+            {% endif %}
+          </strong>
+
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+
+        <div class="toast-body">
+          {{ message }}
+        </div>
+      </div>
     {% endfor %}
-  </ul>
+  </div>
 {% endif %}

@@ -96,4 +96,10 @@ def checkout(request):
 
 def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
+
+    # If the order belongs to a user, only that user can view it
+    if order.user and (not request.user.is_authenticated or request.user != order.user):
+        messages.error(request, "You do not have permission to view this order.")
+        return redirect("home")
+
     return render(request, "checkout/checkout_success.html", {"order": order})
