@@ -15,6 +15,10 @@ env.py
 .DS_Store
 Thumbs.db
 
+staticfiles/
+
 .coverage
 htmlcov/
 .pytest_cache/
+__pycache__/
+*.pyc
