@@ -5,46 +5,87 @@
 {% block content %}
 <div class="container py-4">
 
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="m-0">Your Bag</h1>
+  <div class="lf-page-head mb-4">
+    <div>
+      <p class="lf-eyebrow m-0">LE FRAT</p>
+      <h1 class="m-0">Your Bag</h1>
+    </div>
 
-    <a href="{% url 'checkout' %}" class="btn btn-primary">
-      Go to Checkout
-    </a>
+    <div class="lf-page-head__actions">
+      <a href="{% url 'products' %}" class="btn btn-outline-secondary lf-btn-pill">
+        Continue shopping
+      </a>
+      <a href="{% url 'checkout' %}" class="btn btn-primary lf-btn-pill">
+        Go to Checkout
+      </a>
+    </div>
   </div>
 
   {% if bag_items %}
-    <ul class="list-unstyled">
-      {% for item in bag_items %}
-        <li class="mb-3">
-          <strong>{{ item.product.name }}</strong> — ${{ item.product.price }}
+    <div class="lf-bag">
+      <div class="lf-bag__list">
+        {% for item in bag_items %}
+          <div class="lf-bag-item">
+            <div class="lf-bag-item__left">
+              <a href="{% url 'product_detail' item.product.id %}" class="lf-bag-thumb">
+                {% if item.product.image %}
+                  <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" loading="lazy">
+                {% else %}
+                  <div class="lf-bag-thumb__placeholder"></div>
+                {% endif %}
+              </a>
 
-          <form method="POST" action="{% url 'update_bag' item.product.id %}" class="mt-2 d-flex gap-2 align-items-center">
-            {% csrf_token %}
-            <input
-              type="number"
-              name="quantity"
-              value="{{ item.quantity }}"
-              min="1"
-              class="form-control"
-              style="max-width: 120px;"
-            >
-            <button type="submit" class="btn btn-outline-primary">Update</button>
-          </form>
+              <div class="lf-bag-meta">
+                <h3 class="lf-bag-name m-0">
+                  <a href="{% url 'product_detail' item.product.id %}" class="lf-product-link">
+                    {{ item.product.name }}
+                  </a>
+                </h3>
+                <p class="lf-bag-price m-0">${{ item.product.price }}</p>
+              </div>
+            </div>
 
-          <form method="POST" action="{% url 'remove_from_bag' item.product.id %}" class="mt-2">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-outline-danger">Remove</button>
-          </form>
-        </li>
-      {% endfor %}
-    </ul>
+            <div class="lf-bag-item__right">
+              <form method="POST" action="{% url 'update_bag' item.product.id %}" class="lf-qty-form">
+                {% csrf_token %}
+                <input
+                  type="number"
+                  name="quantity"
+                  value="{{ item.quantity }}"
+                  min="1"
+                  class="form-control lf-qty-input"
+                  aria-label="Quantity"
+                >
+                <button type="submit" class="btn btn-outline-primary lf-btn-pill">
+                  Update
+                </button>
+              </form>
 
-    <a href="{% url 'products' %}">Continue shopping</a>
+              <form method="POST" action="{% url 'remove_from_bag' item.product.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger lf-btn-pill">
+                  Remove
+                </button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="lf-bag__footer">
+        <a href="{% url 'checkout' %}" class="btn btn-primary lf-btn-pill">
+          Checkout
+        </a>
+      </div>
+    </div>
 
   {% else %}
-    <p>Your bag is empty.</p>
-    <a href="{% url 'products' %}" class="btn btn-primary">Go Shopping</a>
+    <div class="lf-empty-state text-center">
+      <p class="fw-bold mb-2">Your bag is empty.</p>
+      <a href="{% url 'products' %}" class="btn btn-primary lf-btn-pill">
+        Go Shopping
+      </a>
+    </div>
   {% endif %}
 
 </div>
