@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-dark lf-nav">
   <div class="container">
 
     <!-- Brand -->
-    <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+    <a class="navbar-brand lf-brand" href="{% url 'home' %}">
       LE FRAT
     </a>
 
@@ -19,18 +19,12 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Links -->
     <div class="collapse navbar-collapse" id="mainNavbar">
 
       <!-- Left -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 lf-navlinks">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'products' %}">Shop</a>
-        </li>
-
-        <!-- ✅ NEW: Checkout link -->
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'checkout' %}">Checkout</a>
+          <a class="nav-link" href="{% url 'products' %}">New Arrivals</a>
         </li>
       </ul>
 
@@ -39,11 +33,12 @@
 
         <!-- Bag -->
         <li class="nav-item">
-          <a class="nav-link position-relative" href="{% url 'view_bag' %}">
-            Bag
+          <a class="nav-link position-relative lf-navicon" href="{% url 'view_bag' %}" aria-label="Bag">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="ms-2 d-inline d-lg-none">Bag</span>
+
             {% if product_count %}
-              <span
-                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+              <span class="badge rounded-pill bg-primary lf-badge">
                 {{ product_count }}
               </span>
             {% endif %}
@@ -53,39 +48,24 @@
         <!-- Account -->
         <li class="nav-item dropdown">
           <a
-            class="nav-link dropdown-toggle"
+            class="nav-link dropdown-toggle lf-navicon"
             href="#"
             id="accountDropdown"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Account
+            <i class="fa-regular fa-user"></i>
+            <span class="ms-2 d-inline d-lg-none">Account</span>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end">
             {% if request.user.is_authenticated %}
-              <li>
-                <a class="dropdown-item" href="{% url 'profile' %}">
-                  Profile
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="{% url 'account_logout' %}">
-                  Logout
-                </a>
-              </li>
+              <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
             {% else %}
-              <li>
-                <a class="dropdown-item" href="{% url 'account_login' %}">
-                  Login
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="{% url 'account_signup' %}">
-                  Sign Up
-                </a>
-              </li>
+              <li><a class="dropdown-item" href="{% url 'account_login' %}">Login</a></li>
+              <li><a class="dropdown-item" href="{% url 'account_signup' %}">Sign Up</a></li>
             {% endif %}
           </ul>
         </li>

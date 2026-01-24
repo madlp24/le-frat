@@ -499,3 +499,48 @@ form[method="GET"]{
   padding: 2rem 1rem;
 }
 
+
+.lf-nav{
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.lf-brand{
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.lf-navlinks .nav-link{
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.lf-navicon{
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.lf-badge{
+  position: absolute;
+  top: -6px;
+  right: -10px;
+}
+
+.lf-footer{
+  background: #fff;
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+
+.lf-newsletter{
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+
+.lf-newsletter .form-control{
+  flex: 1 1 220px;
+}
+
+.lf-footer__bottom{
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
