@@ -1,25 +1,55 @@
-<footer class="lf-footer mt-5">
-  <div class="container py-5">
-    <div class="row g-4 align-items-start">
-      <div class="col-12 col-lg-6">
-        <p class="lf-eyebrow m-0">LE FRAT</p>
-        <h3 class="m-0 fw-bold">Get the drop.</h3>
-        <p class="lf-muted mt-2 mb-0">New arrivals, restocks, and limited runs. No spam.</p>
+<footer class="lf-footer">
+  <div class="container lf-footer__inner">
+    <div class="lf-footer__grid">
+
+      <!-- Left: logo + socials -->
+      <div class="lf-footer__brand">
+        <a href="{% url 'home' %}" class="lf-footer__logo">LE FRAT</a>
+
+        <div class="lf-footer__socials">
+          <a class="lf-footer__social" href="#" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a class="lf-footer__social" href="#" aria-label="X">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+          <a class="lf-footer__social" href="#" aria-label="YouTube">
+            <i class="fa-brands fa-youtube"></i>
+          </a>
+        </div>
       </div>
 
-      <div class="col-12 col-lg-6">
-        <form method="POST" action="{% url 'newsletter_signup' %}" class="lf-newsletter">
-          {% csrf_token %}
-          <label for="id_email" class="visually-hidden">Newsletter</label>
-          <input type="email" name="email" id="id_email" class="form-control lf-input" placeholder="you@example.com" required>
-          <button type="submit" class="btn btn-primary lf-btn-pill">Join</button>
-        </form>
-        <p class="text-muted mt-2 mb-0 small">By joining, you agree to receive emails from Le Frat.</p>
+      <!-- Customers -->
+      <div class="lf-footer__col">
+        <h3 class="lf-footer__title">Customers</h3>
+        <ul class="lf-footer__links">
+          <li><a href="{% url 'account_login' %}">Login</a></li>
+          <li><a href="{% url 'support' %}">Support</a></li>
+        </ul>
       </div>
+
+      <!-- Help -->
+      <div class="lf-footer__col">
+        <h3 class="lf-footer__title">Help</h3>
+        <ul class="lf-footer__links">
+          <li><a href="{% url 'privacy' %}">Privacy</a></li>
+          <li><a href="{% url 'terms' %}">Terms</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div class="lf-footer__col">
+        <h3 class="lf-footer__title">Company</h3>
+        <ul class="lf-footer__links">
+          <li><a href="{% url 'about' %}">About Us</a></li>
+          <li><a href="{% url 'faqs' %}">FAQs</a></li>
+        </ul>
+      </div>
+
     </div>
 
-    <div class="lf-footer__bottom mt-4 pt-3">
-      <span class="small text-muted">© {% now "Y" %} Le Frat</span>
+    <div class="lf-footer__bottom">
+      <span>© {% now "Y" %} Le Frat.</span>
     </div>
   </div>
 </footer>
