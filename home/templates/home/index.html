@@ -1,8 +1,96 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}Home | Le Frat{% endblock %}
 
 {% block content %}
-<h1>Le Frat</h1>
-<p>Official merch store.</p>
+
+<!-- HERO FULL WIDTH -->
+<section class="lf-hero" style="--hero: url('{% static 'images/home/hero.jpg' %}');">
+  <div class="lf-hero__overlay"></div>
+
+  <div class="lf-hero__inner container">
+    <p class="lf-eyebrow mb-2">LE FRAT · OFFICIAL MERCH</p>
+
+    <h1 class="lf-hero__title mb-3">
+      The spot everyone talks about.
+    </h1>
+
+    <p class="lf-hero__subtitle mb-4">
+      No pretensions. Just attitude. Merch worn like a badge.
+    </p>
+
+    <div class="d-flex flex-wrap gap-2">
+      <a href="{% url 'products' %}" class="btn btn-primary lf-btn-pill">Shop the Drop</a>
+      <a href="{% url 'products' %}?sort=name_asc" class="btn btn-outline-light lf-btn-pill">Browse All</a>
+    </div>
+  </div>
+</section>
+
+
+  <!-- MARQUEE -->
+  <section class="lf-marquee" aria-hidden="true">
+    <div class="lf-marquee__track">
+      <span>EVERYTHING IS BETTER IN COMBO · </span>
+      <span>EVERYTHING IS BETTER IN COMBO · </span>
+      <span>EVERYTHING IS BETTER IN COMBO · </span>
+      <span>EVERYTHING IS BETTER IN COMBO · </span>
+    </div>
+  </section>
+
+<section class="mt-5">
+  <div class="container">
+
+    <div class="d-flex align-items-end justify-content-between gap-3 mb-3">
+      <div>
+        <h2 class="m-0">New Drop</h2>
+        <p class="text-muted m-0">
+          The good stuff doesn’t need explaining.
+        </p>
+      </div>
+
+      <a href="{% url 'products' %}" class="lf-link-strong">See all →</a>
+    </div>
+
+    <div class="row g-3">
+      {% for p in featured_products %}
+        <div class="col-12 col-md-4">
+          <a class="lf-drop-card"
+             href="{% url 'product_detail' p.id %}"
+             style="--bg: url('{% static 'images/home/' %}{{ p.home_image }}');">
+
+            <div class="lf-drop-card__content">
+              <p class="lf-drop-card__tag">NEW DROP</p>
+              <h3 class="lf-drop-card__title">{{ p.name }}</h3>
+              <p class="lf-drop-card__price mb-0">${{ p.price }}</p>
+            </div>
+
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- BRAND BLOCK -->
+  <section class="lf-brand-block mt-5">
+  <div class="container">
+    <div class="lf-brand-block__inner">
+      <h2 class="m-0">Simple. Like real friendship.</h2>
+
+      <p class="m-0">
+        Merch for the crew. Minimal, bold, and straight to the point.
+        If you don’t have it, you’re missing the story.
+      </p>
+
+      <a href="{% url 'products' %}" class="btn btn-primary lf-btn-pill mt-3">
+        Join the Crew
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
 {% endblock %}
