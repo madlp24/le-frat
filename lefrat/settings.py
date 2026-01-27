@@ -147,7 +147,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 
 # ================================
-# AWS S3 Storage (Boutique Ado style)
+# AWS S3 Storage
 # ================================
 USE_AWS = os.getenv("USE_AWS") == "True"
 

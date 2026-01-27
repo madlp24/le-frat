@@ -1,76 +1,119 @@
-<nav class="navbar navbar-expand-lg navbar-dark lf-nav">
-  <div class="container">
+{% load static %}
 
-    <!-- Brand -->
-    <a class="navbar-brand lf-brand" href="{% url 'home' %}">
-      LE FRAT
-    </a>
+<nav class="lf-nav">
+  <div class="lf-nav__inner">
 
-    <!-- Mobile toggle -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#mainNavbar"
-      aria-controls="mainNavbar"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <!-- LEFT -->
+    <div class="lf-nav__left">
+      <div class="lf-nav__dropdown">
+        <button class="lf-nav__link lf-nav__dropdown-btn" type="button">
+          CATEGORIES
+        </button>
 
-    <div class="collapse navbar-collapse" id="mainNavbar">
+        <div class="lf-nav__dropdown-menu">
+          {% for c in nav_categories %}
+            <a class="lf-nav__dropdown-item" href="{% url 'products' %}?category={{ c.name }}">
+              {{ c.friendly_name }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
 
-      <!-- Left -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 lf-navlinks">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'products' %}">New Arrivals</a>
-        </li>
-      </ul>
-
-      <!-- Right -->
-      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
-
-        <!-- Bag -->
-        <li class="nav-item">
-          <a class="nav-link position-relative lf-navicon" href="{% url 'view_bag' %}" aria-label="Bag">
-            <i class="fa-solid fa-bag-shopping"></i>
-            <span class="ms-2 d-inline d-lg-none">Bag</span>
-
-            {% if product_count %}
-              <span class="badge rounded-pill bg-primary lf-badge">
-                {{ product_count }}
-              </span>
-            {% endif %}
-          </a>
-        </li>
-
-        <!-- Account -->
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle lf-navicon"
-            href="#"
-            id="accountDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <i class="fa-regular fa-user"></i>
-            <span class="ms-2 d-inline d-lg-none">Account</span>
-          </a>
-
-          <ul class="dropdown-menu dropdown-menu-end">
-            {% if request.user.is_authenticated %}
-              <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
-              <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
-            {% else %}
-              <li><a class="dropdown-item" href="{% url 'account_login' %}">Login</a></li>
-              <li><a class="dropdown-item" href="{% url 'account_signup' %}">Sign Up</a></li>
-            {% endif %}
-          </ul>
-        </li>
-
-      </ul>
+      <a class="lf-nav__link" href="{% url 'products' %}">SHOP</a>
+      <a class="lf-nav__link" href="{% url 'products' %}?sort=newest">NEW ARRIVALS</a>
     </div>
+
+    <!-- CENTER -->
+    <div class="lf-nav__center">
+      <a class="lf-nav__logo" href="{% url 'home' %}">LE FRAT</a>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="lf-nav__right">
+      <div class="lf-nav__search-wrap">
+        <button class="lf-nav__icon-btn lf-nav__search-toggle" type="button">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <path fill="currentColor"
+              d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm0-2a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm9.707 5.293-4.11-4.11a1 1 0 0 0-1.414 1.414l4.11 4.11a1 1 0 0 0 1.414-1.414Z"/>
+          </svg>
+        </button>
+
+
+        <form class="lf-nav__search-pop" method="GET" action="{% url 'products' %}" role="search">
+          <input
+            type="search"
+            name="q"
+            class="lf-nav__search-input"
+            placeholder="Search"
+            aria-label="Search products"
+          >
+        </form>
+      </div>
+
+      <script>
+        (function () {
+          const wrap = document.querySelector(".lf-nav__search-wrap");
+          if (!wrap) return;
+
+          const toggle = wrap.querySelector(".lf-nav__search-toggle");
+          const form = wrap.querySelector(".lf-nav__search-pop");
+          const input = wrap.querySelector("input[name='q']");
+
+          function openSearch() {
+            form.classList.add("is-open");
+            toggle.setAttribute("aria-expanded", "true");
+            setTimeout(() => input && input.focus(), 0);
+          }
+
+          function closeSearch() {
+            form.classList.remove("is-open");
+            toggle.setAttribute("aria-expanded", "false");
+          }
+
+          toggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            form.classList.contains("is-open") ? closeSearch() : openSearch();
+          });
+
+          document.addEventListener("click", (e) => {
+            if (!wrap.contains(e.target)) closeSearch();
+          });
+
+          document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeSearch();
+          });
+        })();
+      </script>
+
+
+      <div class="lf-nav__account">
+        <button class="lf-nav__icon-btn" type="button" aria-label="Account">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <path fill="currentColor" d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5Z"/>
+          </svg>
+        </button>
+
+        <div class="lf-nav__account-menu">
+          {% if request.user.is_authenticated %}
+            <a href="{% url 'profile' %}">Profile</a>
+            <a href="{% url 'account_logout' %}">Logout</a>
+          {% else %}
+            <a href="{% url 'account_login' %}">Login</a>
+            <a href="{% url 'account_signup' %}">Sign Up</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <a class="lf-nav__icon-btn" href="{% url 'view_bag' %}" aria-label="Bag">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path fill="currentColor" d="M7 7V6a5 5 0 0 1 10 0v1h3l-1 15H5L4 7h3Zm2 0h6V6a3 3 0 0 0-6 0v1Z"/>
+        </svg>
+
+        {% if product_count %}
+          <span class="lf-nav__badge">{{ product_count }}</span>
+        {% endif %}
+      </a>
+    </div>
+
   </div>
 </nav>
