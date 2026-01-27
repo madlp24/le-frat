@@ -5,14 +5,78 @@
 {% block title %}Login | Le Frat{% endblock %}
 
 {% block content %}
-<h1>Login</h1>
-<form method="post" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Sign in</button>
-</form>
-<p>
-  Don't have an account?
-  <a href="{% url 'account_signup' %}">Sign up</a>
-</p>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+
+      <div class="card lf-card lf-auth">
+        <div class="card-body p-4 p-md-5">
+
+          <p class="lf-eyebrow mb-2">ACCOUNT</p>
+          <h1 class="h3 fw-bold mb-2">Welcome back.</h1>
+          <p class="lf-muted mb-4">Log in to track orders, save your info, and checkout faster.</p>
+
+          <form method="post" action="{% url 'account_login' %}" class="lf-form">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+              <div class="alert alert-light border mb-3">
+                {{ form.non_field_errors }}
+              </div>
+            {% endif %}
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold" for="{{ form.login.id_for_label }}">Email or Username</label>
+              <input
+                type="text"
+                name="{{ form.login.html_name }}"
+                id="{{ form.login.id_for_label }}"
+                class="form-control form-control-lg"
+                value="{{ form.login.value|default:'' }}"
+                required
+                autocomplete="username"
+              >
+              {% if form.login.errors %}<div class="text-danger small mt-1">{{ form.login.errors }}</div>{% endif %}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold" for="{{ form.password.id_for_label }}">Password</label>
+              <input
+                type="password"
+                name="{{ form.password.html_name }}"
+                id="{{ form.password.id_for_label }}"
+                class="form-control form-control-lg"
+                required
+                autocomplete="current-password"
+              >
+              {% if form.password.errors %}<div class="text-danger small mt-1">{{ form.password.errors }}</div>{% endif %}
+            </div>
+
+            {% if form.remember %}
+              <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" name="{{ form.remember.html_name }}" id="{{ form.remember.id_for_label }}">
+                <label class="form-check-label" for="{{ form.remember.id_for_label }}">Remember me</label>
+              </div>
+            {% endif %}
+
+            <div class="d-grid gap-2">
+              <button class="btn btn-primary btn-lg lf-btn-pill" type="submit">
+                Sign in
+              </button>
+              <a class="btn btn-outline-dark btn-lg lf-btn-pill" href="{% url 'account_signup' %}">
+                Create an account
+              </a>
+            </div>
+
+            <p class="small lf-muted mt-4 mb-0">
+              No pretensions. Just attitude.
+            </p>
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 {% endblock %}

@@ -4,41 +4,90 @@
 {% block title %}Checkout | Le Frat{% endblock %}
 
 {% block content %}
-<h1>Checkout</h1>
+<div class="container py-5">
 
-<h2>Order Summary</h2>
+  <div class="lf-page-head mb-4">
+    <div>
+      <p class="lf-eyebrow mb-2">CHECKOUT</p>
+      <h1 class="m-0">Almost yours.</h1>
+      <p class="text-muted m-0">Confirm delivery details and pay securely.</p>
+    </div>
+  </div>
 
-{% if bag_items %}
-  <ul>
-    {% for item in bag_items %}
-      <li>
-        {{ item.product.name }} x {{ item.quantity }}
-        — ${{ item.line_total }}
-      </li>
-    {% endfor %}
-  </ul>
-  <p><strong>Total:</strong> ${{ total }}</p>
-{% else %}
-  <p>Your bag is empty.</p>
-{% endif %}
+  <div class="row g-4">
 
-<hr>
+    <!-- LEFT: ORDER SUMMARY -->
+    <div class="col-12 col-lg-5">
+      <div class="card lf-card">
+        <div class="card-body p-4">
+          <h2 class="h5 fw-bold mb-3">Order summary</h2>
 
-<form method="POST" id="payment-form">
-  {% csrf_token %}
-  {{ order_form.as_p }}
+          {% if bag_items %}
+            <ul class="list-group list-group-flush lf-summary">
+              {% for item in bag_items %}
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="me-3">
+                    <div class="fw-bold">{{ item.product.name }}</div>
+                    <div class="small text-muted">Qty: {{ item.quantity }}</div>
+                  </div>
+                  <div class="fw-bold">${{ item.line_total }}</div>
+                </li>
+              {% endfor %}
+            </ul>
 
-  
-  <div id="card-element"></div>
-  <div id="card-errors" role="alert"></div>
+            <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
+              <span class="fw-bold">Total</span>
+              <span class="h5 m-0 fw-black">${{ total }}</span>
+            </div>
+          {% else %}
+            <div class="lf-empty-state">
+              <p class="m-0">Your bag is empty.</p>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
 
-  <button type="submit" id="submit-button">Pay</button>
-</form>
+    <!-- RIGHT: DELIVERY + PAYMENT -->
+    <div class="col-12 col-lg-7">
+      <div class="card lf-card">
+        <div class="card-body p-4 p-md-5">
 
-<!-- ✅ Send values from Django context into JS safely -->
-{{ stripe_public_key|json_script:"id_stripe_public_key" }}
-{{ client_secret|json_script:"id_client_secret" }}
-<script src="https://js.stripe.com/v3/"></script>
-<!-- This should be the JS file you create for Stripe Elements -->
-<script src="{% static 'js/stripe_elements.js' %}"></script>
+          <h2 class="h5 fw-bold mb-3">Delivery & payment</h2>
+
+          <form method="POST" id="payment-form" class="lf-checkout-form">
+            {% csrf_token %}
+
+            <div class="lf-checkout-grid">
+              {{ order_form.as_p }}
+            </div>
+
+            <div class="mt-3">
+              <label class="form-label fw-semibold">Card details</label>
+              <div id="card-element" class="lf-stripe"></div>
+              <div id="card-errors" class="text-danger small mt-2" role="alert"></div>
+            </div>
+
+            <div class="d-grid d-md-flex gap-2 mt-4">
+              <a class="btn btn-outline-dark lf-btn-pill" href="{% url 'view_bag' %}">
+                Back to bag
+              </a>
+              <button type="submit" id="submit-button" class="btn btn-primary lf-btn-pill">
+                Pay now
+              </button>
+            </div>
+          </form>
+
+          <!-- Context to JS -->
+          {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+          {{ client_secret|json_script:"id_client_secret" }}
+          <script src="https://js.stripe.com/v3/"></script>
+          <script src="{% static 'js/stripe_elements.js' %}"></script>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
 {% endblock %}

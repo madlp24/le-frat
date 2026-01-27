@@ -104,7 +104,7 @@
         </div>
       </div>
 
-      <a class="lf-nav__icon-btn" href="{% url 'view_bag' %}" aria-label="Bag">
+      <a class="lf-nav__icon-btn lf-nav__icon-btn--bag" href="{% url 'view_bag' %}" aria-label="Bag">
         <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
           <path fill="currentColor" d="M7 7V6a5 5 0 0 1 10 0v1h3l-1 15H5L4 7h3Zm2 0h6V6a3 3 0 0 0-6 0v1Z"/>
         </svg>
@@ -113,6 +113,7 @@
           <span class="lf-nav__badge">{{ product_count }}</span>
         {% endif %}
       </a>
+
     </div>
 
   </div>

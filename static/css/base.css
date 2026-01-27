@@ -30,8 +30,9 @@ h2, h3{ font-weight: 700; }
 
 /* Links */
 a{ color: var(--lf-blue); }
-a:hover{ color: var(--lf-black); }
-
+a:hover{
+  color: var(--lf-blue);
+}
 /* ================================
    Buttons (Bootstrap override)
 ================================ */
@@ -235,6 +236,7 @@ a:hover{ color: var(--lf-black); }
 
 /* Icon buttons */
 .lf-nav__icon-btn{
+  position: relative;
   width: 42px;
   height: 42px;
   display: inline-flex;
@@ -246,6 +248,7 @@ a:hover{ color: var(--lf-black); }
   padding: 0;
   color: var(--lf-offwhite);   /* <-- white by default */
   cursor: pointer;
+  line-height: 0;
 }
 
 /* Only turn blue on hover */
@@ -267,16 +270,23 @@ a:hover{ color: var(--lf-black); }
 
 .lf-nav__badge{
   position: absolute;
-  top: -4px;
-  right: -2px;
+  top: -6px;
+  right: -8px;
   background: var(--lf-blue);
   color: #fff;
   font-size: 0.7rem;
   font-weight: 800;
   border-radius: 999px;
   padding: 2px 6px;
+  transform: translate(0, 0);
 }
 
+.lf-nav__icon-btn--bag .lf-nav__badge{
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  transform: translate(0, 0);
+}
 /* Dropdowns */
 .lf-nav__dropdown,
 .lf-nav__account{
@@ -948,3 +958,48 @@ form[method="GET"]{
   max-width:70ch;
 }
 
+/* Auth cards */
+.lf-auth{
+  border-radius: 1.5rem;
+}
+
+.lf-form .form-control-lg{
+  border-radius: 1rem;
+}
+
+.lf-help{
+  color: rgba(0,0,0,0.60);
+}
+
+/* Checkout */
+.lf-summary .list-group-item{
+  background: transparent;
+  border-color: rgba(0,0,0,0.08);
+}
+
+.lf-checkout-form p{
+  margin-bottom: 1rem;
+}
+
+/* Style Django form outputs rendered via as_p */
+.lf-checkout-form label{
+  display: block;
+  font-weight: 700;
+  margin-bottom: .35rem;
+}
+
+.lf-checkout-form input,
+.lf-checkout-form select,
+.lf-checkout-form textarea{
+  width: 100%;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 1rem;
+  padding: .8rem .9rem;
+}
+
+.lf-stripe{
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 1rem;
+  padding: .9rem;
+  background: #fff;
+}
