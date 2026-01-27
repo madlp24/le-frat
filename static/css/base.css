@@ -9,9 +9,16 @@
 ================================ */
 
 body{
-  background: var(--lf-offwhite);
+  background: #fff;
   color: var(--lf-black);
+  margin: 0;
 }
+
+section{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 
 /* Typography: bold, tight, clean */
 h1, h2, h3, .navbar-brand{
@@ -680,13 +687,14 @@ form[method="GET"]{
 }
 
 /* ================================
-   Footer (Le Frat) (single copy)
+   Footer (Le Frat) – Black + Blue
 ================================ */
 
 .lf-footer{
-  background: #fff;
-  border-top: 1px solid rgba(0,0,0,0.08);
-  margin-top: 4rem;
+  background: #000;
+  color: #ECECEC;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  margin-top: 0;
 }
 
 .lf-footer__inner{
@@ -706,8 +714,8 @@ form[method="GET"]{
   font-weight: 900;
   letter-spacing: -0.02em;
   text-decoration: none;
-  color: var(--lf-black);
-  border: 2px solid var(--lf-black);
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.85);
   padding: .6rem 1rem;
   border-radius: .75rem;
 }
@@ -720,19 +728,20 @@ form[method="GET"]{
 }
 
 .lf-footer__social{
-  color: var(--lf-black);
+  color: rgba(236,236,236,.85);
   font-size: 1.4rem;
   text-decoration: none;
 }
-
 .lf-footer__social:hover{
   color: var(--lf-blue);
 }
 
 .lf-footer__title{
-  font-size: 1.25rem;
-  font-weight: 800;
+  font-size: 1.1rem;
+  font-weight: 900;
   margin-bottom: 1rem;
+  color: #fff;
+  letter-spacing: .02em;
 }
 
 .lf-footer__links{
@@ -744,21 +753,20 @@ form[method="GET"]{
 }
 
 .lf-footer__links a{
-  color: rgba(0,0,0,.8);
+  color: rgba(236,236,236,.78);
   text-decoration: none;
+  font-weight: 700;
 }
-
 .lf-footer__links a:hover{
-  color: var(--lf-black);
-  text-decoration: underline;
+  color: var(--lf-blue);
 }
 
 .lf-footer__bottom{
-  margin-top: 2.75rem;
-  padding-top: 1.5rem;
+  margin-top: 2.25rem;
+  padding-top: 1.25rem;
   text-align: center;
-  border-top: 1px solid rgba(0,0,0,0.06);
-  color: rgba(0,0,0,.75);
+  border-top: 1px solid rgba(255,255,255,0.10);
+  color: rgba(236,236,236,.75);
 }
 
 /* Responsive footer */
@@ -769,6 +777,7 @@ form[method="GET"]{
 @media (max-width: 576px){
   .lf-footer__grid{ grid-template-columns: 1fr; }
 }
+
 
 /* BUTTONS */
 .lf-btn-pill{
@@ -799,6 +808,7 @@ form[method="GET"]{
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   border-radius: 0;
+  margin-bottom: 0 !important;
 }
 
 .lf-hero__overlay{
@@ -829,13 +839,20 @@ form[method="GET"]{
 
 /* MARQUEE */
 .lf-marquee{
-  margin-top:16px;
-  border-radius:999px;
-  background:#000;
-  color:#ECECEC;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.10);
+  width: 100vw !important;
+  margin-left: calc(-50vw + 50%) !important;
+  background: #000 !important;
+  color: #ECECEC !important;
+  overflow: hidden !important;
+
+  border-top: 1px solid rgba(255,255,255,.12) !important;
+  border-bottom: 1px solid rgba(255,255,255,.12) !important;
+
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
+
+
 
 .lf-marquee__track{
   display:inline-block;
@@ -917,6 +934,7 @@ form[method="GET"]{
   background:#000;
   color:#ECECEC;
   border:1px solid rgba(255,255,255,.10);
+  margin-bottom: 0 !important;
 }
 
 .lf-brand-block__inner{
@@ -929,3 +947,4 @@ form[method="GET"]{
   margin-top:.75rem;
   max-width:70ch;
 }
+
