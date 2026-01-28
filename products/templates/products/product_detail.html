@@ -7,7 +7,9 @@
   <h1 class="mb-3">{{ product.name }}</h1>
 
   {% if product.image %}
-    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid mb-3">
+    <div class="lf-product-media">
+      <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid mb-3">
+    </div>
   {% endif %}
 
   <p><strong>Price:</strong> ${{ product.price }}</p>

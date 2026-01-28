@@ -1003,3 +1003,24 @@ form[method="GET"]{
   padding: .9rem;
   background: #fff;
 }
+
+/* ===== Product detail image sizing ===== */
+.lf-product-media{
+  max-width: 520px;   
+  margin: 0 auto;        
+}
+
+.lf-product-img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 1.25rem;
+  object-fit: contain;
+}
+
+/* Smaller on small phones */
+@media (max-width: 576px){
+  .lf-product-media{
+    max-width: 340px;
+  }
+}
