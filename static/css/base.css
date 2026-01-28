@@ -1086,6 +1086,13 @@ form[method="GET"]{
   z-index: 9999;
 }
 
+/* Force mobile menu link color (override global a color) */
+.lf-mobile a{
+  color: #ECECEC !important;
+  text-decoration: none;
+}
+
+
 .lf-mobile.is-open{
   display: block;
 }
@@ -1100,6 +1107,9 @@ form[method="GET"]{
   color: #ECECEC;
   border-left: 1px solid rgba(255,255,255,0.12);
   padding: 18px 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .lf-mobile__top{
@@ -1123,6 +1133,8 @@ form[method="GET"]{
   background: rgba(255,255,255,0.06);
   color:#fff;
   font-size:18px;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .lf-mobile__links{
