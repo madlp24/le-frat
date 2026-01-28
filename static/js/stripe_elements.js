@@ -87,3 +87,19 @@ form.addEventListener("submit", async (e) => {
     setLoading(false);
   }
 });
+
+const statusHint = document.getElementById("payment-status-hint");
+
+function setLoading(isLoading) {
+  if (isLoading) {
+    submitBtn.disabled = true;
+    spinner.classList.remove("d-none");
+    btnText.textContent = "Processing…";
+    statusHint.textContent = "Do not refresh. Processing payment…";
+  } else {
+    submitBtn.disabled = false;
+    spinner.classList.add("d-none");
+    btnText.textContent = "Pay now";
+    statusHint.textContent = "";
+  }
+}

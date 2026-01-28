@@ -68,6 +68,12 @@
               <div id="card-errors" class="text-danger small mt-2" role="alert"></div>
             </div>
 
+            {% if not bag_items %}
+            <script>
+              document.getElementById("submit-button")?.setAttribute("disabled", "true");
+            </script>
+            {% endif %}
+                            
             <div class="d-grid d-md-flex gap-2 mt-4">
               <a class="btn btn-outline-dark lf-btn-pill" href="{% url 'view_bag' %}">
                 Back to bag
