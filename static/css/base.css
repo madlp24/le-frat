@@ -19,7 +19,6 @@ section{
   margin-bottom: 0;
 }
 
-
 /* Typography: bold, tight, clean */
 h1, h2, h3, .navbar-brand{
   letter-spacing: -0.02em;
@@ -30,9 +29,8 @@ h2, h3{ font-weight: 700; }
 
 /* Links */
 a{ color: var(--lf-blue); }
-a:hover{
-  color: var(--lf-blue);
-}
+a:hover{ color: var(--lf-blue); }
+
 /* ================================
    Buttons (Bootstrap override)
 ================================ */
@@ -121,14 +119,13 @@ a:hover{
 }
 
 /* ================================
-    Custom Navbar (Le Frat)
+   Custom Navbar (Le Frat)
 ================================ */
 
 .lf-nav{
   background: var(--lf-black);
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
-
 
 .lf-nav a{ text-decoration: none; }
 
@@ -150,7 +147,10 @@ a:hover{
 }
 
 .lf-nav__left{ justify-content: flex-start; }
-.lf-nav__right{ justify-content: flex-end; }
+.lf-nav__right{
+  justify-content: flex-end;
+  flex-wrap: nowrap; /* prevent wrapping */
+}
 
 .lf-nav__link{
   color: var(--lf-offwhite);
@@ -186,6 +186,7 @@ a:hover{
   position: relative;
   display: inline-flex;
   align-items: center;
+  gap: 10px;
 }
 
 .lf-nav__search-pop{
@@ -208,13 +209,7 @@ a:hover{
   width: 260px;
 }
 
-/* Search */
-.lf-nav__search{
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
+/* Search input */
 .lf-nav__search-input{
   width: 180px;
   background: rgba(255,255,255,0.08);
@@ -246,27 +241,20 @@ a:hover{
   background: transparent;
   border: none;
   padding: 0;
-  color: var(--lf-offwhite);   /* <-- white by default */
+  color: var(--lf-offwhite);
   cursor: pointer;
   line-height: 0;
 }
 
-/* Only turn blue on hover */
 .lf-nav__icon-btn:hover{
   color: var(--lf-blue);
   background: rgba(255,255,255,0.08);
 }
 
-/* Make SVG behave nicely */
-.lf-nav__icon-btn svg{
-  display: block;
-}
+.lf-nav__icon-btn svg{ display: block; }
 
-/* IMPORTANT: prevent weird stroke icons */
-.lf-nav__icon-btn svg *{
-  stroke: none;
-}
-
+/* prevent weird stroke icons */
+.lf-nav__icon-btn svg *{ stroke: none; }
 
 .lf-nav__badge{
   position: absolute;
@@ -278,15 +266,13 @@ a:hover{
   font-weight: 800;
   border-radius: 999px;
   padding: 2px 6px;
-  transform: translate(0, 0);
 }
 
 .lf-nav__icon-btn--bag .lf-nav__badge{
-  position: absolute;
   top: -6px;
   right: -8px;
-  transform: translate(0, 0);
 }
+
 /* Dropdowns */
 .lf-nav__dropdown,
 .lf-nav__account{
@@ -331,15 +317,212 @@ a:hover{
   color: var(--lf-blue);
 }
 
-/* Responsive nav */
+/* ================================
+   Mobile Hamburger (CLEAN)
+================================ */
+
+.lf-burger{
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 44px;
+  height: 44px;
+  display: none !important; /* hidden by default */
+  cursor: pointer;
+}
+
+/* Drawer overlay */
+.lf-mobile{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: none;
+  z-index: 9999;
+}
+
+/* Force mobile menu link color (override global a color) */
+.lf-mobile a{
+  color: #ECECEC !important;
+  text-decoration: none;
+}
+
+.lf-mobile.is-open{
+  display: block;
+}
+
+.lf-mobile__panel{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(360px, 92vw);
+  background: #000;
+  color: #ECECEC;
+  border-left: 1px solid rgba(255,255,255,0.12);
+  padding: 18px 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lf-mobile__top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.lf-mobile__brand{
+  font-weight:900;
+  letter-spacing:.16em;
+}
+
+.lf-mobile__close{
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.06);
+  color:#fff;
+  font-size:18px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.lf-mobile__links{
+  display:grid;
+  gap: 10px;
+  padding: 16px 0;
+}
+
+.lf-mobile__links a{
+  color:#ECECEC;
+  text-decoration:none;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding: 12px 10px;
+  border-radius: 12px;
+}
+.lf-mobile__links a:hover{
+  background: rgba(255,255,255,0.08);
+  color: var(--lf-blue);
+}
+
+.lf-mobile__actions{
+  display:grid;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.lf-mobile__btn{
+  display:block;
+  text-decoration:none;
+  color:#ECECEC;
+  font-weight:800;
+  padding: 12px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  text-align:center;
+}
+
+.lf-mobile__btn:hover{
+  color: var(--lf-blue);
+  border-color: rgba(29,0,251,0.55);
+}
+
+.lf-mobile__btn--primary{
+  background: var(--lf-blue);
+  border-color: var(--lf-blue);
+  color:#fff;
+}
+.lf-mobile__btn--primary:hover{
+  background:#000;
+  border-color:#000;
+  color:#fff;
+}
+
+/* ================================
+   Responsive (ALL mobile nav rules in ONE place)
+================================ */
+
 @media (max-width: 992px){
+
+  /* One row: logo left, icons right */
   .lf-nav__inner{
-    grid-template-columns: 1fr;
-    justify-items: start;
+    grid-template-columns: auto 1fr auto !important;
+    align-items: center;
   }
-  .lf-nav__center{ justify-content: flex-start; }
-  .lf-nav__right{ justify-content: flex-start; flex-wrap: wrap; }
+
+  /* Hide desktop links */
+  .lf-nav__left{
+    display: none !important;
+  }
+
+  .lf-nav__center{
+    justify-content: flex-start !important;
+  }
+
+  .lf-nav__right{
+    justify-content: flex-end !important;
+    flex-wrap: nowrap !important;
+    gap: 10px !important;
+  }
+
+  /* Hide desktop icons (mobile menu handles them) */
+  .lf-nav__account,
+  .lf-nav__icon-btn--bag{
+    display: none !important;
+  }
+
+  /* Burger appears on mobile + lines stack properly */
+  .lf-burger{
+    display: inline-flex !important;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.16);
+    background: rgba(255,255,255,0.06);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .lf-burger span{
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: #ECECEC;
+    border-radius: 2px;
+    margin: 0;
+  }
+
+  /* Small tweaks */
   .lf-nav__search-input{ width: 220px; }
+
+  /* Responsive search popover: full-width overlay below nav */
+  .lf-nav__search-pop{
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    top: 74px;
+    width: auto;
+    box-sizing: border-box;
+  }
+
+  .lf-nav__search-pop .lf-nav__search-input{
+    width: 100%;
+  }
+
+  /* prevent icons shrinking weirdly */
+  .lf-nav__icon-btn{
+    flex: 0 0 auto;
+  }
 }
 
 /* ================================
@@ -783,26 +966,8 @@ form[method="GET"]{
 @media (max-width: 992px){
   .lf-footer__grid{ grid-template-columns: 1fr 1fr; }
 }
-
 @media (max-width: 576px){
   .lf-footer__grid{ grid-template-columns: 1fr; }
-}
-
-
-/* BUTTONS */
-.lf-btn-pill{
-  border-radius:999px;
-  padding:.8rem 1.1rem;
-  font-weight:800;
-}
-
-/* EYEBROW TEXT */
-.lf-eyebrow{
-  font-weight:900;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  font-size:.78rem;
-  opacity:.9;
 }
 
 /* HERO */
@@ -854,15 +1019,11 @@ form[method="GET"]{
   background: #000 !important;
   color: #ECECEC !important;
   overflow: hidden !important;
-
   border-top: 1px solid rgba(255,255,255,.12) !important;
   border-bottom: 1px solid rgba(255,255,255,.12) !important;
-
   border-radius: 0 !important;
   box-shadow: none !important;
 }
-
-
 
 .lf-marquee__track{
   display:inline-block;
@@ -959,29 +1120,17 @@ form[method="GET"]{
 }
 
 /* Auth cards */
-.lf-auth{
-  border-radius: 1.5rem;
-}
-
-.lf-form .form-control-lg{
-  border-radius: 1rem;
-}
-
-.lf-help{
-  color: rgba(0,0,0,0.60);
-}
+.lf-auth{ border-radius: 1.5rem; }
+.lf-form .form-control-lg{ border-radius: 1rem; }
+.lf-help{ color: rgba(0,0,0,0.60); }
 
 /* Checkout */
 .lf-summary .list-group-item{
   background: transparent;
   border-color: rgba(0,0,0,0.08);
 }
+.lf-checkout-form p{ margin-bottom: 1rem; }
 
-.lf-checkout-form p{
-  margin-bottom: 1rem;
-}
-
-/* Style Django form outputs rendered via as_p */
 .lf-checkout-form label{
   display: block;
   font-weight: 700;
@@ -1004,10 +1153,10 @@ form[method="GET"]{
   background: #fff;
 }
 
-/* ===== Product detail image sizing ===== */
+/* Product detail image sizing */
 .lf-product-media{
-  max-width: 520px;   
-  margin: 0 auto;        
+  max-width: 520px;
+  margin: 0 auto;
 }
 
 .lf-product-img{
@@ -1018,211 +1167,6 @@ form[method="GET"]{
   object-fit: contain;
 }
 
-/* Smaller on small phones */
 @media (max-width: 576px){
-  .lf-product-media{
-    max-width: 340px;
-  }
-}
-
-/* ================================
-   Mobile Hamburger (NO conflicts)
-================================ */
-
-/* Hidden on desktop */
-.lf-burger{
-  appearance: none;
-  -webkit-appearance: none;
-  border: 0 !important;
-  background: transparent !important;
-  padding: 0 !important;
-  margin: 0 !important;
-
-  width: 44px;
-  height: 44px;
-  display: none;             
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;        
-  cursor: pointer;
-}
-
-/* Only show burger on small screens */
-@media (max-width: 992px){
-  .lf-burger{
-    display:inline-flex;
-    width:44px;
-    height:44px;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,0.16);
-    background: rgba(255,255,255,0.06);
-    align-items:center;
-    justify-content:center;
-    gap:5px;
-    padding:0;
-  }
-
-  .lf-burger span{
-    display:block;
-    width:18px;
-    height:2px;
-    background:#ECECEC;
-    border-radius:2px;
-  }
-
-  /* Hide your desktop nav links on mobile */
-  .lf-nav__left{
-    display:none;
-  }
-}
-
-.lf-burger span + span{ margin-top: 4px; }
-/* Drawer overlay */
-.lf-mobile{
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  display: none;
-  z-index: 9999;
-}
-
-/* Force mobile menu link color (override global a color) */
-.lf-mobile a{
-  color: #ECECEC !important;
-  text-decoration: none;
-}
-
-
-.lf-mobile.is-open{
-  display: block;
-}
-
-.lf-mobile__panel{
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: min(360px, 92vw);
-  background: #000;
-  color: #ECECEC;
-  border-left: 1px solid rgba(255,255,255,0.12);
-  padding: 18px 18px 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.lf-mobile__top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding-bottom: 14px;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-}
-
-.lf-mobile__brand{
-  font-weight:900;
-  letter-spacing:.16em;
-}
-
-.lf-mobile__close{
-  width:44px;
-  height:44px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,0.16);
-  background: rgba(255,255,255,0.06);
-  color:#fff;
-  font-size:18px;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-.lf-mobile__links{
-  display:grid;
-  gap: 10px;
-  padding: 16px 0;
-}
-
-.lf-mobile__links a{
-  color:#ECECEC;
-  text-decoration:none;
-  font-weight:900;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  padding: 12px 10px;
-  border-radius: 12px;
-}
-.lf-mobile__links a:hover{
-  background: rgba(255,255,255,0.08);
-  color: var(--lf-blue);
-}
-
-.lf-mobile__actions{
-  display:grid;
-  gap: 10px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255,255,255,0.12);
-}
-
-.lf-mobile__btn{
-  display:block;
-  text-decoration:none;
-  color:#ECECEC;
-  font-weight:800;
-  padding: 12px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(255,255,255,0.06);
-  text-align:center;
-}
-
-.lf-mobile__btn:hover{
-  color: var(--lf-blue);
-  border-color: rgba(29,0,251,0.55);
-}
-
-.lf-mobile__btn--primary{
-  background: var(--lf-blue);
-  border-color: var(--lf-blue);
-  color:#fff;
-}
-.lf-mobile__btn--primary:hover{
-  background:#000;
-  border-color:#000;
-  color:#fff;
-}
-
-/* ================================
-   Responsive Search Popover Fix
-================================ */
-
-/* allow flex items to shrink inside the nav */
-.lf-nav__right,
-.lf-nav__search-wrap{
-  min-width: 0;
-}
-
-/* desktop default stays the same, but make input fluid */
-.lf-nav__search-pop .lf-nav__search-input{
-  width: 260px;
-  max-width: 100%;
-}
-
-/* Mobile: popover becomes "full width" under the nav */
-@media (max-width: 992px){
-  .lf-nav__search-wrap{
-    width: 100%;
-  }
-
-  .lf-nav__search-pop{
-    left: 0;
-    right: 0;          /* stretch across */
-    width: 100%;
-    top: 52px;         /* a bit lower than your icons */
-    box-sizing: border-box;
-  }
-
-  .lf-nav__search-pop .lf-nav__search-input{
-    width: 100%;
-  }
+  .lf-product-media{ max-width: 340px; }
 }
