@@ -73,8 +73,20 @@
                 Back to bag
               </a>
               <button type="submit" id="submit-button" class="btn btn-primary lf-btn-pill">
-                Pay now
+                <span id="submit-button-text">Pay now</span>
+
+                <span
+                  id="submit-spinner"
+                  class="spinner-border spinner-border-sm ms-2 d-none"
+                  role="status"
+                  aria-hidden="true">
+                </span>
               </button>
+
+              <div class="small text-muted mt-2" aria-live="polite" aria-atomic="true">
+                <span id="payment-status-hint"></span>
+              </div>
+
             </div>
           </form>
 

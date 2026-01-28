@@ -9,38 +9,81 @@ const clientSecret = JSON.parse(
 
 const stripe = Stripe(publicKey);
 const elements = stripe.elements();
-const card = elements.create("card");
-card.mount("#card-element");
 
-card.on("change", (event) => {
-  const errorDiv = document.getElementById("card-errors");
-  errorDiv.textContent = event.error ? event.error.message : "";
+const card = elements.create("card", {
+  hidePostalCode: true,
 });
+card.mount("#card-element");
 
 const form = document.getElementById("payment-form");
 const submitBtn = document.getElementById("submit-button");
+const errorDiv = document.getElementById("card-errors");
+
+// Spinner elements (added in checkout.html below)
+const spinner = document.getElementById("submit-spinner");
+const btnText = document.getElementById("submit-button-text");
+
+function setLoading(isLoading) {
+  if (!spinner || !btnText) return;
+
+  if (isLoading) {
+    submitBtn.disabled = true;
+    spinner.classList.remove("d-none");
+    btnText.textContent = "Processing…";
+  } else {
+    submitBtn.disabled = false;
+    spinner.classList.add("d-none");
+    btnText.textContent = "Pay now";
+  }
+}
+
+card.on("change", (event) => {
+  errorDiv.textContent = event.error ? event.error.message : "";
+});
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  submitBtn.disabled = true;
 
-  const { error, paymentIntent } = await stripe.confirmCardPayment(
-    clientSecret,
-    { payment_method: { card: card } }
-  );
+  errorDiv.textContent = "";
+  setLoading(true);
 
-  if (error) {
-    document.getElementById("card-errors").textContent = error.message;
-    submitBtn.disabled = false;
-    return;
-  }
+  try {
+    const result = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: { card: card },
+    });
 
-  if (paymentIntent.status === "succeeded") {
-    const hiddenInput = document.createElement("input");
-    hiddenInput.type = "hidden";
-    hiddenInput.name = "payment_intent_id";
-    hiddenInput.value = paymentIntent.id;
-    form.appendChild(hiddenInput);
-    form.submit();
+    if (result.error) {
+      // Stripe validation/decline error
+      errorDiv.textContent = result.error.message || "Payment failed. Please try again.";
+      setLoading(false);
+      return;
+    }
+
+    if (!result.paymentIntent) {
+      errorDiv.textContent = "Payment could not be verified. Please try again.";
+      setLoading(false);
+      return;
+    }
+
+    if (result.paymentIntent.status === "succeeded") {
+      const hiddenInput = document.createElement("input");
+      hiddenInput.type = "hidden";
+      hiddenInput.name = "payment_intent_id";
+      hiddenInput.value = result.paymentIntent.id;
+      form.appendChild(hiddenInput);
+
+      // Keep loading state while the server processes the order
+      form.submit();
+      return;
+    }
+
+    // Any other status
+    errorDiv.textContent = `Payment status: ${result.paymentIntent.status}. Please try again.`;
+    setLoading(false);
+
+  } catch (err) {
+    // Network / unexpected error
+    errorDiv.textContent = "Connection problem. Please refresh and try again.";
+    setLoading(false);
   }
 });

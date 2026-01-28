@@ -20,11 +20,21 @@ def checkout(request):
         messages.error(request, "Your bag is empty.")
         return redirect("products")
 
-    # calculate total
+    # calculate total + build bag_items for the summary
     total = Decimal("0.00")
+    bag_items = []
+
     for item_id, quantity in bag.items():
         product = get_object_or_404(Product, pk=item_id)
-        total += product.price * quantity
+        line_total = product.price * quantity
+
+        total += line_total
+
+        bag_items.append({
+            "product": product,
+            "quantity": quantity,
+            "line_total": line_total,
+        })
 
     # Stripe amount in cents (safe rounding)
     stripe_amount = int((total * 100).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
@@ -32,7 +42,7 @@ def checkout(request):
     if request.method == "POST":
         form = OrderForm(request.POST)
 
-        # 🔑 Verify Stripe success BEFORE creating the order
+        # Verify Stripe success BEFORE creating the order
         payment_intent_id = request.POST.get("payment_intent_id", "").strip()
         if not payment_intent_id:
             messages.error(request, "Payment was not completed. Please try again.")
@@ -90,6 +100,7 @@ def checkout(request):
         "client_secret": intent.client_secret,
         "stripe_public_key": settings.STRIPE_PUBLIC_KEY,
         "total": total,
+        "bag_items": bag_items,  
     }
     return render(request, "checkout/checkout.html", context)
 
