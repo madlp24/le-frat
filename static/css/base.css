@@ -1024,3 +1024,193 @@ form[method="GET"]{
     max-width: 340px;
   }
 }
+
+/* ================================
+   Mobile Hamburger (NO conflicts)
+================================ */
+
+/* Hidden on desktop */
+.lf-burger{
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+
+  width: 44px;
+  height: 44px;
+  display: none;             
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;        
+  cursor: pointer;
+}
+
+/* Only show burger on small screens */
+@media (max-width: 992px){
+  .lf-burger{
+    display:inline-flex;
+    width:44px;
+    height:44px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,0.16);
+    background: rgba(255,255,255,0.06);
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    padding:0;
+  }
+
+  .lf-burger span{
+    display:block;
+    width:18px;
+    height:2px;
+    background:#ECECEC;
+    border-radius:2px;
+  }
+
+  /* Hide your desktop nav links on mobile */
+  .lf-nav__left{
+    display:none;
+  }
+}
+
+.lf-burger span + span{ margin-top: 4px; }
+/* Drawer overlay */
+.lf-mobile{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: none;
+  z-index: 9999;
+}
+
+.lf-mobile.is-open{
+  display: block;
+}
+
+.lf-mobile__panel{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(360px, 92vw);
+  background: #000;
+  color: #ECECEC;
+  border-left: 1px solid rgba(255,255,255,0.12);
+  padding: 18px 18px 22px;
+}
+
+.lf-mobile__top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.lf-mobile__brand{
+  font-weight:900;
+  letter-spacing:.16em;
+}
+
+.lf-mobile__close{
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.06);
+  color:#fff;
+  font-size:18px;
+}
+
+.lf-mobile__links{
+  display:grid;
+  gap: 10px;
+  padding: 16px 0;
+}
+
+.lf-mobile__links a{
+  color:#ECECEC;
+  text-decoration:none;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding: 12px 10px;
+  border-radius: 12px;
+}
+.lf-mobile__links a:hover{
+  background: rgba(255,255,255,0.08);
+  color: var(--lf-blue);
+}
+
+.lf-mobile__actions{
+  display:grid;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.lf-mobile__btn{
+  display:block;
+  text-decoration:none;
+  color:#ECECEC;
+  font-weight:800;
+  padding: 12px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  text-align:center;
+}
+
+.lf-mobile__btn:hover{
+  color: var(--lf-blue);
+  border-color: rgba(29,0,251,0.55);
+}
+
+.lf-mobile__btn--primary{
+  background: var(--lf-blue);
+  border-color: var(--lf-blue);
+  color:#fff;
+}
+.lf-mobile__btn--primary:hover{
+  background:#000;
+  border-color:#000;
+  color:#fff;
+}
+
+/* ================================
+   Responsive Search Popover Fix
+================================ */
+
+/* allow flex items to shrink inside the nav */
+.lf-nav__right,
+.lf-nav__search-wrap{
+  min-width: 0;
+}
+
+/* desktop default stays the same, but make input fluid */
+.lf-nav__search-pop .lf-nav__search-input{
+  width: 260px;
+  max-width: 100%;
+}
+
+/* Mobile: popover becomes "full width" under the nav */
+@media (max-width: 992px){
+  .lf-nav__search-wrap{
+    width: 100%;
+  }
+
+  .lf-nav__search-pop{
+    left: 0;
+    right: 0;          /* stretch across */
+    width: 100%;
+    top: 52px;         /* a bit lower than your icons */
+    box-sizing: border-box;
+  }
+
+  .lf-nav__search-pop .lf-nav__search-input{
+    width: 100%;
+  }
+}

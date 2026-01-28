@@ -37,6 +37,9 @@
               d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm0-2a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm9.707 5.293-4.11-4.11a1 1 0 0 0-1.414 1.414l4.11 4.11a1 1 0 0 0 1.414-1.414Z"/>
           </svg>
         </button>
+        <button class="lf-burger" type="button" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
 
 
         <form class="lf-nav__search-pop" method="GET" action="{% url 'products' %}" role="search">
@@ -84,6 +87,38 @@
           });
         })();
       </script>
+
+      <!---Hamburger mobile menu--->
+      <div class="lf-mobile" id="lfMobileMenu" aria-hidden="true">
+        <div class="lf-mobile__panel">
+          <div class="lf-mobile__top">
+            <span class="lf-mobile__brand">LE FRAT</span>
+            <button class="lf-mobile__close" type="button" aria-label="Close menu">✕</button>
+          </div>
+
+          <nav class="lf-mobile__links">
+            <a href="{% url 'products' %}?category=categories">Categories</a>
+            <a href="{% url 'products' %}">Shop</a>
+            <a href="{% url 'products' %}?sort=newest">New Arrivals</a>
+          </nav>
+
+          <div class="lf-mobile__actions">
+            <a class="lf-mobile__btn" href="{% url 'products' %}?q=">Search</a>
+
+            {% if request.user.is_authenticated %}
+              <a class="lf-mobile__btn" href="{% url 'profile' %}">My Profile</a>
+              <a class="lf-mobile__btn" href="{% url 'account_logout' %}">Logout</a>
+            {% else %}
+              <a class="lf-mobile__btn" href="{% url 'account_login' %}">Login</a>
+              <a class="lf-mobile__btn" href="{% url 'account_signup' %}">Sign Up</a>
+            {% endif %}
+
+            <a class="lf-mobile__btn lf-mobile__btn--primary" href="{% url 'view_bag' %}">
+              Bag {% if product_count %}({{ product_count }}){% endif %}
+            </a>
+          </div>
+        </div>
+      </div>
 
 
       <div class="lf-nav__account">
