@@ -37,10 +37,10 @@
               d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm0-2a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm9.707 5.293-4.11-4.11a1 1 0 0 0-1.414 1.414l4.11 4.11a1 1 0 0 0 1.414-1.414Z"/>
           </svg>
         </button>
+
         <button class="lf-burger" type="button" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
-
 
         <form class="lf-nav__search-pop" method="GET" action="{% url 'products' %}" role="search">
           <input
@@ -88,9 +88,9 @@
         })();
       </script>
 
-      <!---Hamburger mobile menu--->
-      <div class="lf-mobile" id="lfMobileMenu" aria-hidden="true">
-        <div class="lf-mobile__panel">
+      <!-- Hamburger mobile menu -->
+      <div class="lf-mobile" id="lfMobileMenu" hidden aria-hidden="true">
+        <div class="lf-mobile__panel" role="dialog" aria-modal="true" aria-label="Mobile menu">
           <div class="lf-mobile__top">
             <span class="lf-mobile__brand">LE FRAT</span>
             <button class="lf-mobile__close" type="button" aria-label="Close menu">✕</button>
@@ -119,7 +119,6 @@
           </div>
         </div>
       </div>
-
 
       <div class="lf-nav__account">
         <button class="lf-nav__icon-btn" type="button" aria-label="Account">
@@ -150,6 +149,5 @@
       </a>
 
     </div>
-
   </div>
 </nav>
