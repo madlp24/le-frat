@@ -19,7 +19,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
+# Fallback is ONLY for local dev so Django doesn't crash if env.py is missing.
+SECRET_KEY = os.getenv("SECRET_KEY", "dev-insecure-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
@@ -158,7 +159,7 @@ if USE_AWS:
     AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 
     AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
-    AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
+    AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=0, no-cache, no-store, must-revalidate"}
     AWS_DEFAULT_ACL = "public-read"
 
     STORAGES = {
