@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     "checkout",
     "profiles.apps.ProfilesConfig",
     "marketing.apps.MarketingConfig",
+    "reviews",
+
 ]
 
 MIDDLEWARE = [

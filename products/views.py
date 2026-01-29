@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.db.models import Q
 from .models import Product, Category
 from .forms import ProductForm
+from reviews.forms import ProductReviewForm
 
 def is_admin(user):
     return user.is_staff
@@ -108,3 +109,16 @@ def delete_product(request, product_id):
         return redirect("products")
 
     return render(request, "products/product_confirm_delete.html", {"product": product})
+
+
+
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    reviews = product.reviews.select_related("user").all()
+    review_form = ProductReviewForm()
+
+    return render(request, "products/product_detail.html", {
+        "product": product,
+        "reviews": reviews,
+        "review_form": review_form,
+    })

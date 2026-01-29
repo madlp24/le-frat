@@ -52,9 +52,51 @@
       </button>
     </div>
   </form>
+  <hr class="my-5">
+
+  <h2 class="h4">Reviews</h2>
+
+  {% if user.is_authenticated %}
+    <form method="POST" action="{% url 'add_review' product.id %}" enctype="multipart/form-data" class="mb-4">
+      {% csrf_token %}
+      {{ review_form.as_p }}
+      <button class="btn btn-dark" type="submit">Post review</button>
+    </form>
+  {% else %}
+    <p><a href="{% url 'account_login' %}">Log in</a> to leave a review.</p>
+  {% endif %}
+
+  {% if reviews %}
+    <div class="d-flex flex-column gap-3">
+      {% for r in reviews %}
+        <div class="card p-3">
+          <div class="d-flex justify-content-between">
+            <strong>{{ r.user.username }}</strong>
+            <small>{{ r.created_at|date:"M d, Y" }}</small>
+          </div>
+
+          <div class="mb-2">Rating: {{ r.rating }}/5</div>
+          <p class="mb-2">{{ r.comment }}</p>
+
+          {% if r.image %}
+            <img src="{{ r.image.url }}" alt="Review image" class="img-fluid rounded" style="max-width: 360px;">
+          {% endif %}
+
+          {% if user == r.user or user.is_staff %}
+            <div class="mt-2 d-flex gap-2">
+              <a class="btn btn-sm btn-outline-secondary" href="{% url 'edit_review' r.id %}">Edit</a>
+              <a class="btn btn-sm btn-outline-danger" href="{% url 'delete_review' r.id %}">Delete</a>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No reviews yet. Be the first.</p>
+  {% endif %}
 
   <div class="mt-4">
-    <a href="{% url 'products' %}">Back to shop</a>
+    <a class="btn btn-outline-primary" href="{% url 'products' %}">Back to shop</a>
   </div>
 </div>
 {% endblock %}
