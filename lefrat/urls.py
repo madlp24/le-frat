@@ -33,6 +33,8 @@ urlpatterns = [
     path("checkout/", include("checkout.urls")),
     path("profile/", include("profiles.urls")),
     path("", include("marketing.urls")),
+    path("marketing/", include("marketing.urls")),
+
 
     
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemap"),

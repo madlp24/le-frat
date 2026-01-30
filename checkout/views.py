@@ -1,4 +1,4 @@
-# checkout/views.py
+import json
 import stripe
 from decimal import Decimal, ROUND_HALF_UP
 
@@ -10,7 +10,6 @@ from .forms import OrderForm
 from .models import Order, OrderLineItem
 from products.models import Product
 
-
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
@@ -20,15 +19,14 @@ def checkout(request):
         messages.error(request, "Your bag is empty.")
         return redirect("products")
 
-    # calculate total + build bag_items for the summary
-    total = Decimal("0.00")
+    # Subtotal + bag items
+    subtotal = Decimal("0.00")
     bag_items = []
 
     for item_id, quantity in bag.items():
         product = get_object_or_404(Product, pk=item_id)
-        line_total = product.price * quantity
-
-        total += line_total
+        line_total = (product.price * quantity).quantize(Decimal("0.01"))
+        subtotal += line_total
 
         bag_items.append({
             "product": product,
@@ -36,13 +34,17 @@ def checkout(request):
             "line_total": line_total,
         })
 
-    # Stripe amount in cents (safe rounding)
-    stripe_amount = int((total * 100).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
+    # Delivery + grand total
+    percentage = Decimal(getattr(settings, "STANDARD_DELIVERY_PERCENTAGE", 0)) / Decimal("100")
+    delivery_cost = (subtotal * percentage).quantize(Decimal("0.01"))
+    grand_total = (subtotal + delivery_cost).quantize(Decimal("0.01"))
+
+    # Stripe amount in cents
+    stripe_amount = int((grand_total * 100).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
 
     if request.method == "POST":
         form = OrderForm(request.POST)
 
-        # Verify Stripe success BEFORE creating the order
         payment_intent_id = request.POST.get("payment_intent_id", "").strip()
         if not payment_intent_id:
             messages.error(request, "Payment was not completed. Please try again.")
@@ -64,7 +66,11 @@ def checkout(request):
 
         if form.is_valid():
             order = form.save(commit=False)
-            order.order_total = total
+            order.order_total = subtotal
+            order.delivery_cost = delivery_cost
+            order.grand_total = grand_total
+            order.stripe_pid = pi.id
+            order.original_bag = json.dumps(bag)
 
             if request.user.is_authenticated:
                 order.user = request.user
@@ -73,15 +79,13 @@ def checkout(request):
 
             for item_id, quantity in bag.items():
                 product = get_object_or_404(Product, pk=item_id)
-                line_total = product.price * quantity
-
                 OrderLineItem.objects.create(
                     order=order,
                     product=product,
                     quantity=quantity,
-                    lineitem_total=line_total,
                 )
 
+            # clear bag
             request.session["bag"] = {}
             messages.success(request, "Payment successful — order confirmed.")
             return redirect("checkout_success", order_number=order.order_number)
@@ -89,7 +93,7 @@ def checkout(request):
         messages.error(request, "There was an error with your form.")
         return redirect("checkout")
 
-    # GET: create the PaymentIntent used by Stripe.js
+    # GET: create PaymentIntent
     intent = stripe.PaymentIntent.create(
         amount=stripe_amount,
         currency="usd",
@@ -99,18 +103,18 @@ def checkout(request):
         "order_form": OrderForm(),
         "client_secret": intent.client_secret,
         "stripe_public_key": settings.STRIPE_PUBLIC_KEY,
-        "total": total,
-        "bag_items": bag_items,  
+        "subtotal": subtotal,
+        "delivery_cost": delivery_cost,
+        "grand_total": grand_total,
+        "bag_items": bag_items,
     }
     return render(request, "checkout/checkout.html", context)
-
 
 def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
 
-    # If the order belongs to a user, only that user can view it
-    if order.user and (not request.user.is_authenticated or request.user != order.user):
-        messages.error(request, "You do not have permission to view this order.")
-        return redirect("home")
+    # Clear bag after successful order (safe if already empty)
+    if "bag" in request.session:
+        request.session["bag"] = {}
 
     return render(request, "checkout/checkout_success.html", {"order": order})
