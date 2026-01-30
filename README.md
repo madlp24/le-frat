@@ -1,213 +1,387 @@
-# 🍔 Le Frat — Burger Store & Merchandise (Project 5)
+# 🍔 Le Frat — Burger Store & Merchandise *(Project 5)*
 
-## 🔗 Live Site
-👉 https://le-frat-store-9249b463cfe0.herokuapp.com/
+🔗 **Live Site:**  
+https://le-frat-store-9249b463cfe0.herokuapp.com/
 
-## 💻 GitHub Repository
-👉 *(Add your repo link here)*
-
----
-
-## 📌 Project Overview
-
-**Le Frat** is a full-stack e-commerce web application built with **Django**. The platform represents a burger-inspired lifestyle brand that sells exclusive merchandise, allowing users to browse products, manage a shopping bag, complete secure **Stripe payments**, and leave **product reviews**.
-
-This project demonstrates **full-stack development skills**, **e-commerce functionality**, **secure payment integration**, and **business strategy planning** in line with **Code Institute Project 5 requirements**.
+🔗 **GitHub Repository:**  
+*(Add your repo link here)*  
 
 ---
 
-## 🏢 Business Model
+## 📌 Project Overview  
+
+Le Frat is a full-stack Django e-commerce platform developed as part of **Code Institute Project 5**.  
+The project represents a burger-inspired lifestyle brand that sells exclusive merchandise, allowing users to browse products, manage a shopping bag, complete secure Stripe payments, and leave product reviews.
+
+This project demonstrates skills in **full-stack development, UX design, Agile methodology, secure payments, database architecture, SEO optimization, and deployment**.
+
+---
+
+## 🏪 Business Model  
 
 Le Frat operates under a **B2C (Business-to-Consumer)** model.
 
-The brand combines:
-- Premium burger culture  
-- Urban lifestyle branding  
-- Exclusive merchandise  
+The brand merges:
+- Burger culture  
+- Streetwear identity  
+- Lifestyle branding  
 
----
-
-## 💰 Revenue Streams
-
+### 💰 Revenue Streams  
 - Online merchandise sales (hoodies, t-shirts, accessories)  
 - Limited edition drops  
-- Brand collaborations  
+- Brand collaborations and partnerships  
+
+### 🎯 Value Proposition  
+Le Frat delivers **a lifestyle experience beyond food**, blending culture, exclusivity, and identity into a recognizable and scalable brand.
 
 ---
 
-## 💡 Value Proposition
+## 👥 Target Audience  
 
-Le Frat delivers a brand experience beyond food, blending **culture, streetwear, and identity** into a recognizable lifestyle brand.
+### 🎯 Primary Audience  
+- Ages 16–35  
+- Urban, trend-aware, socially active  
+- Fans of streetwear and food culture  
 
----
-
-## 🎯 Target Audience
-
-### Primary Audience
-- Ages **16–35**  
-- Urban, trend-aware, digitally active  
-- Streetwear and food culture enthusiasts  
-
-### Secondary Audience
+### 🎯 Secondary Audience  
 - Tourists  
-- Food lovers  
+- Casual shoppers  
 - Brand collectors  
 
 ---
 
-## 📣 Marketing Strategy
+## 📣 Marketing Strategy  
 
-### Social Media Marketing
-
-**Facebook Business Page**  
-👉 https://www.facebook.com/profile.php?id=61587399382148  
-
-Used for:
-- Product announcements  
-- Brand storytelling  
-- Community engagement  
-
----
-
-### 📧 Email Marketing
-
-Users can subscribe to a **newsletter** to receive:
-- Promotions  
-- New product drops  
-- Brand updates  
-
----
-
-### 🔍 SEO Strategy
-
-- `robots.txt` implemented  
-- `sitemap.xml` implemented  
-- SEO-friendly URLs  
-- Optimized metadata for products  
-
----
-
-## 🧠 User Experience (UX) & Agile Planning
-
-User stories were created following **Agile methodology** and tracked using a **Kanban board**.
-
-### Example User Stories
-
-- As a user, I want to browse products  
-- As a customer, I want to securely checkout  
-- As a user, I want to leave product reviews  
-- As an admin, I want to manage inventory  
-
----
-
-## ⭐ Key Features
-
-### 👤 User Accounts
-- User registration, login, and logout  
-- Profile management  
-
-### 🛍 Product Management
-- Browse products  
-- View product details  
-- Admin CRUD (Create, Read, Update, Delete)  
-
-### 🛒 Shopping Bag
-- Add and remove products  
-- Update product quantities  
-
-### 💳 Secure Payments
-- Stripe payment integration  
-- Stripe Webhooks  
-- Payment success and error handling  
-
-### 📝 Product Reviews
-Users can:
-- Leave **one review per product**  
-- Submit a rating from **1–5**  
-- Upload an **optional image**  
-- Edit or delete their **own reviews**  
-
----
-
-## 📈 Business Value
-
-- Builds customer trust  
-- Improves purchase confidence  
-- Encourages user engagement  
-- Strengthens brand credibility  
-
----
-
-## 📘 Facebook Page Evidence
+### 📘 Facebook Business Page  
+A Facebook Business Page supports brand awareness, marketing, and customer engagement.
 
 🔗 https://www.facebook.com/profile.php?id=61587399382148  
 
-### Screenshots to Include:
-- Facebook profile page  
-- About section  
-- Example post  
-
-*(Insert screenshots here)*  
+📸 **Evidence to include:**  
+- Profile page screenshot  
+- About section screenshot  
+- Example promotional post  
 
 ---
 
-## 🗄 Database Schema
+### 📧 Email Marketing  
+Users can subscribe to a **newsletter** to receive:
+- Promotions  
+- New product announcements  
+- Limited edition releases  
 
-Core models include:
-- `Product`  
-- `Order`  
-- `UserProfile`  
-- `ProductReview`  
-- `NewsletterSubscription`  
+This supports **customer retention and remarketing**.
 
 ---
 
-## 🛠 Technologies Used
+### 🔍 SEO Strategy  
+SEO practices implemented:
+- `robots.txt`  
+- `sitemap.xml`  
+- SEO-friendly URLs  
+- Optimized page metadata  
+- Semantic HTML structure  
+- Accessible UI components  
 
-### Frontend
+📸 **Evidence to include:**  
+- Sitemap validation screenshot  
+- Robots.txt screenshot  
+- Meta tag inspection  
+
+---
+
+## 🎨 User Experience (UX) & Design  
+
+### 🎯 UX Goals  
+- Provide a clean and intuitive shopping experience  
+- Enable fast and secure checkout  
+- Encourage engagement through reviews  
+- Maintain strong lifestyle brand identity  
+- Optimize usability across mobile and desktop  
+
+### 🎨 Design Choices  
+- Minimalist layout  
+- Brand-aligned typography and color palette  
+- Mobile-first responsive design  
+- Clear product hierarchy  
+- Accessible navigation  
+
+📸 *(Insert UI & responsive design screenshots here)*  
+
+---
+
+## 🗂️ Agile Development & Planning  
+
+The project followed **Agile methodology**, with features built incrementally and tracked via a Kanban board.
+
+### 📝 Example User Stories  
+- As a customer, I want to browse products easily  
+- As a user, I want to securely checkout  
+- As a user, I want to leave reviews  
+- As an admin, I want to manage inventory  
+- As a customer, I want to subscribe to a newsletter  
+
+📸 *(Insert screenshot of GitHub Projects / Kanban board here)*  
+
+---
+
+## ⚙️ Key Features  
+
+
+### 📰 Newsletter Signup Form  
+
+A newsletter signup form is implemented to support email marketing and customer retention.  
+Users can subscribe to receive promotions, updates, and new product announcements.
+
+📸 *(Insert newsletter signup UI screenshot here)*  
+
+---
+
+### 🚫 Custom 404 Page  
+
+A custom **404 error page** has been created to improve user experience and maintain consistent branding when users navigate to invalid URLs.
+
+📸 *(Insert custom 404 page screenshot here)*  
+
+---
+
+### 🧩 Proof of 3+ Custom Models  
+
+The project includes **multiple original custom Django models**, designed to extend core functionality.
+
+#### 🛍️ Product Model  
+Stores product details including:
+- Name  
+- Description  
+- Price  
+- Stock  
+- Image  
+
+#### 📦 Order Model  
+Handles checkout and order tracking:
+- Customer information  
+- Order totals  
+- Stripe payment references  
+- Order status  
+
+#### ⭐ ProductReview Model  
+Allows users to:
+- Leave a rating (1–5)  
+- Write a review  
+- Upload an optional image  
+- Edit or delete their own review  
+
+#### 📧 NewsletterSubscription Model  
+Stores newsletter subscribers:
+- Email addresses  
+- Subscription date  
+
+These models demonstrate **custom database design**, **relational data structure**, and **full-stack CRUD functionality**, satisfying Code Institute requirements.
+
+📸 *(Insert admin panel / database model screenshots here)*  
+
+### 👤 User Accounts  
+- User registration  
+- Login / logout  
+- Profile management  
+
+---
+
+### 🛍️ Product Management  
+- Browse products  
+- View product detail pages  
+- Admin CRUD functionality  
+
+---
+
+### 🛒 Shopping Bag  
+- Add products to bag  
+- Update quantities  
+- Remove products  
+
+---
+
+### 💳 Secure Checkout & Stripe Payments  
+- Stripe payment integration  
+- Stripe Webhooks  
+- Secure order processing  
+- Payment success and failure handling  
+- Protection against duplicate orders  
+
+📸 *(Insert Stripe webhook and checkout success screenshots)*  
+
+---
+
+### ⭐ Product Reviews System  
+Users can:
+- Leave **one review per product**  
+- Rate products from **1–5**  
+- Upload an optional image  
+- Edit or delete their own reviews  
+
+#### 📈 Business Value  
+- Builds customer trust  
+- Improves conversion rates  
+- Encourages community engagement  
+- Strengthens brand credibility  
+
+📸 *(Insert review UI screenshots)*  
+
+---
+
+## 🗄️ Database Schema  
+
+Core models:
+- Product  
+- Order  
+- UserProfile  
+- ProductReview  
+- NewsletterSubscription  
+
+📸 *(Insert ERD diagram screenshot here)*  
+
+## 📊 ERD / Database Diagram  
+
+The project includes a database schema designed to support e-commerce functionality, user accounts, orders, reviews, and newsletter subscriptions.
+
+A simple ERD (Entity Relationship Diagram) was created to visually represent relationships between models.
+
+📸 *(Insert ERD / database diagram screenshot here)*  
+
+---
+
+## 🧰 Technologies Used  
+
+### 🎨 Frontend  
 - HTML5  
 - CSS3  
 - Bootstrap  
 - JavaScript  
 
-### Backend
+### 🧠 Backend  
 - Python  
 - Django  
 
-### Database
+### 🗃️ Database  
 - PostgreSQL  
 
-### Payments
+### 💳 Payments  
 - Stripe API  
 - Stripe Webhooks  
 
-### Deployment
+### 🚀 Deployment  
 - Heroku  
 - Gunicorn  
 - Whitenoise  
 
 ---
 
-## 🧪 Testing
+## 🧪 Testing  
 
-Manual testing included:
-- User registration and login  
-- Shopping bag functionality  
-- Checkout and Stripe payments  
-- Stripe webhook verification  
-- Product reviews system  
-- CRUD operations  
-- Responsive layout testing  
+### ✅ Manual Testing Summary  
+
+| Feature | Action | Expected Result | Outcome |
+|--------|--------|----------------|--------|
+| User Registration | Create account | Account created | Pass |
+| Login | Login with valid credentials | User logged in | Pass |
+| Add to Bag | Add product | Product added | Pass |
+| Update Bag | Change quantity | Bag updates correctly | Pass |
+| Checkout | Complete payment | Order processed | Pass |
+| Stripe Webhooks | Confirm payment | Payment validated | Pass |
+| Reviews | Submit review | Review saved | Pass |
+| Edit Review | Update review | Changes saved | Pass |
+| Delete Review | Remove review | Review deleted | Pass |
+| Admin CRUD | Manage products | Updates successful | Pass |
+| Responsive Layout | Resize screen | Layout adapts | Pass |
 
 All features were tested across **desktop and mobile devices**.
 
----
-
-## 📸 Screenshots *(Optional)*
-*(Add UI, checkout, admin, and review screenshots here)*  
+📸 *(Insert testing evidence screenshots if desired)*  
 
 ---
 
-## 🏁 Author
+## 🚀 Deployment  
 
-**Le Frat — Code Institute Project 5**
+### 📦 Steps to Deploy on Heroku  
+
+1. Install dependencies  
+   ```bash
+   pip install -r requirements.txt
+### 2. Set environment variables  
+
+- SECRET_KEY  
+- DATABASE_URL  
+- STRIPE_PUBLIC_KEY  
+- STRIPE_SECRET_KEY  
+- STRIPE_WEBHOOK_SECRET  
+
+---
+
+### 3. Run migrations  
+
+```bash
+python manage.py migrate
+
+### 4. Collect static files  
+
+```bash
+python manage.py collectstatic
+
+### 5. Deploy to Heroku  
+
+*(Insert Heroku deployment proof screenshot)*  
+
+---
+
+## 🔐 Security  
+
+- Sensitive credentials stored in environment variables  
+- DEBUG disabled in production  
+- CSRF protection enabled  
+- Secure Stripe payment handling  
+- Safe user authentication practices  
+
+---
+
+## ⚡ Performance & Lighthouse  
+
+The site was tested using **Google Lighthouse** to measure:
+- Performance  
+- Accessibility  
+- Best Practices  
+- SEO  
+
+📸 *(Insert Lighthouse results screenshot)*  
+
+---
+
+## 📸 Screenshots  
+
+📌 **Suggested screenshots to include:**
+- Homepage  
+- Product listing  
+- Product detail page  
+- Shopping bag  
+- Checkout success  
+- Reviews section  
+- Admin dashboard  
+- Facebook Business Page  
+- SEO validation  
+- Deployment confirmation  
+
+---
+
+## 👤 Author  
+
+**Le Frat — Code Institute Project 5**  
+
+---
+
+## 🙌 Acknowledgements  
+
+Thanks to:
+- Code Institute  
+- My mentor  
+- CI Student Community  
+- Django & Stripe Documentation  
+
