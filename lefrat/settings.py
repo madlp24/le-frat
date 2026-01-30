@@ -25,10 +25,12 @@ SECRET_KEY = os.getenv("SECRET_KEY", "dev-insecure-secret-key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".herokuapp.com"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".herokuapp.com","le-frat-store-9249b463cf0.herokuapp.com"]
 
 # Needed for Heroku domain (CSRF protection)
 CSRF_TRUSTED_ORIGINS = ["https://*.herokuapp.com"]
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 
 # Application definition
