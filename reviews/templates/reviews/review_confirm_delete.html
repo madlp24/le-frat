@@ -1,0 +1,14 @@
+<div class="mb-3">
+  <label class="form-label mb-1">Rating</label>
+
+  <div class="star-rating">
+    {% for radio in form.rating %}
+      {{ radio.tag }}
+      <label for="{{ radio.id_for_label }}">★</label>
+    {% endfor %}
+  </div>
+
+  {% if form.rating.errors %}
+    <div class="text-danger small mt-1">{{ form.rating.errors }}</div>
+  {% endif %}
+</div>

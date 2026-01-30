@@ -1170,3 +1170,68 @@ form[method="GET"]{
 @media (max-width: 576px){
   .lf-product-media{ max-width: 340px; }
 }
+
+/* Reviews section */
+.reviews-wrap {
+  border-top: 1px solid #e5e5e5;
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+}
+
+.review-card {
+  border: 1px solid #eee;
+  border-radius: 14px;
+  padding: 1rem;
+  background: #fff;
+}
+
+.review-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.review-img {
+  max-width: 360px;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #eee;
+}
+
+/* Star rating input */
+
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  cursor: pointer;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: #cfcfcf;
+  transition: transform 0.08s ease-in-out;
+}
+
+.star-rating label:hover {
+  transform: scale(1.05);
+}
+
+/* fill stars on hover and when checked */
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input:checked ~ label {
+  color: #f5b301;
+}
+
+/* Le Frat star rating (manual) */
+
+.lf-star:hover{
+  transform: scale(1.06);
+}
+
+.lf-star.is-active{
+  color: #f5b301;
+}
+

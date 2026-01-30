@@ -21,7 +21,8 @@ def add_review(request, product_id):
             review.product = product
             review.user = request.user
             review.save()
-            messages.success(request, "Review added. Gracias por contarla 🔥")
+            messages.success(request, "Review added. Thanks for sharing!")
+
         else:
             messages.error(request, "Please fix the errors in the form.")
     return redirect("product_detail", product_id=product.id)
