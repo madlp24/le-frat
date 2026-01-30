@@ -30,8 +30,6 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".herokuapp.com","le-frat-store-9249b
 # Needed for Heroku domain (CSRF protection)
 CSRF_TRUSTED_ORIGINS = ["https://*.herokuapp.com"]
 
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-
 
 # Application definition
 INSTALLED_APPS = [
@@ -44,7 +42,6 @@ INSTALLED_APPS = [
 
     "django.contrib.sites",
     "django.contrib.sitemaps",
-    "csp",
 
     "allauth",
     "allauth.account",
@@ -73,7 +70,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
 
     "allauth.account.middleware.AccountMiddleware",
-    "csp.middleware.CSPMiddleware",
 
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -225,12 +221,3 @@ MESSAGE_TAGS = {
     messages.WARNING: "warning",
     messages.ERROR: "danger",
 }
-
-# settings.py
-CSP_FRAME_ANCESTORS = (
-    "'self'",
-    "https://amiresponsive.co.uk",
-    "https://www.amiresponsive.co.uk",
-)
-
-X_FRAME_OPTIONS = "SAMEORIGIN"
