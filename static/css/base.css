@@ -878,6 +878,15 @@ form[method="GET"]{
 .lf-newsletter .form-control{
   flex: 1 1 220px;
 }
+.lf-footer .lf-newsletter .form-control{
+  background: rgba(255, 255, 255, 0.148);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #ECECEC;
+}
+
+.lf-footer .lf-newsletter .form-control::placeholder{
+  color: rgba(236,236,236,0.7);
+}
 
 /* ================================
    Footer (Le Frat) – Black + Blue

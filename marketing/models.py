@@ -1,8 +1,9 @@
-from django.db import models
+from django.contrib import admin
+from .models import NewsletterSubscriber
 
-class NewsletterSubscriber(models.Model):
-    email = models.EmailField(unique=True)
-    subscribed_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.email
+@admin.register(NewsletterSubscriber)
+class NewsletterSubscriberAdmin(admin.ModelAdmin):
+    list_display = ("email", "subscribed_at")
+    search_fields = ("email",)
+    ordering = ("-subscribed_at",)

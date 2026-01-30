@@ -42,6 +42,21 @@
           <li><a href="{% url 'faqs' %}">FAQs</a></li>
         </ul>
       </div>
+      <!-- Newsletter -->
+      <div class="lf-footer__col">
+        <h3 class="lf-footer__title">Newsletter</h3>
+        <p class="mb-3" style="color: rgba(236,236,236,.78); font-weight: 600;">
+          Get updates on drops, collabs & promos.
+        </p>
+
+        <form method="POST" action="{% url 'newsletter_signup' %}" class="lf-newsletter">
+            {% csrf_token %}
+            <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+            <button type="submit" class="btn btn-primary lf-btn-pill">Subscribe</button>
+        </form>
+
+      </div>
+
 
     </div>
 
