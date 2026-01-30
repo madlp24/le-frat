@@ -318,15 +318,14 @@ All features were tested across **desktop and mobile devices**.
 ---
 
 ### 3. Run migrations  
-
-```bash
+    ```bash
 python manage.py migrate
-
+```
 ### 4. Collect static files  
 
 ```bash
 python manage.py collectstatic
-
+```
 ### 5. Deploy to Heroku  
 
 *(Insert Heroku deployment proof screenshot)*  
