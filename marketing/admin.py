@@ -1,9 +1,8 @@
 from django.contrib import admin
-from .models import NewsletterSubscription
+from .models import NewsletterSubscriber
 
-
-@admin.register(NewsletterSubscription)
-class NewsletterSubscriptionAdmin(admin.ModelAdmin):
-    list_display = ("email", "created_on")
+@admin.register(NewsletterSubscriber)
+class NewsletterSubscriberAdmin(admin.ModelAdmin):
+    list_display = ("email", "subscribed_at")
     search_fields = ("email",)
-    ordering = ("-created_on",)
+    ordering = ("-subscribed_at",)
