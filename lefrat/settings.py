@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     "django.contrib.sites",
     "django.contrib.sitemaps",
+    "csp",
 
     "allauth",
     "allauth.account",
@@ -72,6 +73,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
 
     "allauth.account.middleware.AccountMiddleware",
+    "csp.middleware.CSPMiddleware",
 
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -223,3 +225,12 @@ MESSAGE_TAGS = {
     messages.WARNING: "warning",
     messages.ERROR: "danger",
 }
+
+# settings.py
+CSP_FRAME_ANCESTORS = (
+    "'self'",
+    "https://amiresponsive.co.uk",
+    "https://www.amiresponsive.co.uk",
+)
+
+X_FRAME_OPTIONS = "SAMEORIGIN"
