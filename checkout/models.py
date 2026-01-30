@@ -3,6 +3,9 @@ import uuid
 from django.db import models
 from django.contrib.auth.models import User
 from products.models import Product
+from decimal import Decimal
+from django.conf import settings
+from django.db.models import Sum
 
 
 class Order(models.Model):
@@ -35,15 +38,43 @@ class Order(models.Model):
         if not self.order_number:
             self.order_number = self._generate_order_number()
         super().save(*args, **kwargs)
+    def update_total(self):
+        self.order_total = self.lineitems.aggregate(
+            Sum('lineitem_total')
+        )['lineitem_total__sum'] or 0
+        self.delivery_cost = self.order_total * Decimal(
+            settings.STANDARD_DELIVERY_PERCENTAGE / 100
+        )
+        self.grand_total = self.order_total + self.delivery_cost
+        self.save()
+
 
 
 class OrderLineItem(models.Model):
     order = models.ForeignKey(
-        Order, related_name="lineitems", on_delete=models.CASCADE
+        Order,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+        related_name='lineitems'
     )
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
-    lineitem_total = models.DecimalField(max_digits=10, decimal_places=2, editable=False)
+    product = models.ForeignKey(
+        Product,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE
+    )
+    quantity = models.IntegerField(default=0)
+    lineitem_total = models.DecimalField(
+        max_digits=6,
+        decimal_places=2,
+        editable=False
+    )
+
+    def save(self, *args, **kwargs):
+        self.lineitem_total = self.product.price * self.quantity
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.product.name} x {self.quantity}"
+        return f'SKU {self.product.sku} on order {self.order.order_number}'
+

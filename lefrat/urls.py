@@ -19,8 +19,6 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from django.contrib.sitemaps.views import sitemap
 from .sitemaps import StaticViewSitemap
-from django.views.generic import RedirectView
-from django.templatetags.static import static
 
 sitemaps = {
     'static': StaticViewSitemap,
@@ -40,5 +38,4 @@ urlpatterns = [
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemap"),
 
     path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
-    path("favicon.ico", RedirectView.as_view(url=static("favicon.ico"))),
 ]
