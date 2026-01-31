@@ -1,10 +1,10 @@
-# 🍔 Le Frat — Burger Store & Merchandise *(Project 5)*
+# Le Frat — Burger Store & Merchandise
 
 🔗 **Live Site:**  
 https://le-frat-store-9249b463cfe0.herokuapp.com/
 
 🔗 **GitHub Repository:**  
-*(Add your repo link here)*  
+https://github.com/madlp24/stage-pass  
 
 ---
 
