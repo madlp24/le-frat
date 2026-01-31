@@ -450,6 +450,7 @@ Mobile
 ![](static/images/lighthouse_mobile.png)
 </details> 
 
+<details> 
 <summary>W3C Validation</summary>
 
 Desktop
