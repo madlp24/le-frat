@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Server Error | Le Frat{% endblock %}
 {% block content %}
-<h1>500 - Server error</h1>
-<p>Something went wrong on our side. Please try again later.</p>
-<a href="{% url 'home' %}">Go back home</a>
+<div class="container py-5">    
+    <h1>500 - Server error</h1>
+    <p>Something went wrong on our side. Please try again later.</p>
+    <a class="btn btn-outline-dark lf-btn-pill" href="{% url 'home' %}">Go back home</a>
+</div>
 {% endblock %}

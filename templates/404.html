@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Page Not Found | Le Frat{% endblock %}
 {% block content %}
-<h1>404 - Page not found</h1>
-<p>The page you’re looking for doesn’t exist.</p>
-<a href="{% url 'home' %}">Go back home</a>
+<div class="container py-5">
+    <h1>404 - Page not found</h1>
+    <p>The page you’re looking for doesn’t exist.</p>
+    <a class="btn btn-outline-dark lf-btn-pill" href="{% url 'home' %}">Go back home</a>
+</div>
 {% endblock %}

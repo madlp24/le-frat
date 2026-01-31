@@ -1244,3 +1244,9 @@ form[method="GET"]{
   color: #f5b301;
 }
 
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+}
