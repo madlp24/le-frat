@@ -496,7 +496,7 @@ Overall, all JavaScript functionality operates as intended. Reported warnings ar
 [ CI Python linter ](https://pep8ci.herokuapp.com/) was used to test python code
 
 ## Bugs
-## 🐞 Known Bugs
+## Known Bugs
 
 ### Bug 1 – Incorrect Heading on Shop Page
 **Issue:**  
@@ -533,7 +533,7 @@ Certain brand colour combinations do not provide sufficient contrast between tex
 Adjust colour contrast for affected UI elements while maintaining the overall brand identity to improve accessibility compliance.
 
 ---
-## 🚀 Deployment
+## Deployment
 
 This project was developed using Gitpod with Git for version control and deployed to **Heroku**.  
 A **Code Institute PostgreSQL database** was used for the production environment.
@@ -585,28 +585,28 @@ This project uses the **Code Institute PostgreSQL database service**.
 
 2. Freeze project dependencies:
     ```bash
-pip3 freeze > requirements.txt
+    pip3 freeze > requirements.txt
 
 3. Apply database migrations:
     ```bash
-python3 manage.py migrate
+    python3 manage.py migrate
 
 4. Create a superuser:
     ```bash
-python3 manage.py createsuperuser
+    python3 manage.py createsuperuser
 
-> ⚠️ **Note**  
+> **Note**  
 Ensure that sensitive information such as `SECRET_KEY` values and database credentials are never committed to GitHub.
 
 ## Final Deployment
 
 1. Install **Gunicorn**, which will be used as the production web server:
     ```bash
-pip3 install gunicorn
+    pip3 install gunicorn
 
 2. Create a `Procfile` in the root directory of the project and add the following line:
     ```bash
-web: gunicorn <project_name>.wsgi
+    web: gunicorn <project_name>.wsgi
 
 
 3. Commit all changes and push them to your GitHub repository.
