@@ -37,12 +37,23 @@ def product_list(request):
     elif sort == "name_desc":
         products = products.order_by("-name")
 
+    if query:
+        page_title = "Search Results"
+    elif sort == "newest":
+        page_title = "New Arrivals"
+    elif category:
+        matched = categories.filter(name=category).first()
+        page_title = matched.friendly_name if matched else category.title()
+    else:
+        page_title = "Shop"
+
     context = {
         "products": products,
         "categories": categories,
         "search_term": query,
         "selected_category": category,
         "selected_sort": sort,
+        "page_title": page_title,
     }
     return render(request, "products/products.html", context)
 

@@ -1,668 +1,180 @@
-# Le Frat — Burger Store & Merchandise
+# Le Frat Store
 
-🔗 **Live Site:**  
-https://le-frat-store-9249b463cfe0.herokuapp.com/
+A Django e-commerce store for a burger-inspired streetwear brand. Customers browse a product catalog, build a session-based bag, and check out with Stripe; staff manage inventory through an admin UI and authenticated users can post and manage their own product reviews.
 
-
----
-
-## Introduction 
-
-Le Frat is a full-stack Django e-commerce platform developed as part of **Code Institute Project 5**.  
-The project represents a burger-inspired lifestyle brand that sells exclusive merchandise, allowing users to browse products, manage a shopping bag, complete secure Stripe payments, and leave product reviews.
+**Live site:** https://le-frat-store-9249b463cfe0.herokuapp.com/
 
 ---
 
-## Business Model  
+## The Problem
 
-Le Frat operates under a **B2C (Business-to-Consumer)** model.
+Small independent apparel brands usually start on a general-purpose storefront like Shopify or Etsy, which is fine for listings but gives the brand little control over the checkout experience, media hosting, and trust signals like user-generated reviews. Self-hosting a full store is the alternative, but most starter templates either skip real payment integration, skip file hosting beyond the local filesystem, or skip the authorization rules needed to let users leave and manage reviews without stepping on each other.
 
-The brand merges:
-- Burger culture  
-- Streetwear identity  
-- Lifestyle branding  
+## The Solution
 
-###  Revenue Streams  
-- Online merchandise sales (hoodies, t-shirts, accessories)  
-- Limited edition drops  
-- Brand collaborations and partnerships  
-
-### Value Proposition  
-Le Frat delivers **a lifestyle experience beyond food**, blending culture, exclusivity, and identity into a recognizable and scalable brand.
+Le Frat Store is a self-hosted Django storefront that covers the full purchase path: catalog → session bag → Stripe checkout → persisted order → user-owned reviews. Media and static assets are served from S3 in production via a small custom storage backend, payments are verified server-side against the Stripe API before orders are saved, and reviews are scoped to their author so one user cannot edit or delete another user's content.
 
 ---
-
-## Target Audience  
-
-### Primary Audience  
-- Ages 16–35  
-- Urban, trend-aware, socially active  
-- Fans of streetwear and food culture  
-
-### Secondary Audience  
-- Tourists  
-- Casual shoppers  
-- Brand collectors  
-
----
-
-## User Experience (UX) & Design  
-
-###  UX Goals  
-- Provide a clean and intuitive shopping experience  
-- Enable fast and secure checkout  
-- Encourage engagement through reviews  
-- Maintain strong lifestyle brand identity  
-- Optimize usability across mobile and desktop  
-
-### Design Choices  
-- Minimalist layout  
-- Brand-aligned typography and color palette  
-- Mobile-first responsive design  
-- Clear product hierarchy  
-- Accessible navigation  
-
-## Agile Development & Planning  
-
-The project followed **Agile methodology**, with features built incrementally and tracked via a Kanban board.
-
-###  User Stories  
-- As a customer, I want to browse products easily  
-- As a user, I want to securely checkout  
-- As a user, I want to leave reviews  
-- As an admin, I want to manage inventory  
-- As a customer, I want to subscribe to a newsletter  
-
-[User stories here:](https://github.com/users/madlp24/projects/5)
-
-## Architecture
----
-## Database
----
-<details>
-  <summary>Click here to view Database Schema:</summary>
-
-  ![](static/images/schema.png)
-
-</details>
-
-## Design
----
-<details>
-  <summary>Before starting any development, I created a set of wireframes to clearly define the overall layout and structure of the site. These wireframes helped me visualize how each page such as the homepage, product page, shopping bag, checkout, user profile, and admin dashboard would function and flow together. They also served as a simple but effective way to communicate my design ideas and goals to my mentor, ensuring we shared the same understanding of what I wanted to achieve before writing any code.
-</summary>
-
-  ![](static/images/wireframes_1.png)
-  ![](static/images/wireframes_2.png)
-
-</details>
-
-## Navigation
----
-<details>
-  <summary>I then created a series of flowcharts to map out the website’s structure and user journeys. These diagrams helped me visualise how users would navigate through the site—from browsing products and managing authentication to completing checkout and accessing their account—making the overall flow clearer before moving into development.
-</summary>
-
-  ![](static/images/flowchart.png)
-
-</details>
-
-### E-commerce type
-
-This project is a merchandise store for Le Frat, a food brand that extends its identity beyond burgers into lifestyle products. The site allows users to browse and purchase branded merchandise through a simple and intuitive shopping experience. From an administrative perspective, the platform implements full CRUD functionality to manage products, users, and orders efficiently.
-
-### Brand Content
-
-Le Frat is a food brand built around simplicity, authenticity, and shared experiences. Rooted in the idea that the best moments happen between friends, the brand embraces a bold yet minimal aesthetic and a relaxed, confident attitude. Its identity focuses on quality over excess, avoiding unnecessary complexity while delivering a strong and recognizable presence.
-
-The merchandise featured on this platform extends Le Frat’s brand beyond food, allowing customers to engage with the brand as part of their everyday lifestyle. Each product reflects the same values found in the restaurant experience: simplicity, community, and character. The online store is designed to maintain this identity through clean design, straightforward interactions, and a user experience that feels effortless and approachable.
 
 ## Features
 
-### Homepage
----
-The homepage provides the main entry point to the Le Frat website, displaying the brand logo, navigation menu, search functionality, user account access, and shopping bag. A hero banner highlights the brand identity and includes a call-to-action button directing users to browse products.
-
-![](static/images/homepage.png)
-
-### Header & Navigation
----
-The header appears across all pages and includes the Le Frat logo, navigation links, search bar, user account access, and shopping bag icon, allowing users to easily navigate the site.
-
-![](static/images/nav_bar.png)
-
-### Product Listing Page
----
-The products page displays all available merchandise in a responsive grid layout, allowing users to browse items, view pricing, and navigate to individual product detail pages.
-
-![](static/images/prod_list.png)
-
-### Product Detail Page
----
-The product detail page presents detailed product information including images, description, price, and an add-to-bag option. Users can also view and submit product reviews.
-
-![](static/images/prod_det.png)
-
-### Shopping Bag
----
-The shopping bag displays selected products along with quantity controls, individual prices, and the order total. Users can update quantities or remove items before proceeding to checkout.
-
-![](static/images/shop_bag.png)
+- **Product catalog** with full-text search over name/description, category filter, and sort by price, name, or newest (`products/views.py:product_list`).
+- **Dynamic listing heading** that reflects the current context — Shop, New Arrivals, category name, or Search Results — rather than a hardcoded label.
+- **Staff-only product CRUD** gated by `@user_passes_test(is_admin)` on add/edit/delete views.
+- **Session-based shopping bag** (`bag/`) with add, update-quantity, and remove endpoints; bag state survives page navigation without requiring a logged-in user.
+- **Stripe Elements checkout** with a server-side-created PaymentIntent and Stripe Elements rendered on the front end (`checkout/views.py`, `checkout/templates/checkout/checkout.html`).
+- **Server-side order verification** — on return from Stripe, the success view retrieves the PaymentIntent directly from Stripe's API and checks both `amount` and `status` before persisting the order.
+- **S3-backed media and static storage** in production via a custom `S3Boto3Storage` subclass (`custom_storages.py`), toggled by the `USE_AWS` environment variable.
+- **WhiteNoise compressed static files** for local/dev and for Heroku deployments that don't use S3.
+- **User accounts via django-allauth** with email-or-username login and a customizable signup form.
+- **Ownership-protected reviews** — `add_review`, `edit_review`, and `delete_review` enforce `review.user == request.user or request.user.is_staff` before mutating, so users can only manage their own reviews.
+- **User profile page** with an order lookup by order number (`profiles/views.py`).
+- **Newsletter signup** and static marketing pages (About, FAQs, Support, Privacy, Terms) under a dedicated app.
+- **Sitemap** via `django.contrib.sitemaps` for search engine discovery.
 
 ---
 
-Also the bag items updated the quantity of products on the bag
+## Tech Stack
 
-![](static/images/bag_icon.png)
-
-
-### Checkout Page
----
-The checkout page allows users to securely enter delivery and contact details while reviewing an order summary before completing payment.
-
-![](static/images/checkout.png)
-
-At the checkout stage, users are prompted to confirm their delivery details and enter their card information to complete payment. An order summary is displayed alongside the form, allowing users to review their items and total cost. If needed, users can return to the shopping bag to make adjustments or proceed by selecting Pay now to finalise the order.
-
-![](static/images/checkout_re.png)
-
-### Order Confirmation
----
-After a successful payment, users are shown an order confirmation page displaying purchase details and confirmation that the transaction was completed successfully.
-
-![](static/images/order_conf.png)
-
-### User Registration
----
-New users can create an account by registering with their email and password, allowing access to features such as order history and product reviews.
-
-![](static/images/sign_up.png)
-
-### User Login
----
-Registered users can log in to access their account, manage profile details, and view previous orders.
-
-![](static/images/login.png)
-
-### User Profile
----
-The user profile page allows customers to view and update personal information and review their order history.
-
-![](static/images/profile.png)
-
-### Product Reviews
----
-Users can leave reviews on products they have purchased, including a rating and optional image, helping build trust and engagement within the platform.
-
-![](static/images/review.png)
-
-### Product management - Add Product
----
-Only super users are authorized to add products to products catalogue
-
-![](static/images/superu_1.png)
-
-### Product management - Add Product
----
-Super users have the ability to edit product details, including the name, description, category, SKU, price, and product image. An alert is displayed to confirm the action being performed, ensuring clarity before proceeding. Users can then choose to save the updated changes or cancel the action.
-
-![](static/images/superu.png)
-
-### Footer
----
-The footer appears across all pages and provides quick access to important customer links, company information, and help resources. It also includes social media links and a newsletter subscription form, allowing users to stay informed about product drops, collaborations, and promotions.
-
-![](static/images/footer.png)
-
-### Newsletter
----
-The newsletter form enables users to subscribe for updates on promotions, product releases, and brand announcements.
-
-![](static/images/newsletter.png)
-
-### Facebook Business Page
----
-The Facebook Business Page supports marketing efforts by promoting products, sharing updates, and engaging with customers.
-
-![](static/images/fb_pag.png)
-![](static/images/fb_det.png)
-![](static/images/fb_f1p.png)
-
-### User Feedback Messages
-
-The application uses Django’s messages framework to provide instant user feedback via toast notifications. Success, error, warning, and informational messages are displayed in response to user actions such as adding products to the shopping bag, subscribing to the newsletter, or submitting forms. These notifications improve usability by clearly communicating the outcome of user interactions.
-
-![](static/images/mssg.png)
-![](static/images/mssg_1.png)
-
-### User Feedback Messages
-
-A custom 404 page is included to handle navigation errors, providing users with a clear message and a link back to the home page to help them continue browsing the site smoothly.
-
-
-![](static/images/404_page.png)
-
-##  Web Marketing  
-
-###  Facebook Business Page  
-A Facebook page was created to help build a community around the target audience. As a free platform that is quick and easy to set up, Facebook provides an effective space for maintaining relationships with users, sharing content, and engaging directly with a large and active audience.
-
-🔗 https://www.facebook.com/profile.php?id=61587399382148  
-
-### Email Marketing  
-Users can subscribe to a **newsletter** to receive:
-- Promotions  
-- New product announcements  
-- Limited edition releases  
-
-This supports **customer retention and remarketing**.
-
-### Search engine optimization
-SEO practices implemented: 
-- SEO-friendly URLs  
-- Optimized page metadata  
-- Semantic HTML structure  
-- Accessible UI components  
-
-![](static/images/seo_key.png)
+| Layer | Choice |
+|---|---|
+| Language / runtime | Python (see `runtime.txt`) |
+| Web framework | Django 6.0 |
+| Authentication | django-allauth |
+| Payments | Stripe (stripe Python SDK + Stripe Elements) |
+| Database (prod) | PostgreSQL via `psycopg2-binary` + `dj-database-url` |
+| Database (dev) | SQLite (Django default) |
+| Object storage (prod) | AWS S3 via `boto3` + `django-storages` |
+| Static files (no-S3) | WhiteNoise |
+| Application server | Gunicorn |
+| Image handling | Pillow |
+| Env var loading | python-dotenv |
 
 ---
 
-## Technologies
+## Architecture
 
-### Languages
+The project is split into seven Django apps, each with a narrow responsibility:
 
-* [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- **`home/`** — landing page and root-level views.
+- **`products/`** — `Product` and `Category` models, the catalog listing with search/filter/sort, product detail page (which also renders the reviews list and review form), and staff-only CRUD.
+- **`bag/`** — session-backed shopping bag. No model — bag contents live in `request.session`. Exposes `add`, `update`, `remove`, and `view` endpoints, and publishes a context processor so the bag total is available in any template.
+- **`checkout/`** — `Order` and `OrderLineItem` models, the Stripe Elements checkout page, the success view that re-verifies the PaymentIntent server-side, and the order admin.
+- **`profiles/`** — user profile page and order detail lookup; uses a `post_save` signal (`profiles/signals.py`) to create a profile when a new `User` is created.
+- **`marketing/`** — newsletter signup form plus static content pages (About, FAQs, Support, Privacy, Terms).
+- **`reviews/`** — `ProductReview` model and the add/edit/delete views, with ownership checks on mutation. Reviews are rendered inline on the product detail page rather than on their own listing page.
 
-* [Javascript](https://www.javascript.com/)
+The project settings and root URL conf live in `lefrat/`, and `custom_storages.py` at the repo root provides the two S3 storage subclasses.
 
-* [Python](https://www.python.org/)
+---
 
-* [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+## Key Technical Decisions
 
-### Frameworks, programs and libraries used
+### 1. Server-side PaymentIntent re-verification over webhooks
 
-* [Stripe](https://stripe.com/en-ie) - Used to implement secure checkout functionality and process online payments.
+After the Stripe Elements confirmation completes, the browser is redirected to the success view with the PaymentIntent ID in the query string. Rather than trusting the redirect alone, the success view calls `stripe.PaymentIntent.retrieve(payment_intent_id)` and checks that the returned `amount` matches the server-computed grand total (in cents) and that the intent's `status` is `succeeded` before saving the `Order` (`checkout/views.py`). This keeps the flow simple and avoids the webhook endpoint, signature verification, and deployment-environment configuration that webhooks require.
 
-* [Balsamiq](https://balsamiq.com/) - Used during the planning phase to create wireframes and visualise the site layout.
+The tradeoff is that order creation depends on the browser completing the redirect. If the user closes the tab between Stripe confirmation and the server return, the payment will have succeeded on Stripe's side but no `Order` row will be written. Webhook support is a planned improvement (see Future Improvements) to close this gap — the event `payment_intent.succeeded` would trigger order creation if it hasn't already happened.
 
-* [Django](https://www.djangoproject.com/) - A high-level Python web framework used to support rapid development and clean, maintainable design.
+### 2. Custom storage backend for media files
 
-* [AWS](https://aws.amazon.com/s3/) - Used to provide object storage through a web service interface.
+Django's default `FileSystemStorage` assumes a writable local filesystem, which doesn't survive on ephemeral hosts like Heroku dynos, and doesn't separate static assets from user-uploaded media. `custom_storages.py` defines two small `S3Boto3Storage` subclasses:
 
-* [GitHub](https://github.com/) - Used for version control and to store the project repository.
+- `StaticStorage` writes to the `static/` prefix of the S3 bucket.
+- `MediaStorage` writes to the `media/` prefix and, critically, sets `file_overwrite = False` so two users uploading files with the same name don't clobber each other's images.
 
-* [Bootstrap4](https://getbootstrap.com/) - A CSS framework used to create a responsive and consistent user interface.
+These are wired into Django's `STORAGES` setting only when `USE_AWS=True`, so local development defaults to filesystem storage and WhiteNoise for statics without needing AWS credentials.
 
-* [PostgreSQL](https://www.PostgreSQL.com/) - Used as the primary database service for the project.
+### 3. Ownership-protected reviews
 
-* [Gitpod](https://www.gitpod.io/) - Used as the integrated development environment (IDE) during development.
+The review app uses an explicit check at the top of `edit_review` and `delete_review`:
 
-* [Font Awesome](https://fontawesome.com/) - Used to provide icons for user interface elements and social media links.
+```python
+if review.user != request.user and not request.user.is_staff:
+    messages.error(request, "You can't edit someone else's review.")
+    return redirect("product_detail", product_id=review.product_id)
+```
 
-* [dbdiagram](https://dbdiagram.io/home) - Used to design and document the database schema.
+This sits next to the mutation it guards, so it's hard to miss when someone modifies the view later. Users cannot bypass it by guessing `/reviews/<id>/edit/` URLs directly, because the check runs before any form handling. A staff bypass is included so moderators can remove abusive content without impersonating the reviewer.
 
-* [Heroku](https://www.heroku.com/) - Used as the cloud platform to deploy and host the application.
+---
 
-* [PEP8ci](https://pep8ci.herokuapp.com/) - Used to validate Python code against PEP8 standards.
+## Local Setup
+
+```bash
+# 1. Clone and enter the repo
+git clone <repo-url>
+cd le-frat
+
+# 2. Create and activate a virtualenv
+python -m venv .venv
+source .venv/bin/activate        # on Windows: .venv\Scripts\activate
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. Create a .env file with the required variables (see below)
+
+# 5. Apply migrations and create a superuser
+python manage.py migrate
+python manage.py createsuperuser
+
+# 6. Run the dev server
+python manage.py runserver
+```
+
+### Required environment variables
+
+```
+SECRET_KEY=<django secret key>
+DEBUG=True                        # for local only
+DATABASE_URL=<optional; omit to use SQLite>
+STRIPE_PUBLIC_KEY=pk_test_...
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WH_SECRET=whsec_...        # reserved; not yet consumed (see Known Limitations)
+USE_AWS=False                     # set to True in production with AWS keys below
+AWS_STORAGE_BUCKET_NAME=
+AWS_S3_REGION_NAME=
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+```
+
+### Stripe CLI
+
+The [Stripe CLI](https://stripe.com/docs/stripe-cli) is useful during local checkout testing:
+
+```bash
+stripe listen
+```
+
+This streams live test-mode events (e.g. `payment_intent.created`, `payment_intent.succeeded`) so you can watch what the checkout flow is doing. There is no webhook endpoint to forward events to yet — `stripe listen --forward-to <url>` will become useful once webhook handling is implemented (see Future Improvements).
+
+---
 
 ## Testing
 
-### Manual Testing
+```bash
+python manage.py test
+```
 
-| Feature Area | Test | Expected Result | Actual Result |
-|---|---|---|---|
-| **Homepage** | Load homepage | Homepage loads with hero content and navigation | Pass |
-| Homepage | Click "Shop the Drop" / "Browse All" | Redirects to product listing | Pass |
-| **Navigation** | Click **Shop** in navbar | Opens products page | Pass |
-| Navigation | Click **New Arrivals** in navbar | Opens product listing sorted to newest | Pass |
-| Navigation | Open **Categories** menu | Category options visible (T-Shirts / Hoodies / Accessories) | Pass |
-| Navigation | Select **T-Shirts** category | Filters products to T-Shirts | Pass |
-| Navigation | Select **Hoodies** category | Filters products to Hoodies | Pass |
-| Navigation | Select **Accessories** category | Filters products to Accessories | Pass |
-| Navigation | Footer link **Support** | Opens support page | Pass |
-| Navigation | Footer link **Privacy** | Opens privacy page | Pass |
-| Navigation | Footer link **Terms** | Opens terms page | Pass |
-| Navigation | Footer link **About Us** | Opens about page | Pass |
-| Navigation | Footer link **FAQs** | Opens FAQs page | Pass |
-| **Search** | Use search with valid keyword | Matching products displayed | Pass |
-| Search | Use search with empty input | Returns product listing (no crash) | Pass |
-| **Products Listing** | Products page loads | Products visible with name + price + view links | Pass |
-| Products Listing | Sort by price low → high | Products reorder correctly | Pass |
-| Products Listing | Sort by price high → low | Products reorder correctly | Pass |
-| Products Listing | Sort by name A → Z | Products reorder correctly | Pass |
-| Products Listing | Sort by name Z → A | Products reorder correctly | Pass |
-| **Product Detail** | Open a product detail page | Product page shows title, image, price, description | Pass |
-| Product Detail | Click **Back to shop** | Returns to product listing | Pass |
-| Product Detail | Reviews section visible | Reviews display; prompts login to leave review | Pass |
-| **Authentication** | Open **Sign Up** page | Registration form loads | Pass |
-| Authentication | Register with valid details | Account created and user can log in | Pass |
-| Authentication | Register with missing/invalid fields | Validation errors shown | Pass |
-| Authentication | Open **Login** page | Login form loads | Pass |
-| Authentication | Login with valid credentials | User logged in successfully | Pass |
-| Authentication | Login with invalid credentials | Error/validation shown | Pass |
-| Authentication | Logout | User logged out and redirected appropriately | Pass |
-| **Bag** | Open **Bag** page | Bag page loads | Pass |
-| Bag | Bag empty state | “Your bag is empty” message shown | Pass |
-| Bag | Click **Go Shopping** from empty bag | Redirects to products page | Pass |
-| Bag | Click **Go to Checkout** with empty bag | Redirects away (cannot checkout with empty bag) | Pass |
-| Bag | Add item to bag from product detail | Success toast shown; item appears in bag | Pass |
-| Bag | Add same item again | Quantity increases correctly | Pass |
-| Bag | Update quantity in bag | Totals update correctly | Pass |
-| Bag | Remove item from bag | Item removed and totals update | Pass |
-| **Checkout** | Attempt access checkout with empty bag | Redirects to products page | Pass |
-| Checkout | Checkout with items in bag | Checkout form + order summary display | Pass |
-| Checkout | Submit checkout with missing fields | Form validation errors shown | Pass |
-| **Payments (Stripe)** | Submit valid Stripe test payment | Payment processes successfully | Pass |
-| Payments (Stripe) | Submit invalid card details | Payment blocked; error shown | Pass |
-| Payments (Stripe) | Webhook confirmation (if implemented) | Order/payment state updates correctly | Pass |
-| **Order Confirmation** | Complete successful payment | Confirmation shown with order details | Pass |
-| **Reviews** | Logged-out user tries to leave review | Prompted to log in | Pass |
-| Reviews | Logged-in user submits review (1–5 rating) | Review saved and displayed | Pass |
-| Reviews | User edits own review | Changes saved correctly | Pass |
-| Reviews | User deletes own review | Review removed successfully | Pass |
-| Reviews | User tries edit/delete another user’s review | Action blocked / not permitted | Pass |
-| **Newsletter** | Enter valid email + Subscribe | Success message shown | Pass |
-| Newsletter | Enter invalid email | Validation error shown | Pass |
-| Newsletter | Duplicate email subscribe | Handled gracefully (no crash) | Pass |
-| **Static Info Pages** | Support page loads | Support content displays correctly | Pass |
-| Static Info Pages | Privacy page loads | Privacy content displays correctly | Pass |
-| Static Info Pages | Terms page loads | Terms content displays correctly | Pass |
-| Static Info Pages | About Us page loads | About content displays correctly | Pass |
-| Static Info Pages | FAQs page loads | FAQ content displays correctly | Pass |
-| **Responsiveness** | Mobile view: homepage | Layout adapts and remains usable | Pass |
-| Responsiveness | Mobile view: products page | Grid adapts without overflow | Pass |
-| Responsiveness | Mobile view: bag/checkout | Content remains readable and usable | Pass |
-
-## Functionality Testing
-
-Throughout the development of this project, Google Chrome was used as the primary browser for testing and debugging. Chrome Developer Tools played a key role in identifying and resolving functionality-related issues, including JavaScript errors, layout problems, and performance concerns. Features were tested incrementally as they were implemented to ensure that all components behaved as expected. 
-
-Responsive design and layout behaviour were tested using Chrome’s built-in device emulation tools, allowing the site to be evaluated across a range of screen sizes and resolutions. This helped ensure that core functionality remained consistent on both desktop and mobile views.
-
-## Compatibility Testing
-
-Compatibility testing was conducted to confirm that the application functions correctly across different devices and screen types. This process included the use of Chrome-emulated devices as well as physical hardware for more accurate real-world testing.
-
-Physical devices used during testing included an iPhone 13, a Samsung A51, and a Samsung Tablet E. These tests helped verify that the user interface, navigation, and core features performed reliably across different operating systems and device form factors. Any inconsistencies identified during testing were addressed to improve overall usability and accessibility.
-
-## Wave testing
-
-I also tested this site on [WAVE Web Accessibility Evaluation Tool](https://wave.webaim.org/) is a set of evaluation tools which helps authors to make their web content more accessible to individuals with disabilities. WAVE can identify many accessibility and Web Content Accessibility Guideline (WCAG) errors, but also facilitates human evaluation of web content as per definition on their site.
-
-<details>
-  <summary>Homepage</summary>
-
-  ![](static/images/homepage_wa.png)
-
-  The homepage was tested using the WAVE Web Accessibility Evaluation Tool. The results show no critical accessibility errors, with appropriate use of headings, ARIA labels, and structural elements. Minor contrast warnings were identified due to stylistic design choices, but all core content remains readable and accessible.
-
-</details> 
-
-<details>
-<summary>About Page</summary>
-
-![](static/images/about_wa.png)
-
-The About page achieved a high accessibility score with no detected errors. Semantic heading structure and ARIA attributes are used correctly, ensuring screen reader compatibility and clear content hierarchy.
-
-</details> 
-
-<details>
-<summary>Privacy Page</summary>
-
-![](static/images/privacy_wa.png)
-
-The Privacy page was tested for accessibility compliance and passed without errors. Content is clearly structured using appropriate heading levels and readable text, supporting accessibility best practices.
-
-</details> 
-
-<details>
-<summary>Support / FAQs Page</summary>
-
-![](static/images/support_wa.png)
-
-The Support (FAQs) page uses accessible accordion components with proper ARIA controls, allowing screen readers and keyboard navigation to function correctly. No accessibility errors were detected during testing.
-</details> 
-
-<details>
-<summary>Product Detail Page</summary>
-
-![](static/images/pro_det_wa.png)
-
-The product detail page was tested for accessibility, including image alternative text, form labels, and review sections. Some low-contrast warnings were identified due to branding colour choices; however, all essential information remains accessible and usable.
-</details> 
-
-<details>
-<summary>Login Page</summary>
-
-![](static/images/login_wa.png)
-
-The login page demonstrates strong accessibility support with correctly labelled form fields, semantic headings, and ARIA attributes. No accessibility errors were detected, ensuring the page is usable for assistive technology users.
-</details> 
-
-<details>
-<summary>Lighthouse results</summary>
-
-Desktop
-![](static/images/lighthouse_desktop.png)
-Mobile
-![](static/images/lighthouse_mobile.png)
-</details> 
-
-<details> 
-<summary>W3C Validation</summary>
-
-Desktop
-![](static/images/nu_checker.png)
-
-Mobile
-![](static/images/css_checker.png)
-
-HTML and CSS were validated using W3C validation tools. Minor warnings related to accessibility best practices were identified in the HTML and have no impact on functionality. CSS validation errors originate from third-party libraries (Font Awesome) and do not affect the application’s performance or compliance.
-</details> 
-
-Accessibility testing was carried out using the WAVE Web Accessibility Evaluation Tool across multiple pages of the site. The application demonstrates strong accessibility practices through the use of semantic HTML, ARIA labels, descriptive form labels, and clear heading structures. Minor contrast warnings were identified on some pages due to design choices; however, these do not impact usability or readability of core content.
-
-## JavaScript Validation
-
-JavaScript code used throughout the project was validated using JSLint to identify potential errors and enforce consistent coding standards.
-
-Several files returned warnings related primarily to JSLint’s strict style rules, such as the use of single quotes instead of double quotes and line length exceeding 80 characters. These warnings do not affect the functionality of the application.
-
-In some cases, JSLint was unable to complete validation when third-party or embedded scripts were included. This occurred due to code structure or formatting that does not align with JSLint’s parsing expectations and is common when validating external libraries.
-
-A summary of the validation results is provided below:
-
-- **Navigation / Mobile Menu Script**  
-  Returned multiple warnings related to the use of single quotes instead of double quotes. No functional issues were identified.
-
-- **Checkout Script**  
-  Returned warnings for line length exceeding 80 characters and syntax formatting. Some warnings were caused by Stripe-related code and embedded scripts.
-
-- **Newsletter Script**  
-  Returned warnings due to third-party code sourced directly from Mailchimp. This code was not modified.
-
-- **Bootstrap JavaScript (CDN)**  
-  JSLint was unable to complete validation due to external library syntax. This code is maintained by Bootstrap and was not altered.
-
-- **Base Template Scripts**  
-  No warnings were reported.
-
-Overall, all JavaScript functionality operates as intended. Reported warnings are related to stylistic preferences or third-party code and do not impact site performance or user experience.
-
-
-### Python
-[ CI Python linter ](https://pep8ci.herokuapp.com/) was used to test python code
-
-## Bugs
-## Known Bugs
-
-### Bug 1 – Incorrect Heading on Shop Page
-**Issue:**  
-When selecting **Shop** from the navigation menu, the products page loads correctly but still displays the heading **“New Arrivals”**, which may cause confusion for users.
-
-**Cause:**  
-The same template is used for both the general products view and the “New Arrivals” view without dynamically changing the heading based on the selected option.
-
-**Planned Fix:**  
-Update the template logic to display a different heading depending on the selected navigation option or query parameters.
+**Current state:** the per-app `tests.py` files are empty Django boilerplate — there is no meaningful test coverage yet. Building out a real test suite is the top item under Future Improvements.
 
 ---
 
-### Bug 2 – Reviewer Email Address Displayed Publicly
-**Issue:**  
-Product reviews currently display the reviewer’s email address publicly on the product detail page.
+## Known Limitations
 
-**Cause:**  
-The review template renders the user’s email field instead of a safer identifier.
-
-**Planned Fix:**  
-Replace the displayed email address with the user’s username or a generic label such as *“Verified Customer”* to protect user privacy.
+- **Payment confirmation relies on the post-checkout redirect succeeding.** Users who close the tab before the redirect completes may not have their order saved. Webhook support is planned to handle this edge case.
+- **No test coverage.** The test suite is currently unpopulated; the codebase is manually verified only.
+- **No email delivery in production.** The email backend is set to `console.EmailBackend`, so order confirmations and other transactional emails are logged rather than sent.
+- **Account email verification is disabled** (`ACCOUNT_EMAIL_VERIFICATION = "none"`), meaning new signups can transact without confirming their address.
 
 ---
 
-### Bug 3 – Low Contrast Accessibility Warnings
-**Issue:**  
-Accessibility testing using the WAVE tool identified low-contrast warnings on some buttons and text elements, particularly on product detail pages.
+## Future Improvements
 
-**Cause:**  
-Certain brand colour combinations do not provide sufficient contrast between text and background.
-
-**Planned Fix:**  
-Adjust colour contrast for affected UI elements while maintaining the overall brand identity to improve accessibility compliance.
-
----
-## Deployment
-
-This project was developed using Gitpod with Git for version control and deployed to **Heroku**.  
-A **Code Institute PostgreSQL database** was used for the production environment.
-
-### Heroku Deployment Steps
-
-1. Log in to **Heroku** (or create an account if required).
-2. From the Heroku dashboard, click **New** → **Create New App**.
-3. Enter a unique application name.
-4. Select **Europe** as the region.
-5. Click **Create App**.
-
----
-
-### Database Setup (Code Institute PostgreSQL)
-
-This project uses the **Code Institute PostgreSQL database service**.
-
-1. Navigate to:  
-   https://dbs.ci-dbs.net/
-2. Create a new PostgreSQL database instance.
-3. Copy the provided **DATABASE_URL**.
-
----
-
-### Environment Configuration
-
-1. In Heroku, open your app and go to **Settings**.
-2. Click **Reveal Config Vars**.
-3. Add the following environment variables:
-
-   - `DATABASE_URL` → paste the PostgreSQL database URL from dbs.ci-dbs.net
-   - `SECRET_KEY` → your Django secret key
-   - `STRIPE_PUBLIC_KEY`
-   - `STRIPE_SECRET_KEY`
-   - `STRIPE_WH_SECRET`
-   - `DISABLE_COLLECTSTATIC` → `1` (for initial deployment)
-
-4. In your project, ensure `dj_database_url` is installed and imported in `settings.py`.
-5. Update `settings.py` to use the production database when `DATABASE_URL` is present.
-
----
-
-### Migrations & Requirements
-
-1. Install PostgreSQL dependencies:
-   ```bash
-   pip3 install psycopg2-binary
-
-2. Freeze project dependencies:
-    ```bash
-    pip3 freeze > requirements.txt
-
-3. Apply database migrations:
-    ```bash
-    python3 manage.py migrate
-
-4. Create a superuser:
-    ```bash
-    python3 manage.py createsuperuser
-
-> **Note**  
-Ensure that sensitive information such as `SECRET_KEY` values and database credentials are never committed to GitHub.
-
-## Final Deployment
-
-1. Install **Gunicorn**, which will be used as the production web server:
-    ```bash
-    pip3 install gunicorn
-
-2. Create a `Procfile` in the root directory of the project and add the following line:
-    ```bash
-    web: gunicorn <project_name>.wsgi
-
-
-3. Commit all changes and push them to your GitHub repository.
-
-4. Log in to **Heroku** and navigate to the **Deploy** section of your application dashboard.
-
-5. Connect the Heroku app to the appropriate GitHub repository.
-
-6. Select either **Manual Deploy** or **Automatic Deploy**, depending on preference.
-
-7. Click **Deploy Branch** to begin the deployment process.
-
-8. Once deployment is complete, select **View** to open the live application.
-
-## Forking the Repository
-
-1. Navigate to the GitHub page containing the repository.
-2. Click the **Fork** button located in the top-right corner of the page.
-3. Once the process is complete, a copy of the repository will be created in your own GitHub account.
-
-## Cloning the Repository
-
-1. Open the repository page on GitHub.
-2. Click the green **Code** button.
-3. Copy the repository URL from the **HTTPS** tab.
-4. Alternatively, you may download the repository as a ZIP file, extract it locally, and open it in your preferred IDE.
-5. To clone using Git, open a terminal or command prompt.
-6. Navigate to the directory where you would like the project to be stored.
-7. Run the following command, replacing the URL with the one copied from GitHub:
-
----
-
-
-## Credits
-
-### Media
-- Some images featuring people used throughout the site were **AI-generated** for design and branding purposes.
-
-### Branding & Merchandise
-- The **Le Frat branding, logos, and merchandise designs** were created by:  
-  https://www.maquinados.co/
-
-### Code & Learning Resources
-- Code Institute **Boutique Ado** walkthrough
-- [DataFlair Django tutorials](https://data-flair.training/blogs/django-tutorials-home/)
-- Stack Overflow for troubleshooting and reference
-
-
-### Blog Content Inspiration
-- [Weedgreen](https://weedgreen.com/en)
-- [Fullsend](https://fullsend.com/)
-- [True](https://trueshop.co/?utm_term=true&utm_campaign=TRUE_SEM_CPC_PB&utm_source=adwords&utm_medium=ppc&hsa_acc=9245374731&hsa_cam=17477674933&hsa_grp=136098743005&hsa_ad=617272709203&hsa_src=g&hsa_tgt=kwd-321791485&hsa_kw=true&hsa_mt=e&hsa_net=adwords&hsa_ver=3&gad_source=1&gad_campaignid=17477674933&gbraid=0AAAAABRpsmZv6osjB4ZlH7ilvgJABJ6BF&gclid=Cj0KCQiAyvHLBhDlARIsAHxl6xrBi89WKCr0E4BrjKJ3MTamWOThwSTBdsvz8VrziAUEaHhjRXpv7k4aAqrNEALw_wcB
-)
-
-### Acknowledgements
-- Special thanks to my **Code Institute mentor Jubril Akolade** for guidance, feedback, and support throughout the development of this project.
-- Code Institute  
-- Django & Stripe Documentation  
-
+- Implement a Stripe webhook handler for `payment_intent.succeeded` to guarantee order creation even when the post-checkout redirect is dropped.
+- Populate the test suite — model validation, session-bag behaviour, checkout amount-mismatch handling, review ownership enforcement, and access control on staff-only views.
+- Swap the console email backend for a real transactional email provider and send order confirmations.
+- Enable account email verification and a password-reset flow through allauth.
+- Add CI (GitHub Actions) to run migrations and tests on every push.
+- Extract the `Order` creation path into a service function shared between the success-view flow and the future webhook handler, so both code paths produce identical order rows.
