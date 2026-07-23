@@ -1,24 +1,29 @@
+# Secretos y config local
+env.py
 .env
-.venv/
-venv/
-ENV/
+
+# Base de datos local
+db.sqlite3
+
+# Python
 __pycache__/
 *.py[cod]
-*$py.class
-db.sqlite3
-*.log
-media/
-*/migrations/__pycache__/
-env.py
-.vscode/
+*.egg-info/
+.venv/
+venv/
+env/
 
-.DS_Store
-Thumbs.db
-
+# Django
 staticfiles/
+media/
+*.log
 
-.coverage
-htmlcov/
-.pytest_cache/
-__pycache__/
-*.pyc
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+
+# Respaldos
+*.bak
