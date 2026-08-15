@@ -1,107 +1,106 @@
 {% extends "base.html" %}
-{% load static %}
-{% block title %}Home | Le Frat{% endblock %}
+{% load static i18n %}
+{% block title %}{% translate "Home" %} | Le Frat{% endblock %}
 
 {% block content %}
 
-<!-- HERO FULL WIDTH -->
-<section class="lf-hero" style="--hero: url('{% static 'images/home/hero.jpg' %}');">
-  <div class="lf-hero__overlay"></div>
+<!-- HERO: one statement, one action, lots of air -->
+<section class="lf-h">
+  <div class="container lf-h__inner">
+    <p class="lf-h__eyebrow">{% translate "Placeres primarios" %} &middot; Bogot&aacute;</p>
 
-  <div class="lf-hero__inner container">
-    <p class="lf-eyebrow mb-2">LE FRAT · OFFICIAL MERCH</p>
-
-    <h1 class="lf-hero__title mb-3">
-      The spot everyone talks about.
+    <h1 class="lf-h__title">
+      {% translate "Good things" %}<br>
+      {% translate "need no" %}<br>
+      <em>{% translate "explaining." %}</em>
     </h1>
 
-    <p class="lf-hero__subtitle mb-4">
-      No pretensions. Just attitude. Merch worn like a badge.
-    </p>
+    <a href="{% url 'products' %}" class="lf-h__cta">
+      {% translate "Shop the drop" %} <span class="lf-h__arw">&rarr;</span>
+    </a>
 
-    <div class="d-flex flex-wrap gap-2">
-      <a href="{% url 'products' %}" class="btn btn-primary lf-btn-pill">Shop the Drop</a>
-      <a href="{% url 'products' %}?sort=name_asc" class="btn btn-outline-light lf-btn-pill">Browse All</a>
-    </div>
-  </div>
-</section>
-
-
-  <!-- MARQUEE -->
-<section class="lf-marquee" aria-hidden="true">
-  <div class="lf-marquee__inner">
-    <div class="lf-marquee__track">
-      <span>EVERYTHING IS BETTER IN COMBO · </span>
-      <span>EVERYTHING IS BETTER IN COMBO · </span>
-      <span>EVERYTHING IS BETTER IN COMBO · </span>
-      <span>EVERYTHING IS BETTER IN COMBO · </span>
-      <span>EVERYTHING IS BETTER IN COMBO · </span>
-      <span>EVERYTHING IS BETTER IN COMBO · </span>
-      <span>EVERYTHING IS BETTER IN COMBO · </span>
-      <span>EVERYTHING IS BETTER IN COMBO · </span>
-      <span>EVERYTHING IS BETTER IN COMBO · </span>
-      <span>EVERYTHING IS BETTER IN COMBO · </span>
-      <span>EVERYTHING IS BETTER IN COMBO · </span>
-      <span>EVERYTHING IS BETTER IN COMBO · </span>
-    </div>
-  </div>
-</section>
-
-
-<section class="mt-5">
-  <div class="container">
-
-    <div class="d-flex align-items-end justify-content-between gap-3 mb-3">
-      <div>
-        <h2 class="m-0">New Drop</h2>
-        <p class="text-muted m-0">
-          The good stuff doesn’t need explaining.
-        </p>
+    <div class="lf-h__shot" style="--shot: url('{% static 'images/home/hero.jpg' %}');">
+      <div class="lf-h__badge">
+        {% translate "Placeres" %}<br>{% translate "primarios" %}<br>2026
       </div>
+    </div>
+  </div>
+</section>
 
-      <a href="{% url 'products' %}" class="lf-link-strong">See all →</a>
+
+<!-- MARQUEE: single, thin -->
+<section class="lf-strip" aria-hidden="true">
+  <div class="lf-strip__track">
+    <span>{% translate "Everything is better in combo" %} &#9670; {% translate "If you weren't there, you missed it" %} &#9670; Placeres primarios &#9670;&nbsp;</span>
+    <span>{% translate "Everything is better in combo" %} &#9670; {% translate "If you weren't there, you missed it" %} &#9670; Placeres primarios &#9670;&nbsp;</span>
+  </div>
+</section>
+
+
+<!-- MENU: four burgers, clean list -->
+<section class="lf-menu">
+  <div class="container">
+    <div class="lf-menu__head">
+      <h2 class="lf-menu__h2">{% translate "The menu" %}</h2>
+      <span class="lf-menu__kicker">{% translate "Four. That's it." %}</span>
     </div>
 
-    <div class="row g-3">
+    <div class="lf-menu__rows">
+      <div class="lf-menu__row">
+        <span class="lf-menu__name">La Frat <span class="lf-menu__type">{% translate "Beef" %}</span></span>
+        <span class="lf-menu__dots"></span>
+        <span class="lf-menu__price">$24.900</span>
+      </div>
+      <div class="lf-menu__row">
+        <span class="lf-menu__name">Bogotown <span class="lf-menu__type">{% translate "Beef" %}</span></span>
+        <span class="lf-menu__dots"></span>
+        <span class="lf-menu__price">$28.900</span>
+      </div>
+      <div class="lf-menu__row">
+        <span class="lf-menu__name">La Pollo <span class="lf-menu__type">{% translate "Chicken" %}</span></span>
+        <span class="lf-menu__dots"></span>
+        <span class="lf-menu__price">$23.900</span>
+      </div>
+      <div class="lf-menu__row">
+        <span class="lf-menu__name">La Verde <span class="lf-menu__type">{% translate "Veggie" %}</span></span>
+        <span class="lf-menu__dots"></span>
+        <span class="lf-menu__price">$22.900</span>
+      </div>
+    </div>
+
+    <p class="lf-menu__note">{% translate "+ Fries &middot; milkshakes &middot; beers" %}</p>
+  </div>
+</section>
+
+
+<!-- STATEMENT: one line, full bleed -->
+<section class="lf-say">
+  <p>{% translate "We're tight and all, but I don't share my fries." %}</p>
+</section>
+
+
+<!-- MERCH: real products from the shop -->
+<section class="lf-merch">
+  <div class="container">
+    <div class="lf-merch__head">
+      <h2 class="lf-merch__h2">Merch</h2>
+      <a href="{% url 'products' %}" class="lf-merch__all">{% translate "See all" %} &rarr;</a>
+    </div>
+
+    <div class="lf-merch__grid">
       {% for p in featured_products %}
-        <div class="col-12 col-md-4">
-          <a class="lf-drop-card"
-             href="{% url 'product_detail' p.id %}"
-             style="--bg: url('{% static 'images/home/' %}{{ p.home_image }}');">
-
-            <div class="lf-drop-card__content">
-              <p class="lf-drop-card__tag">NEW DROP</p>
-              <h3 class="lf-drop-card__title">{{ p.name }}</h3>
-              <p class="lf-drop-card__price mb-0">${{ p.price }}</p>
-            </div>
-
-          </a>
-        </div>
+        <a class="lf-merch__tile" href="{% url 'product_detail' p.id %}"
+           style="--bg: url('{% static 'images/home/' %}{{ p.home_image }}');">
+          <div class="lf-merch__meta">
+            <span class="lf-merch__name">{{ p.name }}</span>
+            <span class="lf-merch__price">${{ p.price }}</span>
+          </div>
+        </a>
       {% endfor %}
     </div>
 
+    <p class="lf-merch__note">{% translate "La Frat se usa" %}</p>
   </div>
 </section>
-
-
-  <!-- BRAND BLOCK -->
-  <section class="lf-brand-block mt-5" style="border-radius:0rem;">
-  <div class="container">
-    <div class="lf-brand-block__inner">
-      <h2 class="m-0">Simple. Like real friendship.</h2>
-
-      <p class="m-0">
-        Merch for the crew. Minimal, bold, and straight to the point.
-        If you don’t have it, you’re missing the story.
-      </p>
-
-      <a href="{% url 'products' %}" class="btn btn-primary lf-btn-pill mt-3">
-        Join the Crew
-      </a>
-    </div>
-  </div>
-</section>
-
-
 
 {% endblock %}

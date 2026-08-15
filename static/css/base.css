@@ -1250,3 +1250,340 @@ form[method="GET"]{
   inset: 0;
   background: rgba(0,0,0,0.35);
 }
+
+
+/* ================================================================
+   REDESIGN 2026 — minimal home, brand-aligned (manual de marca)
+   Blue #1D00FB / black / off-white. Mono for details.
+   ================================================================ */
+
+:root{
+  --lf-paper: #f6f6f4;
+  --lf-ink: #0a0a12;
+  --lf-mono: "SF Mono", "Menlo", "Consolas", monospace;
+}
+
+/* ---- brand logo in nav / footer / mobile ---- */
+.lf-nav__logo-img{
+  height: 34px;
+  width: auto;
+  display: block;
+}
+.lf-mobile__brand-img{
+  height: 30px;
+  width: auto;
+}
+.lf-footer__logo-img{
+  width: min(300px, 70%);
+  height: auto;
+  display: block;
+}
+
+/* ---- language switcher (lives in the dark nav: light on dark) ---- */
+.lf-lang{ margin: 0; display: flex; align-items: center; }
+.lf-lang__btn{
+  font-family: var(--lf-mono);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .68rem;
+  font-weight: 700;
+  color: var(--lf-offwhite);
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,.55);
+  border-radius: 999px;
+  padding: .45rem .8rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color .18s, color .18s, background .18s;
+}
+.lf-lang__btn:hover,
+.lf-lang__btn:focus-visible{
+  background: var(--lf-blue);
+  border-color: var(--lf-blue);
+  color: #fff;
+}
+
+/* ---- HERO ---- */
+.lf-h{
+  background: var(--lf-paper);
+  padding-block: clamp(2.5rem, 8vw, 6rem) clamp(1.5rem, 4vw, 3rem);
+}
+.lf-h__inner{ text-align: center; }
+.lf-h__eyebrow{
+  font-family: var(--lf-mono);
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-size: .7rem;
+  font-weight: 500;
+  color: var(--lf-blue);
+  margin: 0 0 clamp(1.2rem, 4vw, 2.2rem);
+}
+.lf-h__title{
+  font-size: clamp(2.6rem, 11vw, 8.5rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -.045em;
+  line-height: .86;
+  text-wrap: balance;
+  margin: 0;
+  color: var(--lf-ink);
+}
+.lf-h__title em{ font-style: italic; color: var(--lf-blue); }
+.lf-h__cta{
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  margin-top: clamp(1.6rem, 5vw, 2.6rem);
+  background: var(--lf-blue);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 1rem 2rem;
+  font-family: var(--lf-mono);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .76rem;
+  font-weight: 600;
+  transition: background .2s;
+}
+.lf-h__cta:hover, .lf-h__cta:focus-visible{ background: var(--lf-ink); color: #fff; }
+.lf-h__arw{ transition: transform .2s; }
+.lf-h__cta:hover .lf-h__arw{ transform: translateX(4px); }
+
+.lf-h__shot{
+  position: relative;
+  margin-top: clamp(1.8rem, 6vw, 3.2rem);
+  border-radius: 22px;
+  aspect-ratio: 16 / 8;
+  overflow: hidden;
+  background-color: var(--lf-blue);
+  background-image: var(--shot);
+  background-size: cover;
+  background-position: center;
+}
+.lf-h__badge{
+  position: absolute;
+  top: clamp(.9rem, 3vw, 1.7rem);
+  right: clamp(.9rem, 3vw, 1.7rem);
+  width: 86px; height: 86px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--lf-blue);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  transform: rotate(8deg);
+  font-family: var(--lf-mono);
+  font-size: .58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  line-height: 1.35;
+}
+@media (max-width: 640px){
+  .lf-h__badge{ width: 68px; height: 68px; font-size: .5rem; }
+  .lf-h__shot{ aspect-ratio: 4 / 3; }
+}
+
+/* ---- thin marquee ---- */
+.lf-strip{
+  background: var(--lf-ink);
+  color: #fff;
+  overflow: hidden;
+  padding-block: .85rem;
+}
+.lf-strip__track{
+  display: flex;
+  gap: 2.6rem;
+  width: max-content;
+  white-space: nowrap;
+  animation: lf-slide 28s linear infinite;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -.02em;
+  font-size: 1.05rem;
+}
+.lf-strip__track span{ display: inline-flex; gap: 2.6rem; align-items: center; }
+@keyframes lf-slide{ to{ transform: translateX(-50%); } }
+
+/* ---- MENU list ---- */
+.lf-menu{ background: var(--lf-paper); padding-block: clamp(2.6rem, 7vw, 5rem); }
+.lf-menu__head{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: clamp(1.4rem, 4vw, 2.4rem);
+}
+.lf-menu__h2{
+  font-size: clamp(1.9rem, 6vw, 3.4rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -.035em;
+  margin: 0;
+}
+.lf-menu__kicker,
+.lf-menu__note{
+  font-family: var(--lf-mono);
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-size: .7rem;
+  font-weight: 500;
+}
+.lf-menu__kicker{ color: var(--lf-blue); }
+.lf-menu__note{ color: rgba(10,10,18,.55); margin: 1.3rem 0 0; }
+.lf-menu__row{
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid rgba(10,10,18,.14);
+}
+.lf-menu__row:last-child{ border-bottom: 1px solid rgba(10,10,18,.14); }
+.lf-menu__name{
+  font-size: clamp(1.3rem, 4vw, 2.1rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -.02em;
+  transition: color .18s;
+}
+.lf-menu__row:hover .lf-menu__name{ color: var(--lf-blue); }
+.lf-menu__type{
+  font-family: var(--lf-mono);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: .66rem;
+  font-weight: 500;
+  color: var(--lf-blue);
+  margin-left: .35rem;
+}
+.lf-menu__dots{
+  flex: 1;
+  border-bottom: 1.5px dotted rgba(10,10,18,.28);
+  transform: translateY(-4px);
+}
+.lf-menu__price{
+  font-family: var(--lf-mono);
+  font-weight: 700;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---- STATEMENT band ---- */
+.lf-say{
+  background: var(--lf-blue);
+  color: #fff;
+  text-align: center;
+  padding-block: clamp(3rem, 9vw, 6.5rem);
+  padding-inline: 1.2rem;
+}
+.lf-say p{
+  font-size: clamp(1.8rem, 6vw, 4.2rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -.035em;
+  line-height: .95;
+  text-wrap: balance;
+  max-width: 20ch;
+  margin: 0 auto;
+}
+
+/* ---- MERCH grid ---- */
+.lf-merch{ background: var(--lf-paper); padding-block: clamp(2.6rem, 7vw, 5rem); }
+.lf-merch__head{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: clamp(1.4rem, 4vw, 2.4rem);
+}
+.lf-merch__h2{
+  font-size: clamp(1.9rem, 6vw, 3.4rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -.035em;
+  margin: 0;
+}
+.lf-merch__all{
+  font-family: var(--lf-mono);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: .7rem;
+  font-weight: 600;
+  color: var(--lf-blue);
+  text-decoration: none;
+}
+.lf-merch__all:hover{ text-decoration: underline; }
+.lf-merch__grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.lf-merch__tile{
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  aspect-ratio: 4 / 5;
+  border-radius: 18px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #fff;
+  background-color: var(--lf-ink);
+  background-image: var(--bg);
+  background-size: cover;
+  background-position: center;
+  transition: transform .22s;
+}
+.lf-merch__tile::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 45%, rgba(5,5,16,.78));
+}
+.lf-merch__tile:hover{ transform: translateY(-4px); }
+.lf-merch__meta{
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: .8rem;
+  padding: 1rem 1.1rem;
+}
+.lf-merch__name{
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -.01em;
+  font-size: 1.02rem;
+}
+.lf-merch__price{
+  font-family: var(--lf-mono);
+  font-weight: 700;
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+}
+.lf-merch__note{
+  font-family: var(--lf-mono);
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-size: .7rem;
+  color: rgba(10,10,18,.55);
+  margin: 1.3rem 0 0;
+}
+@media (max-width: 760px){
+  .lf-merch__grid{ grid-template-columns: 1fr 1fr; }
+  .lf-merch__grid .lf-merch__tile:last-child{ grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+}
+@media (max-width: 460px){
+  .lf-merch__grid{ grid-template-columns: 1fr; }
+  .lf-merch__grid .lf-merch__tile:last-child{ aspect-ratio: 4 / 5; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .lf-strip__track{ animation: none; }
+  .lf-merch__tile, .lf-h__cta, .lf-h__arw, .lf-menu__name{ transition: none; }
+}

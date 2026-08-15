@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 
 <nav class="lf-nav">
   <div class="lf-nav__inner">
@@ -7,7 +7,7 @@
     <div class="lf-nav__left">
       <div class="lf-nav__dropdown">
         <button class="lf-nav__link lf-nav__dropdown-btn" type="button">
-          CATEGORIES
+          {% translate "CATEGORIES" %}
         </button>
 
         <div class="lf-nav__dropdown-menu">
@@ -19,26 +19,29 @@
         </div>
       </div>
 
-      <a class="lf-nav__link" href="{% url 'products' %}">SHOP</a>
-      <a class="lf-nav__link" href="{% url 'products' %}?sort=newest">NEW ARRIVALS</a>
+      <a class="lf-nav__link" href="{% url 'products' %}">{% translate "SHOP" %}</a>
+      <a class="lf-nav__link" href="{% url 'products' %}?sort=newest">{% translate "NEW ARRIVALS" %}</a>
     </div>
 
     <!-- CENTER -->
     <div class="lf-nav__center">
-      <a class="lf-nav__logo" href="{% url 'home' %}">LE FRAT</a>
+      <a class="lf-nav__logo" href="{% url 'home' %}" aria-label="Le Frat">
+        <img src="{% static 'images/brand/logo-principal-azul.png' %}"
+             alt="Le Frat — Placeres primarios" class="lf-nav__logo-img">
+      </a>
     </div>
 
     <!-- RIGHT -->
     <div class="lf-nav__right">
       <div class="lf-nav__search-wrap">
-        <button class="lf-nav__icon-btn lf-nav__search-toggle" type="button" aria-label="Open search">
+        <button class="lf-nav__icon-btn lf-nav__search-toggle" type="button" aria-label="{% translate 'Open search' %}">
           <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
             <path fill="currentColor"
               d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm0-2a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm9.707 5.293-4.11-4.11a1 1 0 0 0-1.414 1.414l4.11 4.11a1 1 0 0 0 1.414-1.414Z"/>
           </svg>
         </button>
 
-        <button class="lf-burger" type="button" aria-label="Open menu" aria-expanded="false">
+        <button class="lf-burger" type="button" aria-label="{% translate 'Open menu' %}" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
 
@@ -47,8 +50,8 @@
             type="search"
             name="q"
             class="lf-nav__search-input"
-            placeholder="Search"
-            aria-label="Search products"
+            placeholder="{% translate 'Search' %}"
+            aria-label="{% translate 'Search products' %}"
           >
         </form>
       </div>
@@ -92,36 +95,50 @@
       <div class="lf-mobile" id="lfMobileMenu" hidden aria-hidden="true">
         <div class="lf-mobile__panel" role="dialog" aria-modal="true" aria-label="Mobile menu">
           <div class="lf-mobile__top">
-            <span class="lf-mobile__brand">LE FRAT</span>
-            <button class="lf-mobile__close" type="button" aria-label="Close menu">✕</button>
+            <img class="lf-mobile__brand-img" src="{% static 'images/brand/logo-principal-azul.png' %}" alt="Le Frat">
+            <button class="lf-mobile__close" type="button" aria-label="{% translate 'Close menu' %}">✕</button>
           </div>
 
           <nav class="lf-mobile__links">
-            <a href="{% url 'products' %}?category=categories">Categories</a>
-            <a href="{% url 'products' %}">Shop</a>
-            <a href="{% url 'products' %}?sort=newest">New Arrivals</a>
+            <a href="{% url 'products' %}?category=categories">{% translate "Categories" %}</a>
+            <a href="{% url 'products' %}">{% translate "Shop" %}</a>
+            <a href="{% url 'products' %}?sort=newest">{% translate "New Arrivals" %}</a>
           </nav>
 
           <div class="lf-mobile__actions">
-            <a class="lf-mobile__btn" href="{% url 'products' %}?q=">Search</a>
+            <a class="lf-mobile__btn" href="{% url 'products' %}?q=">{% translate "Search" %}</a>
 
             {% if request.user.is_authenticated %}
-              <a class="lf-mobile__btn" href="{% url 'profile' %}">My Profile</a>
-              <a class="lf-mobile__btn" href="{% url 'account_logout' %}">Logout</a>
+              <a class="lf-mobile__btn" href="{% url 'profile' %}">{% translate "My Profile" %}</a>
+              <a class="lf-mobile__btn" href="{% url 'account_logout' %}">{% translate "Logout" %}</a>
             {% else %}
-              <a class="lf-mobile__btn" href="{% url 'account_login' %}">Login</a>
-              <a class="lf-mobile__btn" href="{% url 'account_signup' %}">Sign Up</a>
+              <a class="lf-mobile__btn" href="{% url 'account_login' %}">{% translate "Login" %}</a>
+              <a class="lf-mobile__btn" href="{% url 'account_signup' %}">{% translate "Sign Up" %}</a>
             {% endif %}
 
             <a class="lf-mobile__btn lf-mobile__btn--primary" href="{% url 'view_bag' %}">
-              Bag {% if product_count %}({{ product_count }}){% endif %}
+              {% translate "Bag" %} {% if product_count %}({{ product_count }}){% endif %}
             </a>
           </div>
         </div>
       </div>
 
+      <!-- Language switcher: shows the language you can switch TO -->
+      <form class="lf-lang" action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        {% get_current_language as CURRENT_LANG %}
+        {% if CURRENT_LANG == "es" %}
+          <button class="lf-lang__btn" type="submit" name="language" value="en"
+                  aria-label="Switch to English">EN</button>
+        {% else %}
+          <button class="lf-lang__btn" type="submit" name="language" value="es"
+                  aria-label="Cambiar a espanol">ES</button>
+        {% endif %}
+      </form>
+
       <div class="lf-nav__account">
-        <button class="lf-nav__icon-btn" type="button" aria-label="Account">
+        <button class="lf-nav__icon-btn" type="button" aria-label="{% translate 'Account' %}">
           <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
             <path fill="currentColor" d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5Z"/>
           </svg>
@@ -129,16 +146,16 @@
 
         <div class="lf-nav__account-menu">
           {% if request.user.is_authenticated %}
-            <a href="{% url 'profile' %}">Profile</a>
-            <a href="{% url 'account_logout' %}">Logout</a>
+            <a href="{% url 'profile' %}">{% translate "Profile" %}</a>
+            <a href="{% url 'account_logout' %}">{% translate "Logout" %}</a>
           {% else %}
-            <a href="{% url 'account_login' %}">Login</a>
-            <a href="{% url 'account_signup' %}">Sign Up</a>
+            <a href="{% url 'account_login' %}">{% translate "Login" %}</a>
+            <a href="{% url 'account_signup' %}">{% translate "Sign Up" %}</a>
           {% endif %}
         </div>
       </div>
 
-      <a class="lf-nav__icon-btn lf-nav__icon-btn--bag" href="{% url 'view_bag' %}" aria-label="Bag">
+      <a class="lf-nav__icon-btn lf-nav__icon-btn--bag" href="{% url 'view_bag' %}" aria-label="{% translate 'Bag' %}">
         <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
           <path fill="currentColor" d="M7 7V6a5 5 0 0 1 10 0v1h3l-1 15H5L4 7h3Zm2 0h6V6a3 3 0 0 0-6 0v1Z"/>
         </svg>
