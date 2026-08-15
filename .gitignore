@@ -27,3 +27,4 @@ media/
 
 # Respaldos
 *.bak
+env.py.bak*

@@ -1,0 +1,162 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Le Frat\n"
+"Report-Msgid-Bugs-To: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "CATEGORIES"
+msgstr "CATEGORÍAS"
+
+msgid "SHOP"
+msgstr "TIENDA"
+
+msgid "NEW ARRIVALS"
+msgstr "NUEVO"
+
+msgid "Open search"
+msgstr "Abrir búsqueda"
+
+msgid "Open menu"
+msgstr "Abrir menú"
+
+msgid "Search"
+msgstr "Buscar"
+
+msgid "Search products"
+msgstr "Buscar productos"
+
+msgid "Close menu"
+msgstr "Cerrar menú"
+
+msgid "Categories"
+msgstr "Categorías"
+
+msgid "Shop"
+msgstr "Tienda"
+
+msgid "New Arrivals"
+msgstr "Nuevo"
+
+msgid "My Profile"
+msgstr "Mi perfil"
+
+msgid "Logout"
+msgstr "Salir"
+
+msgid "Login"
+msgstr "Entrar"
+
+msgid "Sign Up"
+msgstr "Crear cuenta"
+
+msgid "Bag"
+msgstr "Bolsa"
+
+msgid "Account"
+msgstr "Cuenta"
+
+msgid "Profile"
+msgstr "Perfil"
+
+msgid "Social links"
+msgstr "Redes sociales"
+
+msgid "Customers"
+msgstr "Clientes"
+
+msgid "Support"
+msgstr "Soporte"
+
+msgid "Help"
+msgstr "Ayuda"
+
+msgid "Privacy"
+msgstr "Privacidad"
+
+msgid "Terms"
+msgstr "Términos"
+
+msgid "Company"
+msgstr "Nosotros"
+
+msgid "About Us"
+msgstr "Quiénes somos"
+
+msgid "FAQs"
+msgstr "Preguntas"
+
+msgid "Newsletter"
+msgstr "Newsletter"
+
+msgid "Get updates on drops, collabs &amp; promos."
+msgstr "Entérate de los drops, colabs y promos antes que nadie."
+
+msgid "Enter your email"
+msgstr "Tu correo"
+
+msgid "Email address"
+msgstr "Correo electrónico"
+
+msgid "Subscribe"
+msgstr "Suscribirme"
+
+msgid "Home"
+msgstr "Inicio"
+
+msgid "Placeres primarios"
+msgstr "Placeres primarios"
+
+msgid "Good things"
+msgstr "Lo bueno"
+
+msgid "need no"
+msgstr "no necesita"
+
+msgid "explaining."
+msgstr "explicaciones."
+
+msgid "Shop the drop"
+msgstr "Ver el drop"
+
+msgid "Placeres"
+msgstr "Placeres"
+
+msgid "primarios"
+msgstr "primarios"
+
+msgid "Everything is better in combo"
+msgstr "Todo es mejor en combo"
+
+msgid "If you weren't there, you missed it"
+msgstr "Si no estuviste, te lo perdiste"
+
+msgid "The menu"
+msgstr "El menú"
+
+msgid "Four. That's it."
+msgstr "Cuatro. Y punto."
+
+msgid "Beef"
+msgstr "Carne"
+
+msgid "Chicken"
+msgstr "Pollo"
+
+msgid "Veggie"
+msgstr "Veggie"
+
+msgid "+ Fries &middot; milkshakes &middot; beers"
+msgstr "+ Papas &middot; malteadas &middot; cervezas"
+
+msgid "We're tight and all, but I don't share my fries."
+msgstr "Muy amigos y todo, pero no comparto mis papas."
+
+msgid "See all"
+msgstr "Ver todo"
+
+msgid "La Frat se usa"
+msgstr "La Frat se usa"

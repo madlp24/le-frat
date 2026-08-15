@@ -26,6 +26,10 @@ sitemaps = {
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+
+    # Language switcher (set_language view)
+    path("i18n/", include("django.conf.urls.i18n")),
+
     path("accounts/", include("allauth.urls")),
     path("", include("home.urls")),
     path("products/", include("products.urls")),

@@ -65,6 +65,10 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
 
     "django.contrib.sessions.middleware.SessionMiddleware",
+
+    # Picks the active language from session/cookie/Accept-Language
+    "django.middleware.locale.LocaleMiddleware",
+
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -133,10 +137,18 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-LANGUAGE_CODE = "en-us"
-TIME_ZONE = "UTC"
+# Site is bilingual: Spanish (default, Bogota audience) and English.
+LANGUAGE_CODE = "es"
+TIME_ZONE = "America/Bogota"
 USE_I18N = True
 USE_TZ = True
+
+LANGUAGES = [
+    ("es", "Espanol"),
+    ("en", "English"),
+]
+
+LOCALE_PATHS = [BASE_DIR / "locale"]
 
 
 # Static files (CSS, JavaScript, Images)
