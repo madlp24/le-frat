@@ -18,7 +18,17 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <!-- FavIcon -->
-  <link rel="icon" href="{% static 'images/lefrat_favicon.ico' %}">
+  <link rel="icon" href="{% static 'images/brand/favicon.ico' %}" sizes="any">
+  <link rel="icon" type="image/png" href="{% static 'images/brand/favicon-32.png' %}" sizes="32x32">
+  <link rel="apple-touch-icon" href="{% static 'images/brand/apple-touch-icon.png' %}">
+  <meta name="theme-color" content="#1D00FB">
+
+  <!-- Brand typefaces: load the display face first, it carries the headlines -->
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+        href="{% static 'fonts/ArticulatCF-Bold.woff2' %}">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+        href="{% static 'fonts/RightGroteskMono-Regular.woff2' %}">
+
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
 

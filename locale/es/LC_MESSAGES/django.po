@@ -163,3 +163,6 @@ msgstr "La Frat se usa"
 
 msgid "Le Frat, Bogota: four burgers done right, fries, milkshakes and official merch. Placeres primarios."
 msgstr "Le Frat, Bogotá: cuatro hamburguesas bien hechas, papas, malteadas y merch oficial. Placeres primarios."
+
+msgid "Burgers in Bogota"
+msgstr "Hamburguesas en Bogotá"

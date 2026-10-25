@@ -1587,3 +1587,63 @@ form[method="GET"]{
   .lf-strip__track{ animation: none; }
   .lf-merch__tile, .lf-h__cta, .lf-h__arw, .lf-menu__name{ transition: none; }
 }
+
+
+/* ================================================================
+   BRAND TYPEFACES — manual de marca §2.3
+   Articulat CF (primaria, titulares) · PP Right Grotesk Mono (detalles)
+   Only Bold was delivered for Articulat CF, so the mono carries body copy.
+   ================================================================ */
+
+@font-face{
+  font-family: "Articulat CF";
+  src: url("../fonts/ArticulatCF-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "Right Grotesk Mono";
+  src: url("../fonts/RightGroteskMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "Right Grotesk Mono";
+  src: url("../fonts/RightGroteskMono-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "Right Grotesk Mono";
+  src: url("../fonts/RightGroteskMono-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root{
+  --lf-display: "Articulat CF", "Helvetica Neue", Arial, sans-serif;
+  --lf-mono: "Right Grotesk Mono", "SF Mono", Menlo, Consolas, monospace;
+  --lf-body: "Right Grotesk Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* Display face carries every headline and the nav/buttons */
+h1, h2, h3, h4, h5,
+.lf-h__title, .lf-menu__h2, .lf-merch__h2, .lf-say p,
+.lf-menu__name, .lf-merch__name, .lf-strip__track,
+.lf-nav__link, .lf-footer__title, .lf-mobile__links a{
+  font-family: var(--lf-display);
+  font-weight: 700;
+}
+
+/* Mono handles the supporting text: labels, prices, meta, body copy */
+body,
+.lf-h__eyebrow, .lf-h__cta, .lf-h__badge,
+.lf-menu__kicker, .lf-menu__note, .lf-menu__type, .lf-menu__price,
+.lf-merch__all, .lf-merch__note, .lf-merch__price,
+.lf-lang__btn, .lf-footer__links a, .lf-btn-pill{
+  font-family: var(--lf-mono);
+}
