@@ -166,3 +166,36 @@ msgstr "Le Frat, Bogotá: cuatro hamburguesas bien hechas, papas, malteadas y me
 
 msgid "Burgers in Bogota"
 msgstr "Hamburguesas en Bogotá"
+
+msgid "Good things need no explaining."
+msgstr "Lo bueno no necesita explicaciones."
+
+msgid "Four burgers. Imported beef, bakery buns, nothing you cannot pronounce. Come hungry, come with the crew."
+msgstr "Cuatro hamburguesas. Carne importada, pan artesanal, nada que no puedas pronunciar. Venga con hambre y con el parche."
+
+msgid "Double beef, cheddar, grilled onion and house sauce."
+msgstr "Doble carne, cheddar, cebolla asada y salsa de la casa."
+
+msgid "Imported beef, double cheese, bacon and pickles."
+msgstr "Carne importada, doble queso, tocineta y encurtidos."
+
+msgid "Crispy chicken, fresh slaw and spicy mayo."
+msgstr "Pollo crocante, slaw fresco y mayo picante."
+
+msgid "Portobello, cheese and local greens. Veggie, no excuses."
+msgstr "Portobello, queso y vegetales locales. Veggie, sin excusas."
+
+msgid "Fries, milkshakes and cold beer on the side."
+msgstr "Papas, malteadas y cerveza bien fría."
+
+msgid "Drops, combos and openings before anyone else."
+msgstr "Drops, combos y aperturas antes que nadie."
+
+msgid "Your email"
+msgstr "Tu correo"
+
+msgid "Join"
+msgstr "Va"
+
+msgid "Footer"
+msgstr "Pie de página"

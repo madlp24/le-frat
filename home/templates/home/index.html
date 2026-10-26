@@ -2,105 +2,117 @@
 {% load static i18n %}
 {% block title %}Le Frat &mdash; {% translate "Burgers in Bogota" %}{% endblock %}
 
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
 {% block content %}
+<div class="lf-home">
 
-<!-- HERO: one statement, one action, lots of air -->
-<section class="lf-h">
-  <div class="container lf-h__inner">
-    <p class="lf-h__eyebrow">{% translate "Placeres primarios" %} &middot; Bogot&aacute;</p>
-
-    <h1 class="lf-h__title">
-      {% translate "Good things" %}<br>
-      {% translate "need no" %}<br>
-      <em>{% translate "explaining." %}</em>
-    </h1>
-
-    <a href="{% url 'products' %}" class="lf-h__cta">
-      {% translate "Shop the drop" %} <span class="lf-h__arw">&rarr;</span>
-    </a>
-
-    <div class="lf-h__shot" style="--shot: url('{% static 'images/home/hero.jpg' %}');">
-      <div class="lf-h__badge">
-        {% translate "Placeres" %}<br>{% translate "primarios" %}<br>2026
+  <!-- HERO — ranged left, with the brand's own edge anchors -->
+  <section class="lf-hero">
+    <div class="lf-wrap">
+      <div class="lf-anchors">
+        <span>(Le Frat) (Bog &mdash; Col)</span>
+        <span>{% translate "Placeres primarios" %}</span>
       </div>
+
+      <h1 class="lf-hero__title">{% translate "Good things need no explaining." %}</h1>
+
+      <div class="lf-hero__foot">
+        <a class="lf-cta" href="{% url 'products' %}">{% translate "Shop the drop" %}</a>
+        <p class="lf-hero__says">
+          {% translate "Four burgers. Imported beef, bakery buns, nothing you cannot pronounce. Come hungry, come with the crew." %}
+        </p>
+      </div>
+    </div>
+
+    <div class="lf-hero__shot" style="--shot: url('{% static 'images/home/hero.jpg' %}');"></div>
+  </section>
+
+
+  <!-- MARQUEE -->
+  <div class="lf-strip" aria-hidden="true">
+    <div class="lf-strip__track">
+      <span>{% translate "Everything is better in combo" %} <i>&#9670;</i> {% translate "If you weren't there, you missed it" %} <i>&#9670;</i> Placeres primarios <i>&#9670;</i>&nbsp;</span>
+      <span>{% translate "Everything is better in combo" %} <i>&#9670;</i> {% translate "If you weren't there, you missed it" %} <i>&#9670;</i> Placeres primarios <i>&#9670;</i>&nbsp;</span>
     </div>
   </div>
-</section>
 
 
-<!-- MARQUEE: single, thin -->
-<section class="lf-strip" aria-hidden="true">
-  <div class="lf-strip__track">
-    <span>{% translate "Everything is better in combo" %} &#9670; {% translate "If you weren't there, you missed it" %} &#9670; Placeres primarios &#9670;&nbsp;</span>
-    <span>{% translate "Everything is better in combo" %} &#9670; {% translate "If you weren't there, you missed it" %} &#9670; Placeres primarios &#9670;&nbsp;</span>
-  </div>
-</section>
-
-
-<!-- MENU: four burgers, clean list -->
-<section class="lf-menu">
-  <div class="container">
-    <div class="lf-menu__head">
-      <h2 class="lf-menu__h2">{% translate "The menu" %}</h2>
-      <span class="lf-menu__kicker">{% translate "Four. That's it." %}</span>
-    </div>
-
-    <div class="lf-menu__rows">
-      <div class="lf-menu__row">
-        <span class="lf-menu__name">La Frat <span class="lf-menu__type">{% translate "Beef" %}</span></span>
-        <span class="lf-menu__dots"></span>
-        <span class="lf-menu__price">$24.900</span>
+  <!-- MENU — quiet narrow column vs. the dishes -->
+  <section class="lf-menu" id="menu">
+    <div class="lf-wrap lf-menu__grid">
+      <div class="lf-menu__aside">
+        <h2>{% translate "The menu" %}</h2>
+        <p class="lf-menu__count">{% translate "Four. That's it." %}</p>
+        <img class="lf-menu__seal" src="{% static 'images/brand/insignia-azul.png' %}" alt="" aria-hidden="true">
       </div>
-      <div class="lf-menu__row">
-        <span class="lf-menu__name">Bogotown <span class="lf-menu__type">{% translate "Beef" %}</span></span>
-        <span class="lf-menu__dots"></span>
-        <span class="lf-menu__price">$28.900</span>
-      </div>
-      <div class="lf-menu__row">
-        <span class="lf-menu__name">La Pollo <span class="lf-menu__type">{% translate "Chicken" %}</span></span>
-        <span class="lf-menu__dots"></span>
-        <span class="lf-menu__price">$23.900</span>
-      </div>
-      <div class="lf-menu__row">
-        <span class="lf-menu__name">La Verde <span class="lf-menu__type">{% translate "Veggie" %}</span></span>
-        <span class="lf-menu__dots"></span>
-        <span class="lf-menu__price">$22.900</span>
+
+      <div class="lf-menu__list">
+        <article class="lf-dish">
+          <h3 class="lf-dish__name">La Frat</h3>
+          <span class="lf-dish__price">$24.900</span>
+          <p class="lf-dish__desc">{% translate "Double beef, cheddar, grilled onion and house sauce." %}</p>
+        </article>
+
+        <article class="lf-dish">
+          <h3 class="lf-dish__name">Bogotown</h3>
+          <span class="lf-dish__price">$28.900</span>
+          <p class="lf-dish__desc">{% translate "Imported beef, double cheese, bacon and pickles." %}</p>
+        </article>
+
+        <article class="lf-dish">
+          <h3 class="lf-dish__name">La Pollo</h3>
+          <span class="lf-dish__price">$23.900</span>
+          <p class="lf-dish__desc">{% translate "Crispy chicken, fresh slaw and spicy mayo." %}</p>
+        </article>
+
+        <article class="lf-dish">
+          <h3 class="lf-dish__name">La Verde</h3>
+          <span class="lf-dish__price">$22.900</span>
+          <p class="lf-dish__desc">{% translate "Portobello, cheese and local greens. Veggie, no excuses." %}</p>
+        </article>
+
+        <p class="lf-menu__extras">{% translate "Fries, milkshakes and cold beer on the side." %}</p>
       </div>
     </div>
-
-    <p class="lf-menu__note">{% translate "+ Fries &middot; milkshakes &middot; beers" %}</p>
-  </div>
-</section>
+  </section>
 
 
-<!-- STATEMENT: one line, full bleed -->
-<section class="lf-say">
-  <p>{% translate "We're tight and all, but I don't share my fries." %}</p>
-</section>
-
-
-<!-- MERCH: real products from the shop -->
-<section class="lf-merch">
-  <div class="container">
-    <div class="lf-merch__head">
-      <h2 class="lf-merch__h2">Merch</h2>
-      <a href="{% url 'products' %}" class="lf-merch__all">{% translate "See all" %} &rarr;</a>
+  <!-- STATEMENT — the one loud moment, with the crew seal -->
+  <section class="lf-say">
+    <div class="lf-wrap">
+      <div class="lf-say__grid">
+        <p>{% translate "We're tight and all, but I don't share my fries." %}</p>
+        <img class="lf-say__seal" src="{% static 'images/brand/insignia-blanco.png' %}" alt="" aria-hidden="true">
+      </div>
+      <p class="lf-say__mark">&copy;2026 (Lefrat) Brand Mark</p>
     </div>
+  </section>
 
-    <div class="lf-merch__grid">
-      {% for p in featured_products %}
-        <a class="lf-merch__tile" href="{% url 'product_detail' p.id %}"
-           style="--bg: url('{% static 'images/home/' %}{{ p.home_image }}');">
-          <div class="lf-merch__meta">
-            <span class="lf-merch__name">{{ p.name }}</span>
-            <span class="lf-merch__price">${{ p.price }}</span>
-          </div>
-        </a>
-      {% endfor %}
+
+  <!-- MERCH — one lead piece, two smaller ones -->
+  <section class="lf-merch" id="merch">
+    <div class="lf-wrap">
+      <div class="lf-merch__head">
+        <h2>Merch</h2>
+        <a class="lf-merch__all" href="{% url 'products' %}">{% translate "See all" %}</a>
+      </div>
+
+      <div class="lf-merch__grid">
+        {% for p in featured_products %}
+          <a class="lf-piece" href="{% url 'product_detail' p.id %}"
+             style="--bg: url('{% static 'images/home/' %}{{ p.home_image }}');">
+            <span class="lf-piece__meta">
+              <span class="lf-piece__name">{{ p.name }}</span>
+              <span class="lf-piece__price">${{ p.price }}</span>
+            </span>
+          </a>
+        {% endfor %}
+      </div>
     </div>
+  </section>
 
-    <p class="lf-merch__note">{% translate "La Frat se usa" %}</p>
-  </div>
-</section>
-
+</div>
 {% endblock %}

@@ -1,0 +1,344 @@
+/* ================================================================
+   LE FRAT — HOME
+   Layout concept: "ficha tecnica". The brand's own pieces (manual §4)
+   anchor text to the edges — "(BOG - COL)", "(C)2026 (LEFRAT) BRAND MARK" —
+   so the page is built on edge anchors and an off-centre grid instead of
+   the stacked centred bands it had before.
+   Boldness is spent in one place: the blue statement band.
+   ================================================================ */
+
+.lf-home{
+  --rule: rgba(10,10,18,.16);
+  --muted: rgba(10,10,18,.55);
+  background: var(--lf-paper);
+}
+
+/* .lf-wrap is defined in base.css (the footer uses it site-wide) */
+
+/* Edge anchors: the small mono strings pinned to the corners */
+.lf-anchors{
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.4rem .6rem;
+  color: var(--lf-blue);
+  font-family: var(--lf-mono);
+  font-size: .68rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+/* ---------------- HERO ---------------- */
+.lf-hero{ padding-bottom: clamp(2rem, 5vw, 3.5rem); }
+
+.lf-hero__title{
+  font-family: var(--lf-display);
+  font-weight: 700;
+  /* tight, oversized, ranged left — the headline is the composition */
+  font-size: clamp(2.9rem, 12.5vw, 11rem);
+  line-height: .84;
+  letter-spacing: -.045em;
+  text-transform: uppercase;
+  margin: clamp(1rem, 3vw, 2rem) 0 0;
+  color: var(--lf-ink);
+  max-width: 14ch;
+}
+
+/* Hero foot: action on the left, the menu in one line on the right */
+.lf-hero__foot{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: clamp(1.6rem, 4vw, 2.6rem);
+}
+.lf-hero__says{
+  font-family: var(--lf-mono);
+  font-size: .84rem;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 34ch;
+  text-align: right;
+  margin: 0;
+}
+@media (max-width: 720px){
+  .lf-hero__says{ text-align: left; }
+}
+
+.lf-cta{
+  display: inline-block;
+  font-family: var(--lf-mono);
+  font-weight: 700;
+  font-size: .78rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--lf-blue);
+  border: 2px solid var(--lf-blue);
+  border-radius: 999px;
+  padding: 1.05rem 2.1rem;
+  text-decoration: none;
+  transition: background .18s, color .18s;
+}
+.lf-cta:hover, .lf-cta:focus-visible{
+  background: var(--lf-ink);
+  border-color: var(--lf-ink);
+  color: #fff;
+}
+
+/* Hero image runs wider than the text column */
+.lf-hero__shot{
+  margin-top: clamp(1.8rem, 5vw, 3rem);
+  aspect-ratio: 16 / 7;
+  background-color: var(--lf-blue);
+  background-image: var(--shot);
+  background-size: cover;
+  background-position: center 62%;
+}
+@media (max-width: 720px){
+  .lf-hero__shot{ aspect-ratio: 4 / 3; }
+}
+
+/* ---------------- MARQUEE ---------------- */
+.lf-strip{
+  background: var(--lf-ink);
+  color: #fff;
+  overflow: hidden;
+  padding-block: .9rem;
+}
+.lf-strip__track{
+  display: flex;
+  gap: 3rem;
+  width: max-content;
+  white-space: nowrap;
+  animation: lf-slide 34s linear infinite;
+  font-family: var(--lf-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -.01em;
+  font-size: 1.05rem;
+}
+.lf-strip__track span{ display: inline-flex; gap: 3rem; align-items: center; }
+.lf-strip__track i{ font-style: normal; color: var(--lf-blue); }
+@keyframes lf-slide{ to{ transform: translateX(-50%); } }
+
+/* ---------------- MENU: narrow left column, wide right column ------- */
+.lf-menu{ padding-block: clamp(3rem, 8vw, 6rem); }
+.lf-menu__grid{
+  display: grid;
+  grid-template-columns: minmax(170px, 2fr) 7fr;
+  gap: clamp(1.6rem, 5vw, 4.5rem);
+  align-items: start;
+}
+.lf-menu__aside h2{
+  font-family: var(--lf-display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 3.4vw, 2.7rem);
+  letter-spacing: -.035em;
+  text-transform: uppercase;
+  line-height: .95;
+  margin: 0;
+}
+.lf-menu__count{
+  font-family: var(--lf-mono);
+  font-size: .72rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: .8rem 0 0;
+}
+/* The crew mark sits in the quiet column, as a seal rather than decoration */
+.lf-menu__seal{
+  width: clamp(92px, 11vw, 150px);
+  height: auto;
+  margin-top: clamp(1.6rem, 4vw, 2.6rem);
+  opacity: .9;
+}
+@media (max-width: 720px){
+  .lf-menu__grid{ grid-template-columns: 1fr; }
+  .lf-menu__seal{ display: none; }
+}
+
+.lf-dish{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: .4rem 1.5rem;
+  padding: clamp(1rem, 2.4vw, 1.6rem) 0;
+  border-top: 1px solid var(--rule);
+}
+.lf-dish:last-child{ border-bottom: 1px solid var(--rule); }
+.lf-dish__name{
+  font-family: var(--lf-display);
+  font-weight: 700;
+  font-size: clamp(1.45rem, 3.8vw, 2.5rem);
+  letter-spacing: -.03em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--lf-ink);
+}
+.lf-dish__price{
+  font-family: var(--lf-mono);
+  font-weight: 700;
+  font-size: clamp(.9rem, 1.4vw, 1.05rem);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--lf-ink);
+}
+.lf-dish__desc{
+  grid-column: 1 / -1;
+  font-family: var(--lf-mono);
+  font-size: .8rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+  max-width: 52ch;
+}
+.lf-menu__extras{
+  font-family: var(--lf-mono);
+  font-size: .78rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: clamp(1.2rem, 3vw, 1.8rem) 0 0;
+}
+
+/* ---------------- STATEMENT: the one loud moment ---------------- */
+.lf-say{
+  background: var(--lf-blue);
+  color: #fff;
+  padding-block: clamp(3rem, 8vw, 6rem);
+}
+.lf-say__grid{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 4rem);
+}
+.lf-say__grid p{
+  font-family: var(--lf-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 5.6vw, 4.6rem);
+  line-height: .95;
+  letter-spacing: -.035em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  margin: 0;
+  max-width: 17ch;
+}
+.lf-say__seal{ width: clamp(110px, 16vw, 230px); height: auto; }
+@media (max-width: 720px){
+  .lf-say__grid{ grid-template-columns: 1fr; }
+  .lf-say__seal{ width: 120px; }
+}
+.lf-say__mark{
+  font-family: var(--lf-mono);
+  font-size: .66rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.75);
+  margin: clamp(1.6rem, 4vw, 2.4rem) 0 0;
+}
+
+/* ---------------- MERCH: irregular grid, not three equal cards ------ */
+.lf-merch{ padding-block: clamp(3rem, 8vw, 6rem); }
+.lf-merch__head{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: clamp(1.3rem, 3vw, 2rem);
+}
+.lf-merch__head h2{
+  font-family: var(--lf-display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 3.4vw, 2.7rem);
+  letter-spacing: -.035em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.lf-merch__all{
+  font-family: var(--lf-mono);
+  font-size: .74rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--lf-blue);
+  text-decoration: none;
+  border-bottom: 1.5px solid currentColor;
+  padding-bottom: 2px;
+}
+.lf-merch__all:hover{ color: var(--lf-ink); }
+
+.lf-merch__grid{
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  grid-template-rows: auto auto;
+  gap: clamp(.7rem, 1.6vw, 1.1rem);
+}
+/* first piece is the hero of the row and spans both rows */
+.lf-piece:first-child{ grid-row: span 2; }
+.lf-piece{
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 190px;
+  text-decoration: none;
+  color: #fff;
+  background-color: var(--lf-ink);
+  background-image: var(--bg);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+.lf-piece:first-child{ min-height: 420px; }
+.lf-piece::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 40%, rgba(5,5,16,.8));
+}
+.lf-piece__meta{
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  width: 100%;
+  padding: clamp(.9rem, 2vw, 1.3rem);
+}
+.lf-piece__name{
+  font-family: var(--lf-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -.01em;
+  font-size: clamp(.95rem, 1.5vw, 1.15rem);
+  line-height: 1.05;
+}
+.lf-piece__price{
+  font-family: var(--lf-mono);
+  font-weight: 700;
+  font-size: .82rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+@media (max-width: 720px){
+  .lf-merch__grid{ grid-template-columns: 1fr; }
+  .lf-piece:first-child{ grid-row: auto; min-height: 300px; }
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible{
+  outline: 3px solid var(--lf-blue);
+  outline-offset: 3px;
+}
+.lf-say a:focus-visible, .lf-foot a:focus-visible,
+.lf-foot button:focus-visible, .lf-foot input:focus-visible{
+  outline-color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .lf-strip__track{ animation: none; }
+  .lf-cta, .lf-merch__all{ transition: none; }
+}

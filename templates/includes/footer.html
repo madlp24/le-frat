@@ -1,71 +1,49 @@
 {% load static i18n %}
 
-<footer class="lf-footer">
-  <div class="container lf-footer__inner">
-    <div class="lf-footer__grid">
+<footer class="lf-foot">
+  <div class="lf-wrap">
 
-      <!-- Brand + socials -->
-      <div class="lf-footer__brand">
-        <a href="{% url 'home' %}" class="lf-footer__logo" aria-label="Le Frat">
-          <img src="{% static 'images/brand/logo-principal-blanco.png' %}" alt="Le Frat — Placeres primarios" class="lf-footer__logo-img">
-        </a>
+    <a href="{% url 'home' %}" aria-label="Le Frat">
+      <img class="lf-foot__mark"
+           src="{% static 'images/brand/logo-principal-blanco.png' %}"
+           alt="Le Frat &mdash; Placeres primarios">
+    </a>
 
-        <div class="lf-footer__socials" aria-label="{% translate 'Social links' %}">
-          <a class="lf-footer__social" href="https://www.instagram.com/lefrattt?igsh=MXUxbWlqejhhMGQ4OA==" aria-label="Instagram">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-          <a class="lf-footer__social" href="https://www.facebook.com/profile.php?id=61587399382148" aria-label="Facebook">
-            <i class="fa-brands fa-facebook"></i>
-          </a>
-        </div>
-      </div>
+    <div class="lf-foot__row">
+      <a class="lf-foot__handle"
+         href="https://www.instagram.com/lefrattt?igsh=MXUxbWlqejhhMGQ4OA=="
+         rel="noopener">@lefrat.bog</a>
 
-      <!-- Customers -->
-      <div class="lf-footer__col">
-        <h3 class="lf-footer__title">{% translate "Customers" %}</h3>
-        <ul class="lf-footer__links">
-          <li><a href="{% url 'account_login' %}">{% translate "Login" %}</a></li>
-          <li><a href="{% url 'support' %}">{% translate "Support" %}</a></li>
-        </ul>
-      </div>
-
-      <!-- Help -->
-      <div class="lf-footer__col">
-        <h3 class="lf-footer__title">{% translate "Help" %}</h3>
-        <ul class="lf-footer__links">
-          <li><a href="{% url 'privacy' %}">{% translate "Privacy" %}</a></li>
-          <li><a href="{% url 'terms' %}">{% translate "Terms" %}</a></li>
-        </ul>
-      </div>
-
-      <!-- Company -->
-      <div class="lf-footer__col">
-        <h3 class="lf-footer__title">{% translate "Company" %}</h3>
-        <ul class="lf-footer__links">
-          <li><a href="{% url 'about' %}">{% translate "About Us" %}</a></li>
-          <li><a href="{% url 'faqs' %}">{% translate "FAQs" %}</a></li>
-        </ul>
-      </div>
-      <!-- Newsletter -->
-      <div class="lf-footer__col">
-        <h3 class="lf-footer__title">{% translate "Newsletter" %}</h3>
-        <p class="mb-3" style="color: rgba(236,236,236,.78); font-weight: 600;">
-          {% translate "Get updates on drops, collabs &amp; promos." %}
-        </p>
-
-        <form method="POST" action="{% url 'newsletter_signup' %}" class="lf-newsletter">
-            {% csrf_token %}
-            <input type="email" name="email" class="form-control" placeholder="{% translate 'Enter your email' %}" aria-label="{% translate 'Email address' %}" required/>
-            <button type="submit" class="btn btn-primary lf-btn-pill">{% translate "Subscribe" %}</button>
-        </form>
-
-      </div>
-
-
+      <nav class="lf-foot__links" aria-label="{% translate 'Footer' %}">
+        <a href="{% url 'products' %}">{% translate "Shop" %}</a>
+        <a href="{% url 'about' %}">{% translate "About Us" %}</a>
+        <a href="{% url 'support' %}">{% translate "Support" %}</a>
+        <a href="{% url 'faqs' %}">{% translate "FAQs" %}</a>
+        <a href="{% url 'privacy' %}">{% translate "Privacy" %}</a>
+        <a href="{% url 'terms' %}">{% translate "Terms" %}</a>
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'profile' %}">{% translate "My Profile" %}</a>
+        {% else %}
+          <a href="{% url 'account_login' %}">{% translate "Login" %}</a>
+        {% endif %}
+      </nav>
     </div>
 
-    <div class="lf-footer__bottom">
-      <span>© {% now "Y" %} Le Frat.</span>
+    <div class="lf-foot__news">
+      <p>{% translate "Drops, combos and openings before anyone else." %}</p>
+      <form class="lf-foot__form" method="POST" action="{% url 'newsletter_signup' %}">
+        {% csrf_token %}
+        <input type="email" name="email" required
+               placeholder="{% translate 'Your email' %}"
+               aria-label="{% translate 'Email address' %}">
+        <button type="submit">{% translate "Join" %}</button>
+      </form>
     </div>
+
+    <div class="lf-foot__base">
+      <span>&copy;{% now "Y" %} (Lefrat) Brand Mark</span>
+      <span>{% translate "Placeres primarios" %} &mdash; Bogot&aacute;</span>
+    </div>
+
   </div>
 </footer>
