@@ -322,3 +322,6 @@ msgstr "Ese correo ya está en la lista."
 
 msgid "Merch waiting list"
 msgstr "Lista de espera del merch"
+
+msgid "Order on Rappi"
+msgstr "Pedir por Rappi"

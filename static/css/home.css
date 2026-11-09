@@ -671,3 +671,25 @@ a:focus-visible, button:focus-visible, input:focus-visible{
 @media (max-width: 760px){
   .lf-soon__grid{ grid-template-columns: 1fr; }
 }
+
+/* two ways to order, side by side */
+.lf-visit__actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+}
+.lf-visit__rappi{
+  font-family: var(--lf-mono);
+  font-weight: 700;
+  font-size: .88rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #fff;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  padding: 1rem 1.8rem;
+  text-decoration: none;
+  transition: background .18s, color .18s;
+}
+.lf-visit__rappi:hover{ background: #fff; color: var(--lf-blue); }
