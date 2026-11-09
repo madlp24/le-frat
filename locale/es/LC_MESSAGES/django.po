@@ -280,3 +280,45 @@ msgstr "Café"
 
 msgid "Americano"
 msgstr "Americano"
+
+msgid "Come by"
+msgstr "Pásate"
+
+msgid "Sunday to Wednesday"
+msgstr "Domingo a miércoles"
+
+msgid "Thursday to Saturday"
+msgstr "Jueves a sábado"
+
+msgid "Public holidays"
+msgstr "Festivos"
+
+msgid "Some pleasures do get delivered."
+msgstr "Algunos placeres sí llegan a domicilio."
+
+msgid "Order on WhatsApp"
+msgstr "Pedir por WhatsApp"
+
+msgid "Coming soon"
+msgstr "Muy pronto"
+
+msgid "Soon you'll want it on."
+msgstr "Pronto lo vas a querer puesto."
+
+msgid "Hoodies, tees and caps that say you were here. Leave your email and you'll be the first to know when the drop lands."
+msgstr "Hoodies, camisetas y gorras que dicen que estuviste. Déjanos tu correo y eres el primero en saber cuándo sale el drop."
+
+msgid "Let me know"
+msgstr "Avísenme"
+
+msgid "You're on the list. We'll let you know."
+msgstr "Quedaste en la lista. Te avisamos."
+
+msgid "You're in. Welcome to the crew."
+msgstr "Listo. Bienvenido al parche."
+
+msgid "That email is already on the list."
+msgstr "Ese correo ya está en la lista."
+
+msgid "Merch waiting list"
+msgstr "Lista de espera del merch"

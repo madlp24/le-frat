@@ -193,25 +193,72 @@
   </section>
 
 
-  <!-- MERCH -->
-  <section class="lf-merch" id="merch">
-    <div class="lf-wrap">
-      <div class="lf-merch__head">
-        <h2>Merch</h2>
-        <a class="lf-merch__all" href="{% url 'products' %}">{% translate "See all" %}</a>
+  <!-- VISIT — address, hours and how to order -->
+  <section class="lf-visit" id="local">
+    <div class="lf-wrap lf-visit__grid">
+
+      <div class="lf-visit__info">
+        <h2 class="lf-visit__title">{% translate "Come by" %}</h2>
+
+        <a class="lf-visit__address"
+           href="https://www.google.com/maps/search/?api=1&amp;query=Carrera+11a+%2398-06+Bogota"
+           target="_blank" rel="noopener">
+          Cra. 11a #98&ndash;06<br>
+          <span>Bogot&aacute;</span>
+        </a>
+
+        <dl class="lf-hours">
+          <div>
+            <dt>{% translate "Sunday to Wednesday" %}</dt>
+            <dd>11:30 a.m. &ndash; 8:00 p.m.</dd>
+          </div>
+          <div>
+            <dt>{% translate "Thursday to Saturday" %}</dt>
+            <dd>11:30 a.m. &ndash; 10:00 p.m.</dd>
+          </div>
+          <div>
+            <dt>{% translate "Public holidays" %}</dt>
+            <dd>11:30 a.m. &ndash; 8:00 p.m.</dd>
+          </div>
+        </dl>
       </div>
 
-      <div class="lf-merch__grid">
-        {% for p in featured_products %}
-          <a class="lf-piece" href="{% url 'product_detail' p.id %}"
-             style="--bg: url('{% static 'images/home/' %}{{ p.home_image }}');">
-            <span class="lf-piece__meta">
-              <span class="lf-piece__name">{{ p.name }}</span>
-              <span class="lf-piece__price">${{ p.price }}</span>
-            </span>
-          </a>
-        {% endfor %}
+      <div class="lf-visit__order">
+        <p class="lf-visit__says">{% translate "Some pleasures do get delivered." %}</p>
+        <a class="lf-visit__wa" href="https://wa.me/573124086555" target="_blank" rel="noopener">
+          {% translate "Order on WhatsApp" %}
+        </a>
+        <p class="lf-visit__phone">312 408 6555</p>
       </div>
+
+    </div>
+  </section>
+
+
+  <!-- MERCH — a waiting list, not a half-built shop -->
+  <section class="lf-soon" id="merch">
+    <div class="lf-wrap lf-soon__grid">
+
+      <div class="lf-soon__shot" style="--bg: url('{% static 'images/home/drop-hoodie.jpg' %}');">
+        <span class="lf-soon__tag">{% translate "Coming soon" %}</span>
+      </div>
+
+      <div class="lf-soon__copy">
+        <h2 class="lf-soon__title">{% translate "Soon you'll want it on." %}</h2>
+        <p class="lf-soon__text">
+          {% translate "Hoodies, tees and caps that say you were here. Leave your email and you'll be the first to know when the drop lands." %}
+        </p>
+
+        <form class="lf-soon__form" method="POST" action="{% url 'newsletter_signup' %}">
+          {% csrf_token %}
+          <input type="hidden" name="source" value="merch">
+          <input type="email" name="email" required
+                 placeholder="{% translate 'Your email' %}"
+                 aria-label="{% translate 'Email address' %}">
+          <button type="submit">{% translate "Let me know" %}</button>
+        </form>
+      </div>
+
     </div>
   </section>
 
