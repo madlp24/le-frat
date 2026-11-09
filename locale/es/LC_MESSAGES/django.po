@@ -199,3 +199,84 @@ msgstr "Va"
 
 msgid "Footer"
 msgstr "Pie de página"
+
+msgid "See the menu"
+msgstr "Ver el menú"
+
+msgid "The four Le Frat burgers stacked into one tower"
+msgstr "Las cuatro hamburguesas de Le Frat apiladas en una torre"
+
+msgid "Beef, cheese, lettuce, tomato and house sauce."
+msgstr "Carne, queso, lechuga, tomate y salsa de la casa."
+
+msgid "Smashed beef with onion pressed into the patty, and cheese."
+msgstr "Carne smash con cebolla prensada en la carne, y queso."
+
+msgid "Crispy chicken with purple slaw."
+msgstr "Pollo crocante con slaw morado."
+
+msgid "Veggie patty, red onion, lettuce and tomato."
+msgstr "Medallón veggie, cebolla morada, lechuga y tomate."
+
+msgid "On the side"
+msgstr "Para acompañar"
+
+msgid "parsley and parmesan"
+msgstr "perejil y parmesano"
+
+msgid "150gr beef, lettuce, tomato, american cheese, classic sauce."
+msgstr "150gr de carne, lechuga, tomate, queso americano, salsa clásica."
+
+msgid "Double 60gr patty, sliced onion, smash sauce, double american cheese, tomato."
+msgstr "Doble carne de 60gr, cebolla laminada, salsa smash, doble queso americano, tomate."
+
+msgid "Chicken thigh, sriracha honey, coleslaw."
+msgstr "Contramuslo de pollo, miel de sriracha, coleslaw."
+
+msgid "Falafel, lettuce, tomato, yogurt sauce, aubergine and garlic puree."
+msgstr "Falafel, lechuga, tomate, salsa de yogurt, puré de berenjena y ajo."
+
+msgid "Sides and milkshakes"
+msgstr "Para acompañar y malteadas"
+
+msgid "parsley, parmesan"
+msgstr "perejil, parmesano"
+
+msgid "Onion (grilled, caramelised or pickled)"
+msgstr "Cebolla (grillé, caramelizada o encurtida)"
+
+msgid "Bacon"
+msgstr "Tocineta"
+
+msgid "Cheese"
+msgstr "Queso"
+
+msgid "...and if you want more, we give you more."
+msgstr "...y si quieres más, te damos más."
+
+msgid "Soft drinks"
+msgstr "Bebidas sin alcohol"
+
+msgid "Iced tea, lemon or peach"
+msgstr "Té limón o durazno"
+
+msgid "Still water"
+msgstr "Manantial sin gas"
+
+msgid "Sparkling water"
+msgstr "Manantial con gas"
+
+msgid "Beer"
+msgstr "Cerveza"
+
+msgid "Stella draft"
+msgstr "Caña de Stella"
+
+msgid "Club draft"
+msgstr "Caña de Club"
+
+msgid "Coffee"
+msgstr "Café"
+
+msgid "Americano"
+msgstr "Americano"

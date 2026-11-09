@@ -9,7 +9,7 @@
 {% block content %}
 <div class="lf-home">
 
-  <!-- HERO — ranged left, with the brand's own edge anchors -->
+  <!-- HERO — headline left, the four-burger tower right -->
   <section class="lf-hero">
     <div class="lf-wrap">
       <div class="lf-anchors">
@@ -17,17 +17,20 @@
         <span>{% translate "Placeres primarios" %}</span>
       </div>
 
-      <h1 class="lf-hero__title">{% translate "Good things need no explaining." %}</h1>
+      <div class="lf-hero__grid">
+        <div class="lf-hero__copy">
+          <h1 class="lf-hero__title">{% translate "Good things need no explaining." %}</h1>
+          <p class="lf-hero__says">
+            {% translate "Four burgers. Imported beef, bakery buns, nothing you cannot pronounce. Come hungry, come with the crew." %}
+          </p>
+          <a class="lf-cta" href="#menu">{% translate "See the menu" %}</a>
+        </div>
 
-      <div class="lf-hero__foot">
-        <a class="lf-cta" href="{% url 'products' %}">{% translate "Shop the drop" %}</a>
-        <p class="lf-hero__says">
-          {% translate "Four burgers. Imported beef, bakery buns, nothing you cannot pronounce. Come hungry, come with the crew." %}
-        </p>
+        <img class="lf-hero__tower"
+             src="{% static 'images/menu/hero-tower.jpg' %}"
+             alt="{% translate 'The four Le Frat burgers stacked into one tower' %}">
       </div>
     </div>
-
-    <div class="lf-hero__shot" style="--shot: url('{% static 'images/home/hero.jpg' %}');"></div>
   </section>
 
 
@@ -40,47 +43,145 @@
   </div>
 
 
-  <!-- MENU — quiet narrow column vs. the dishes -->
+  <!-- MENU -->
   <section class="lf-menu" id="menu">
-    <div class="lf-wrap lf-menu__grid">
-      <div class="lf-menu__aside">
+    <div class="lf-wrap">
+
+      <div class="lf-menu__head">
         <h2>{% translate "The menu" %}</h2>
-        <p class="lf-menu__count">{% translate "Four. That's it." %}</p>
+        <span class="lf-menu__count">{% translate "Four. That's it." %}</span>
         <img class="lf-menu__seal" src="{% static 'images/brand/insignia-azul.png' %}" alt="" aria-hidden="true">
       </div>
 
-      <div class="lf-menu__list">
+      <div class="lf-dishes">
         <article class="lf-dish">
-          <h3 class="lf-dish__name">La Frat</h3>
-          <span class="lf-dish__price">$24.900</span>
-          <p class="lf-dish__desc">{% translate "Double beef, cheddar, grilled onion and house sauce." %}</p>
+          <img class="lf-dish__shot" src="{% static 'images/menu/burger-classic.jpg' %}" alt="Classic Burger" loading="lazy">
+          <h3 class="lf-dish__name">Classic Burger</h3>
+          <p class="lf-dish__desc">{% translate "150gr beef, lettuce, tomato, american cheese, classic sauce." %}</p>
+          <span class="lf-dish__price">$31.900</span>
         </article>
 
         <article class="lf-dish">
-          <h3 class="lf-dish__name">Bogotown</h3>
-          <span class="lf-dish__price">$28.900</span>
-          <p class="lf-dish__desc">{% translate "Imported beef, double cheese, bacon and pickles." %}</p>
+          <img class="lf-dish__shot" src="{% static 'images/menu/burger-smash.jpg' %}" alt="Smash Oklahoma Burger" loading="lazy">
+          <h3 class="lf-dish__name">Smash Oklahoma Burger</h3>
+          <p class="lf-dish__desc">{% translate "Double 60gr patty, sliced onion, smash sauce, double american cheese, tomato." %}</p>
+          <span class="lf-dish__price">$27.900</span>
         </article>
 
         <article class="lf-dish">
-          <h3 class="lf-dish__name">La Pollo</h3>
-          <span class="lf-dish__price">$23.900</span>
-          <p class="lf-dish__desc">{% translate "Crispy chicken, fresh slaw and spicy mayo." %}</p>
+          <img class="lf-dish__shot" src="{% static 'images/menu/burger-chicken.jpg' %}" alt="Chicken Burger" loading="lazy">
+          <h3 class="lf-dish__name">Chicken Burger</h3>
+          <p class="lf-dish__desc">{% translate "Chicken thigh, sriracha honey, coleslaw." %}</p>
+          <span class="lf-dish__price">$31.900</span>
         </article>
 
         <article class="lf-dish">
-          <h3 class="lf-dish__name">La Verde</h3>
-          <span class="lf-dish__price">$22.900</span>
-          <p class="lf-dish__desc">{% translate "Portobello, cheese and local greens. Veggie, no excuses." %}</p>
+          <img class="lf-dish__shot" src="{% static 'images/menu/burger-veggie.jpg' %}" alt="Veggie Burger" loading="lazy">
+          <h3 class="lf-dish__name">Veggie Burger</h3>
+          <p class="lf-dish__desc">{% translate "Falafel, lettuce, tomato, yogurt sauce, aubergine and garlic puree." %}</p>
+          <span class="lf-dish__price">$27.900</span>
         </article>
+      </div>
 
-        <p class="lf-menu__extras">{% translate "Fries, milkshakes and cold beer on the side." %}</p>
+      <!-- Sides and shakes: smaller, with their real prices -->
+      <div class="lf-sides">
+        <h3 class="lf-sides__title">{% translate "Sides and milkshakes" %}</h3>
+        <div class="lf-sides__grid">
+          <article class="lf-side">
+            <img src="{% static 'images/menu/side-fries.jpg' %}" alt="Fries" loading="lazy">
+            <span class="lf-side__name">Fries</span>
+            <span class="lf-side__price">$9.900</span>
+          </article>
+          <article class="lf-side">
+            <img src="{% static 'images/menu/side-lefries.jpg' %}" alt="Le Fries" loading="lazy">
+            <span class="lf-side__name">Le Fries</span>
+            <span class="lf-side__note">{% translate "parsley, parmesan" %}</span>
+            <span class="lf-side__price">$14.900</span>
+          </article>
+          <article class="lf-side">
+            <img src="{% static 'images/menu/shake-banana.jpg' %}" alt="Banana Split" loading="lazy">
+            <span class="lf-side__name">Banana Split</span>
+            <span class="lf-side__price">$17.900</span>
+          </article>
+          <article class="lf-side">
+            <img src="{% static 'images/menu/shake-cookies.jpg' %}" alt="Cookies &amp; Cream" loading="lazy">
+            <span class="lf-side__name">Cookies &amp; Cream</span>
+            <span class="lf-side__price">$17.900</span>
+          </article>
+          <article class="lf-side">
+            <img src="{% static 'images/menu/shake-miso.jpg' %}" alt="Miso Caramelo" loading="lazy">
+            <span class="lf-side__name">Miso Caramelo</span>
+            <span class="lf-side__price">$17.900</span>
+          </article>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- EXTRAS — blue, like the extras page of the printed menu -->
+  <section class="lf-extras">
+    <div class="lf-wrap lf-extras__grid">
+      <h2 class="lf-extras__title">Extras</h2>
+
+      <ul class="lf-extras__list">
+        <li><span>{% translate "Onion (grilled, caramelised or pickled)" %}</span><b>$4.000</b></li>
+        <li><span>{% translate "Bacon" %}</span><b>$6.900</b></li>
+        <li><span>{% translate "Cheese" %}</span><b>$4.900</b></li>
+        <li><span>Pickles</span><b>$3.900</b></li>
+        <li><span>Smash patty</span><b>$6.500</b></li>
+      </ul>
+
+      <p class="lf-extras__kicker">{% translate "...and if you want more, we give you more." %}</p>
+    </div>
+  </section>
+
+
+  <!-- DRINKS — black, like the drinks page of the printed menu -->
+  <section class="lf-drinks">
+    <div class="lf-wrap">
+      <h2 class="lf-drinks__title">Drinks</h2>
+
+      <div class="lf-drinks__cols">
+        <div class="lf-drinks__col">
+          <h3>{% translate "Soft drinks" %}</h3>
+          <ul>
+            <li><span>Coca Cola</span><b>$6.900</b></li>
+            <li><span>Coca Cola Zero</span><b>$6.900</b></li>
+            <li><span>Sprite</span><b>$6.900</b></li>
+            <li><span>Schweppes Soda</span><b>$6.900</b></li>
+            <li><span>Schweppes Ginger</span><b>$6.900</b></li>
+            <li><span>{% translate "Iced tea, lemon or peach" %}</span><b>$6.900</b></li>
+            <li><span>{% translate "Still water" %}</span><b>$6.900</b></li>
+            <li><span>{% translate "Sparkling water" %}</span><b>$6.900</b></li>
+          </ul>
+        </div>
+
+        <div class="lf-drinks__col">
+          <h3>{% translate "Beer" %}</h3>
+          <ul>
+            <li><span>{% translate "Stella draft" %}</span><b>$7.000</b></li>
+            <li><span>{% translate "Club draft" %}</span><b>$6.000</b></li>
+            <li><span>Colombia</span><b>$11.000</b></li>
+            <li><span>Stella Artois</span><b>$12.000</b></li>
+          </ul>
+        </div>
+
+        <div class="lf-drinks__col">
+          <h3>{% translate "Coffee" %}</h3>
+          <ul>
+            <li><span>{% translate "Americano" %}</span><b>$7.000</b></li>
+            <li><span>Espresso</span><b>$7.000</b></li>
+            <li><span>Cappuccino</span><b>$9.000</b></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
 
-  <!-- STATEMENT — the one loud moment, with the crew seal -->
+  <!-- STATEMENT -->
   <section class="lf-say">
     <div class="lf-wrap">
       <div class="lf-say__grid">
@@ -92,7 +193,7 @@
   </section>
 
 
-  <!-- MERCH — one lead piece, two smaller ones -->
+  <!-- MERCH -->
   <section class="lf-merch" id="merch">
     <div class="lf-wrap">
       <div class="lf-merch__head">

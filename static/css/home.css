@@ -28,42 +28,43 @@
   text-transform: uppercase;
 }
 
-/* ---------------- HERO ---------------- */
+/* ---------------- HERO: copy left, the four-burger tower right ------ */
 .lf-hero{ padding-bottom: clamp(2rem, 5vw, 3.5rem); }
 
+.lf-hero__grid{
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  margin-top: clamp(.5rem, 2vw, 1.5rem);
+}
 .lf-hero__title{
   font-family: var(--lf-display);
   font-weight: 700;
-  /* tight, oversized, ranged left — the headline is the composition */
-  font-size: clamp(2.9rem, 12.5vw, 11rem);
-  line-height: .84;
+  font-size: clamp(2.6rem, 7vw, 6.2rem);
+  line-height: .86;
   letter-spacing: -.045em;
   text-transform: uppercase;
-  margin: clamp(1rem, 3vw, 2rem) 0 0;
+  margin: 0;
   color: var(--lf-ink);
-  max-width: 14ch;
-}
-
-/* Hero foot: action on the left, the menu in one line on the right */
-.lf-hero__foot{
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1.5rem;
-  margin-top: clamp(1.6rem, 4vw, 2.6rem);
 }
 .lf-hero__says{
   font-family: var(--lf-mono);
-  font-size: .84rem;
+  font-size: .85rem;
   line-height: 1.7;
   color: var(--muted);
-  max-width: 34ch;
-  text-align: right;
-  margin: 0;
+  max-width: 40ch;
+  margin: clamp(1.1rem, 2.5vw, 1.6rem) 0 clamp(1.4rem, 3vw, 2rem);
 }
-@media (max-width: 720px){
-  .lf-hero__says{ text-align: left; }
+/* the tower is the appetite; let it run tall */
+.lf-hero__tower{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+@media (max-width: 820px){
+  .lf-hero__grid{ grid-template-columns: 1fr; }
+  .lf-hero__tower{ max-width: 320px; margin-inline: auto; }
 }
 
 .lf-cta{
@@ -79,25 +80,12 @@
   border-radius: 999px;
   padding: 1.05rem 2.1rem;
   text-decoration: none;
-  transition: background .18s, color .18s;
+  transition: background .18s, border-color .18s;
 }
 .lf-cta:hover, .lf-cta:focus-visible{
   background: var(--lf-ink);
   border-color: var(--lf-ink);
   color: #fff;
-}
-
-/* Hero image runs wider than the text column */
-.lf-hero__shot{
-  margin-top: clamp(1.8rem, 5vw, 3rem);
-  aspect-ratio: 16 / 7;
-  background-color: var(--lf-blue);
-  background-image: var(--shot);
-  background-size: cover;
-  background-position: center 62%;
-}
-@media (max-width: 720px){
-  .lf-hero__shot{ aspect-ratio: 4 / 3; }
 }
 
 /* ---------------- MARQUEE ---------------- */
@@ -123,21 +111,22 @@
 .lf-strip__track i{ font-style: normal; color: var(--lf-blue); }
 @keyframes lf-slide{ to{ transform: translateX(-50%); } }
 
-/* ---------------- MENU: narrow left column, wide right column ------- */
+/* ---------------- MENU: product first ---------------- */
 .lf-menu{ padding-block: clamp(3rem, 8vw, 6rem); }
-.lf-menu__grid{
-  display: grid;
-  grid-template-columns: minmax(170px, 2fr) 7fr;
-  gap: clamp(1.6rem, 5vw, 4.5rem);
-  align-items: start;
+
+.lf-menu__head{
+  display: flex;
+  align-items: baseline;
+  gap: clamp(.8rem, 2vw, 1.6rem);
+  flex-wrap: wrap;
+  margin-bottom: clamp(1.4rem, 3.5vw, 2.4rem);
 }
-.lf-menu__aside h2{
+.lf-menu__head h2{
   font-family: var(--lf-display);
   font-weight: 700;
-  font-size: clamp(1.8rem, 3.4vw, 2.7rem);
+  font-size: clamp(1.9rem, 4vw, 3rem);
   letter-spacing: -.035em;
   text-transform: uppercase;
-  line-height: .95;
   margin: 0;
 }
 .lf-menu__count{
@@ -146,63 +135,99 @@
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--muted);
-  margin: .8rem 0 0;
 }
-/* The crew mark sits in the quiet column, as a seal rather than decoration */
 .lf-menu__seal{
-  width: clamp(92px, 11vw, 150px);
+  width: clamp(54px, 7vw, 86px);
   height: auto;
-  margin-top: clamp(1.6rem, 4vw, 2.6rem);
+  margin-left: auto;
   opacity: .9;
 }
-@media (max-width: 720px){
-  .lf-menu__grid{ grid-template-columns: 1fr; }
-  .lf-menu__seal{ display: none; }
-}
 
-.lf-dish{
+.lf-dishes{
   display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: baseline;
-  gap: .4rem 1.5rem;
-  padding: clamp(1rem, 2.4vw, 1.6rem) 0;
-  border-top: 1px solid var(--rule);
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 2.4vw, 2rem);
 }
-.lf-dish:last-child{ border-bottom: 1px solid var(--rule); }
+.lf-dish{ display: flex; flex-direction: column; }
+.lf-dish__shot{
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: #fff;
+  display: block;
+}
 .lf-dish__name{
   font-family: var(--lf-display);
   font-weight: 700;
-  font-size: clamp(1.45rem, 3.8vw, 2.5rem);
-  letter-spacing: -.03em;
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+  line-height: 1.05;
+  letter-spacing: -.02em;
   text-transform: uppercase;
-  line-height: 1;
+  margin: clamp(.8rem, 1.6vw, 1.1rem) 0 0;
   color: var(--lf-ink);
+}
+.lf-dish__desc{
+  font-family: var(--lf-mono);
+  font-size: .76rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: .45rem 0 .8rem;
 }
 .lf-dish__price{
   font-family: var(--lf-mono);
   font-weight: 700;
-  font-size: clamp(.9rem, 1.4vw, 1.05rem);
+  font-size: .95rem;
   font-variant-numeric: tabular-nums;
-  white-space: nowrap;
   color: var(--lf-ink);
+  margin-top: auto;
+  padding-top: .2rem;
+  border-top: 1px solid var(--rule);
 }
-.lf-dish__desc{
-  grid-column: 1 / -1;
+@media (max-width: 900px){ .lf-dishes{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 460px){ .lf-dishes{ grid-template-columns: 1fr; } }
+
+/* sides + shakes: quieter, smaller, one row */
+.lf-sides{ margin-top: clamp(2.4rem, 6vw, 4rem); }
+.lf-sides__title{
   font-family: var(--lf-mono);
-  font-size: .8rem;
-  line-height: 1.6;
-  color: var(--muted);
-  margin: 0;
-  max-width: 52ch;
-}
-.lf-menu__extras{
-  font-family: var(--lf-mono);
-  font-size: .78rem;
-  letter-spacing: .1em;
+  font-size: .72rem;
+  letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--muted);
-  margin: clamp(1.2rem, 3vw, 1.8rem) 0 0;
+  margin: 0 0 clamp(.9rem, 2vw, 1.3rem);
+  padding-bottom: .7rem;
+  border-bottom: 1px solid var(--rule);
 }
+.lf-sides__grid{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(.7rem, 1.8vw, 1.4rem);
+}
+.lf-side{ display: flex; flex-direction: column; }
+.lf-side img{
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+.lf-side__name{
+  font-family: var(--lf-display);
+  font-weight: 700;
+  font-size: .9rem;
+  text-transform: uppercase;
+  letter-spacing: -.01em;
+  margin-top: .6rem;
+  color: var(--lf-ink);
+}
+.lf-side__note{
+  font-family: var(--lf-mono);
+  font-size: .68rem;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-top: .15rem;
+}
+@media (max-width: 900px){ .lf-sides__grid{ grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 460px){ .lf-sides__grid{ grid-template-columns: repeat(2, 1fr); } }
 
 /* ---------------- STATEMENT: the one loud moment ---------------- */
 .lf-say{
@@ -342,3 +367,115 @@ a:focus-visible, button:focus-visible, input:focus-visible{
   .lf-strip__track{ animation: none; }
   .lf-cta, .lf-merch__all{ transition: none; }
 }
+
+
+/* ---------------- SIDE PRICES ---------------- */
+.lf-side__price{
+  font-family: var(--lf-mono);
+  font-weight: 700;
+  font-size: .82rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--lf-ink);
+  margin-top: .3rem;
+}
+
+/* ---------------- EXTRAS — blue page of the printed menu ---------- */
+.lf-extras{
+  background: var(--lf-blue);
+  color: #fff;
+  padding-block: clamp(2.6rem, 7vw, 5rem);
+}
+.lf-extras__grid{
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(1.2rem, 4vw, 3.5rem);
+  align-items: start;
+}
+.lf-extras__title{
+  font-family: var(--lf-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 5vw, 3.6rem);
+  letter-spacing: -.035em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.lf-extras__list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 640px;
+}
+.lf-extras__list li{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: .75rem 0;
+  border-bottom: 1px solid rgba(255,255,255,.35);
+  font-family: var(--lf-mono);
+  font-size: .86rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.lf-extras__list li:first-child{ border-top: 1px solid rgba(255,255,255,.35); }
+.lf-extras__list b{ font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lf-extras__kicker{
+  grid-column: 2;
+  font-family: var(--lf-display);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 2.2vw, 1.6rem);
+  text-transform: uppercase;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  margin: clamp(1.1rem, 2.5vw, 1.6rem) 0 0;
+}
+@media (max-width: 720px){
+  .lf-extras__grid{ grid-template-columns: 1fr; }
+  .lf-extras__kicker{ grid-column: 1; }
+}
+
+/* ---------------- DRINKS — black page of the printed menu --------- */
+.lf-drinks{
+  background: var(--lf-ink);
+  color: #fff;
+  padding-block: clamp(2.6rem, 7vw, 5rem);
+}
+.lf-drinks__title{
+  font-family: var(--lf-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 5vw, 3.6rem);
+  letter-spacing: -.035em;
+  text-transform: uppercase;
+  margin: 0 0 clamp(1.4rem, 3.5vw, 2.4rem);
+}
+.lf-drinks__cols{
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: start;
+}
+.lf-drinks__col h3{
+  font-family: var(--lf-mono);
+  font-weight: 700;
+  font-size: .72rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--lf-blue);
+  margin: 0 0 .9rem;
+  padding-bottom: .6rem;
+  border-bottom: 1px solid rgba(255,255,255,.3);
+}
+.lf-drinks__col ul{ list-style: none; margin: 0; padding: 0; }
+.lf-drinks__col li{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.2rem;
+  padding: .5rem 0;
+  font-family: var(--lf-mono);
+  font-size: .82rem;
+  color: rgba(255,255,255,.88);
+}
+.lf-drinks__col b{ font-variant-numeric: tabular-nums; white-space: nowrap; color: #fff; }
+@media (max-width: 820px){ .lf-drinks__cols{ grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px){ .lf-drinks__cols{ grid-template-columns: 1fr; } }
