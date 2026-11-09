@@ -66,6 +66,9 @@ MIDDLEWARE = [
 
     "django.contrib.sessions.middleware.SessionMiddleware",
 
+    # Spanish by default unless the visitor picked a language themselves
+    "lefrat.middleware.DefaultLanguageMiddleware",
+
     # Picks the active language from session/cookie/Accept-Language
     "django.middleware.locale.LocaleMiddleware",
 
