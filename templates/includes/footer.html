@@ -10,22 +10,21 @@
     </a>
 
     <div class="lf-foot__row">
-      <a class="lf-foot__handle"
-         href="https://www.instagram.com/lefrattt?igsh=MXUxbWlqejhhMGQ4OA=="
-         rel="noopener">@lefrat.bog</a>
+      <div class="lf-foot__social">
+        <a class="lf-foot__handle" href="https://www.instagram.com/lefrat.col/" target="_blank" rel="noopener">@lefrat.col</a>
+        <span class="lf-foot__nets">
+          <a href="https://www.instagram.com/lefrat.col/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.tiktok.com/@lefrat.col" target="_blank" rel="noopener">TikTok</a>
+          <a href="https://share.google/nv4xHiYBPequPlDvy" target="_blank" rel="noopener">{% translate "Google reviews" %}</a>
+        </span>
+      </div>
 
       <nav class="lf-foot__links" aria-label="{% translate 'Footer' %}">
-        <a href="{% url 'products' %}">{% translate "Shop" %}</a>
         <a href="{% url 'about' %}">{% translate "About Us" %}</a>
         <a href="{% url 'support' %}">{% translate "Support" %}</a>
         <a href="{% url 'faqs' %}">{% translate "FAQs" %}</a>
         <a href="{% url 'privacy' %}">{% translate "Privacy" %}</a>
         <a href="{% url 'terms' %}">{% translate "Terms" %}</a>
-        {% if request.user.is_authenticated %}
-          <a href="{% url 'profile' %}">{% translate "My Profile" %}</a>
-        {% else %}
-          <a href="{% url 'account_login' %}">{% translate "Login" %}</a>
-        {% endif %}
       </nav>
     </div>
 

@@ -171,7 +171,7 @@ msgid "Good things need no explaining."
 msgstr "Lo bueno no necesita explicaciones."
 
 msgid "Four burgers. Imported beef, bakery buns, nothing you cannot pronounce. Come hungry, come with the crew."
-msgstr "Cuatro hamburguesas. Carne importada, pan artesanal, nada que no puedas pronunciar. Venga con hambre y con el parche."
+msgstr "Cuatro hamburguesas. Carne importada, pan artesanal, nada que no puedas pronunciar. Ven con hambre y con el parche."
 
 msgid "Double beef, cheddar, grilled onion and house sauce."
 msgstr "Doble carne, cheddar, cebolla asada y salsa de la casa."
@@ -325,3 +325,33 @@ msgstr "Lista de espera del merch"
 
 msgid "Order on Rappi"
 msgstr "Pedir por Rappi"
+
+msgid "One last one and we're off."
+msgstr "La última y nos vamos."
+
+msgid "(It won't be the last.)"
+msgstr "(No va a ser la última.)"
+
+msgid "The Le Frat crew gathered round the kitchen counter for a last supper of burgers"
+msgstr "El parche de Le Frat reunido alrededor de la barra de la cocina, en una última cena de hamburguesas"
+
+msgid "If you weren't there, you missed it."
+msgstr "Si no estuviste, te lo perdiste."
+
+msgid "Portraits from the Le Frat launch campaign"
+msgstr "Retratos de la campaña de lanzamiento de Le Frat"
+
+msgid "Buried in Le Frat delivery bags, burger in hand"
+msgstr "Enterrada en bolsas de domicilio de Le Frat, con la hamburguesa en la mano"
+
+msgid "Menu"
+msgstr "Menú"
+
+msgid "Order"
+msgstr "Pedir"
+
+msgid "Main"
+msgstr "Principal"
+
+msgid "Google reviews"
+msgstr "Reseñas en Google"
