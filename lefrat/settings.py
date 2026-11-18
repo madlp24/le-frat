@@ -119,6 +119,10 @@ if DATABASE_URL:
         "default": dj_database_url.parse(
             DATABASE_URL,
             conn_max_age=600,
+            # Neon suspends idle compute, which kills the persistent
+            # connection; check it before reuse instead of failing the
+            # first request after a quiet spell.
+            conn_health_checks=True,
             ssl_require=True,
         )
     }
